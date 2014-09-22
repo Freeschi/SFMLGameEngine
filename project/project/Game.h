@@ -10,6 +10,8 @@ public:
 	Game();
 	void Run();
 
+	static const float PlayerSpeed;
+
 private:
 	void ProcessEvents();
 	void Update(sf::Time deltaTime);
@@ -17,15 +19,14 @@ private:
 
 	void HandlePlayerInput(sf::Keyboard::Key key, bool isPressed);
 
-private:
 	bool mIsMovingUp;
 	bool mIsMovingDown;
 	bool mIsMovingLeft;
 	bool mIsMovingRight;
-	float PlayerSpeed;
 
 	sf::RenderWindow mWindow;
-	sf::CircleShape mPlayer;
+	sf::Texture mTexture;
+	sf::Sprite mPlayer;
 };
 
 #endif
