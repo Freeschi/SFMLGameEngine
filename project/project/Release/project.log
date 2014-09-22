@@ -1,4 +1,4 @@
-﻿Der Buildvorgang wurde am 22.09.2014 22:05:04 gestartet.
+﻿Der Buildvorgang wurde am 22.09.2014 22:11:28 gestartet.
      1>Projekt "E:\Programmieren\Freschi\SFMLGameEngine\SFMLGameEngine\project\project\project.vcxproj" auf Knoten "2", Build Ziel(e).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp
@@ -13,4 +13,4 @@
 
 Build erfolgreich.
 
-Verstrichene Zeit 00:00:00.74
+Verstrichene Zeit 00:00:00.73

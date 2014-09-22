@@ -19,10 +19,19 @@ Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML Application"), mPlayer(), 
 // ====================================================================================================
 void Game::Run()
 {
+	sf::Clock clock;
+	sf::Time TimePerFrame = sf::seconds(1.f / 60.f);
+	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 	while (mWindow.isOpen())
 	{
 		ProcessEvents();
-		Update();
+		timeSinceLastUpdate += clock.restart();
+		while (timeSinceLastUpdate > TimePerFrame)
+		{
+			timeSinceLastUpdate -= TimePerFrame;
+			ProcessEvents();
+			Update(TimePerFrame);
+		}
 		Render();
 	}
 }
@@ -68,19 +77,19 @@ void Game::HandlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 // ====================================================================================================
 // Game::Update
 // ====================================================================================================
-void Game::Update()
+void Game::Update(sf::Time deltaTime)
 {
 	// Update Player Position
 	sf::Vector2f movement(0.f, 0.f);
 	if (mIsMovingUp)
-		movement.y -= 1.f;
+		movement.y -= PlayerSpeed;
 	if (mIsMovingDown)
-		movement.y += 1.f;
+		movement.y += PlayerSpeed;
 	if (mIsMovingLeft)
-		movement.x -= 1.f;
+		movement.x -= PlayerSpeed;
 	if (mIsMovingRight)
-		movement.x += 1.f;
-	mPlayer.move(movement);
+		movement.x += PlayerSpeed;
+	mPlayer.move(movement * deltaTime.asSeconds());
 }
 
 // ====================================================================================================

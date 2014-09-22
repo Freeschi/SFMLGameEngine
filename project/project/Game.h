@@ -12,7 +12,7 @@ public:
 
 private:
 	void ProcessEvents();
-	void Update();
+	void Update(sf::Time deltaTime);
 	void Render();
 
 	void HandlePlayerInput(sf::Keyboard::Key key, bool isPressed);
@@ -22,6 +22,7 @@ private:
 	bool mIsMovingDown;
 	bool mIsMovingLeft;
 	bool mIsMovingRight;
+	float PlayerSpeed;
 
 	sf::RenderWindow mWindow;
 	sf::CircleShape mPlayer;
