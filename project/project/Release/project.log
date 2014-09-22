@@ -1,0 +1,11 @@
+﻿Der Buildvorgang wurde am 22.09.2014 21:41:18 gestartet.
+     1>Projekt "E:\Programmieren\Freschi\SFMLGameEngine\SFMLGameEngine\project\project\project.vcxproj" auf Knoten "2", Build Ziel(e).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Main.cpp
+         Main.cpp
+     1>E:\Programmieren\Freschi\SFMLGameEngine\SFMLGameEngine\sfml\include\SFML/System/Err.hpp(32): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "ostream": No such file or directory
+     1>Die Erstellung des Projekts "E:\Programmieren\Freschi\SFMLGameEngine\SFMLGameEngine\project\project\project.vcxproj" ist abgeschlossen, Build Ziel(e) -- FEHLER.
+
+Fehler beim Buildvorgang.
+
+Verstrichene Zeit 00:00:00.07
