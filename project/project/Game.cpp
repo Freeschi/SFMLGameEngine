@@ -9,13 +9,9 @@ const float Game::PlayerSpeed = 100.f;
 // Game::Game
 // Constructor of the Game class
 // ====================================================================================================
+TextureHolder textures;
 Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML Application"), mPlayer(), mTexture(), mIsMovingUp(false), mIsMovingDown(false), mIsMovingLeft(false), mIsMovingRight(false)
 {
-	if (!mTexture.loadFromFile("Media/Textures/Eagle.png"))
-	{
-		FRESCHI_FATAL_ERROR("Failed to load eagle.png");
-	}
-	mPlayer.setTexture(mTexture);
 	mPlayer.setPosition(100.f, 100.f);
 }
 
@@ -103,7 +99,7 @@ void Game::Update(sf::Time deltaTime)
 void Game::Render()
 {
 	mWindow.clear();
-
+	 
 	mWindow.draw(mPlayer);
 	
 	mWindow.display();
