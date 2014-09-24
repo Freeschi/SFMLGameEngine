@@ -19,15 +19,15 @@
     <Filter Include="Quelldateien\Entities">
       <UniqueIdentifier>{2fcd906d-1dde-42d4-aa11-12d64bfea893}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\Resources">
+      <UniqueIdentifier>{a8e9eaa4-fbf2-422c-9351-62150171af89}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceManager.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
@@ -47,9 +47,6 @@
     <ClInclude Include="Game.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
@@ -58,6 +55,9 @@
     </ClInclude>
     <ClInclude Include="SceneNode.h">
       <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Headerdateien\Resources</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

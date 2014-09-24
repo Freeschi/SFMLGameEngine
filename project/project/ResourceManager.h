@@ -30,9 +30,9 @@ namespace Textures
 	};
 }
 
-class TextureHolder : public ResourceHolder<sf::Texture, Textures::ID>
-{
+//template class ResourceHolder<sf::Texture, Textures::ID>;
+typedef ResourceHolder<sf::Texture, Textures::ID> TextureHolder;
 
-};
+#include "ResourceManager.inl"
 
 #endif

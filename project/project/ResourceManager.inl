@@ -1,9 +1,4 @@
 // ====================================================================================================
-// Includes
-// ====================================================================================================
-#include "Includes.h"
-
-// ====================================================================================================
 // ResourceHolder::Load
 // ====================================================================================================
 template <typename Resource, typename Identifier>
@@ -46,7 +41,7 @@ template <typename Resource, typename Identifier>
 Resource& ResourceHolder<Resource, Identifier>::Get(Identifier id)
 {
 	auto found = mResourceMap.find(id);
-	assert(found != mResourceMap.end());
+	//assert(found != mResourceMap.end());
 
 	return *found->second;
 }
@@ -58,7 +53,7 @@ template <typename Resource, typename Identifier>
 const Resource& ResourceHolder<Resource, Identifier>::Get(Identifier id) const
 {
 	auto found = mResourceMap.find(id);
-	assert(found != mResourceMap.end());
+	//assert(found != mResourceMap.end());
 
 	return *found->second;
 }
