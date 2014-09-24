@@ -3,10 +3,14 @@
 // ====================================================================================================
 #include "Includes.h"
 
+// ====================================================================================================
+// World
+// ====================================================================================================
 World::World(sf::RenderWindow& window) : mWindow(window), mWorldView(window.getDefaultView()), mTextures(), mSceneGraph(), mSceneLayers(), mWorldBounds(0.f, 0.f, mWorldView.getSize().x, 2000.f), mSpawnPosition(mWorldView.getSize().x / 2.f, mWorldBounds.height - mWorldView.getSize().y / 2.f), mScrollSpeed(-50.f), mPlayerAircraft(nullptr)
 {
 	LoadTextures();
 	BuildScene();
+
 	// Prepare the view
 	mWorldView.setCenter(mSpawnPosition);
 }
@@ -14,7 +18,6 @@ World::World(sf::RenderWindow& window) : mWindow(window), mWorldView(window.getD
 // ====================================================================================================
 // Load Textures
 // ====================================================================================================
-
 void World::LoadTextures()
 {
 	mTextures.Load(Textures::Eagle, "Media/Textures/Eagle.png");
@@ -25,7 +28,6 @@ void World::LoadTextures()
 // ====================================================================================================
 // Build Scene
 // ====================================================================================================
-
 void World::BuildScene()
 {
 	for (std::size_t i = 0; i < LayerCount; ++i)
@@ -57,10 +59,10 @@ void World::BuildScene()
 	rightEscort->setPosition(80.f, 50.f);
 	mPlayerAircraft->AttachChild(std::move(rightEscort));
 }
+
 // ====================================================================================================
 // Draw
 // ====================================================================================================
-
 void World::Draw()
 {
 	mWindow.setView(mWorldView);
@@ -70,7 +72,6 @@ void World::Draw()
 // ====================================================================================================
 // Update
 // ====================================================================================================
-
 void World::Update(sf::Time dt)
 {
 	mWorldView.move(0.f, mScrollSpeed * dt.asSeconds());
@@ -83,4 +84,6 @@ void World::Update(sf::Time dt)
 		mPlayerAircraft->SetVelocity(velocity);
 	}
 	mSceneGraph.Update(dt);
+
+	//mWorldView.setCenter(mWorldBounds.left, mWorldBounds.top);
 }
