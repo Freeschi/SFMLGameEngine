@@ -5,6 +5,7 @@
 #include <iostream>
 #include <memory>
 #include <map>
+#include <array>
 #include <SFML/Graphics.hpp>
 
 // ====================================================================================================
@@ -31,10 +32,16 @@
 // ====================================================================================================
 // Most important classes
 // ====================================================================================================
-#include "Game.h"
+class Entity;
+class Aircraft;
+class Game;
+class World;
+
 //#include "Textures.h"
 #include "ResourceManager.h"
 #include "SceneNode.h"
-
+#include "SpriteNode.h"
+#include "World.h"
+#include "Game.h"
 #include "Entity.h"
 #include "Aircraft.h"

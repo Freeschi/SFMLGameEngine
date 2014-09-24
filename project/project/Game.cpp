@@ -10,7 +10,7 @@ const float Game::PlayerSpeed = 100.f;
 // Constructor of the Game class
 // ====================================================================================================
 TextureHolder textures;
-Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML Application"), mPlayer(), mTexture(), mIsMovingUp(false), mIsMovingDown(false), mIsMovingLeft(false), mIsMovingRight(false)
+Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML Application"), mPlayer(), mTexture(), mIsMovingUp(false), mIsMovingDown(false), mIsMovingLeft(false), mIsMovingRight(false), mWorld(mWindow)
 {
 	mPlayer.setPosition(100.f, 100.f);
 }
@@ -80,17 +80,7 @@ void Game::HandlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 // ====================================================================================================
 void Game::Update(sf::Time deltaTime)
 {
-	// Update Player Position
-	sf::Vector2f movement(0.f, 0.f);
-	if (mIsMovingUp)
-		movement.y -= PlayerSpeed;
-	if (mIsMovingDown)
-		movement.y += PlayerSpeed;
-	if (mIsMovingLeft)
-		movement.x -= PlayerSpeed;
-	if (mIsMovingRight)
-		movement.x += PlayerSpeed;
-	mPlayer.move(movement * deltaTime.asSeconds());
+	mWorld.Update(deltaTime);
 }
 
 // ====================================================================================================
@@ -99,8 +89,8 @@ void Game::Update(sf::Time deltaTime)
 void Game::Render()
 {
 	mWindow.clear();
-	 
-	mWindow.draw(mPlayer);
-	
+	mWorld.Draw();
+
+	mWindow.setView(mWindow.getDefaultView());
 	mWindow.display();
 }

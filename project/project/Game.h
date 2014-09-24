@@ -27,6 +27,7 @@ private:
 	sf::RenderWindow mWindow;
 	sf::Texture mTexture;
 	sf::Sprite mPlayer;
+	World mWorld;
 };
 
 #endif
