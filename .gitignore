@@ -5,3 +5,4 @@ project/project/Release/project.tlog/CL.read.1.tlog
 project/project/Release/project.tlog/CL.write.1.tlog
 *.tlog
 project/project/Release/project.log
+*.obj
