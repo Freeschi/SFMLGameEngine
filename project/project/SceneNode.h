@@ -15,9 +15,16 @@ public:
 	void AttachChild(Ptr child);
 	Ptr DetachChild(const SceneNode& node);
 
+	void Update(sf::Time dt);
+
+	sf::Transform GetWorldTransform() const;
+	sf::Vector2f GetWorldPosition() const;
+
 private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-	virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
+	virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const {};
+	virtual void UpdateCurrent(sf::Time dt) {};
+	void UpdateChildren(sf::Time dt);
 
 	std::vector<Ptr> mChildren;
 	SceneNode* mParent;

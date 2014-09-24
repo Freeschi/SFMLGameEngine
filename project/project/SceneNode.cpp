@@ -3,6 +3,11 @@
 // ====================================================================================================
 #include "Includes.h"
 
+SceneNode::SceneNode() : mParent(NULL)
+{
+
+}
+
 // ====================================================================================================
 // SceneNode::AttachChild
 // ====================================================================================================
@@ -28,6 +33,9 @@ SceneNode::Ptr SceneNode::DetachChild(const SceneNode& node)
 	return result;
 }
 
+// ====================================================================================================
+// SceneNode::Draw
+// ====================================================================================================
 void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform *= getTransform();
@@ -39,4 +47,34 @@ void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	{
 		(*itr)->draw(target, states);
 	}
+}
+
+// ====================================================================================================
+// SceneNode::GetWorldPosition
+// ====================================================================================================
+sf::Transform SceneNode::GetWorldTransform() const
+{
+	sf::Transform transform = sf::Transform::Identity;
+	for (const SceneNode* node = this; node != nullptr; node = node->mParent)
+		transform = node->getTransform() * transform;
+
+	return transform;
+}
+sf::Vector2f SceneNode::GetWorldPosition() const
+{
+	return GetWorldTransform() * sf::Vector2f();
+}
+
+// ====================================================================================================
+// SceneNode::Update
+// ====================================================================================================
+void SceneNode::Update(sf::Time dt)
+{
+	UpdateCurrent(dt);
+	UpdateChildren(dt);
+}
+void SceneNode::UpdateChildren(sf::Time dt)
+{
+	for(Ptr& child : mChildren)
+		child->Update(dt);
 }
