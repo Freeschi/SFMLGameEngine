@@ -56,6 +56,14 @@ void Game::ProcessEvents()
 			case sf::Event::KeyReleased:
 				HandlePlayerInput(event.key.code, false);
 				break;
+			case sf::Event::GainedFocus:
+				m_bHasFocus = true;
+				printf("[Game] Gained focus\n");
+				break;
+			case sf::Event::LostFocus:
+				m_bHasFocus = false;
+				printf("[Game] Lost focus\n");
+				break;
 		};
 	}
 }
@@ -80,7 +88,7 @@ void Game::HandlePlayerInput(sf::Keyboard::Key key, bool isPressed)
 // ====================================================================================================
 void Game::Update(sf::Time deltaTime)
 {
-	mWorld.Update(deltaTime);
+	mWorld.Update(deltaTime, HasFocus());
 }
 
 // ====================================================================================================

@@ -12,6 +12,8 @@ public:
 
 	static const float PlayerSpeed;
 
+	bool HasFocus() { return m_bHasFocus;  }
+
 private:
 	void ProcessEvents();
 	void Update(sf::Time deltaTime);
@@ -28,6 +30,7 @@ private:
 	sf::Texture mTexture;
 	sf::Sprite mPlayer;
 	World mWorld;
+	bool m_bHasFocus;
 };
 
 #endif

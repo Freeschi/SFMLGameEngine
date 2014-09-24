@@ -8,11 +8,13 @@ class World : private sf::NonCopyable
 {
 public:
 	explicit World(sf::RenderWindow& window);
-	void Update(sf::Time dt);
+	void Update(sf::Time dt, bool hasfocus);
 	void Draw();
+
 private:
 	void LoadTextures();
 	void BuildScene();
+
 private:
 	enum Layer
 	{
@@ -20,7 +22,7 @@ private:
 		Air,
 		LayerCount
 	};
-private:
+
 	sf::RenderWindow& mWindow;
 	sf::View mWorldView;
 	TextureHolder mTextures;
