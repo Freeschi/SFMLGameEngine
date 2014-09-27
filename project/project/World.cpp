@@ -50,14 +50,6 @@ void World::BuildScene()
 	mPlayerAircraft->setPosition(mSpawnPosition);
 	//mPlayerAircraft->SetVelocity(40.f, mScrollSpeed);
 	mSceneLayers[Air]->AttachChild(std::move(leader));
-
-	std::unique_ptr<Aircraft> leftEscort(new Aircraft(Aircraft::Raptor, mTextures));
-	leftEscort->setPosition(-80.f, 50.f);
-	mPlayerAircraft->AttachChild(std::move(leftEscort));
-
-	std::unique_ptr<Aircraft> rightEscort(new Aircraft(Aircraft::Raptor, mTextures));
-	rightEscort->setPosition(80.f, 50.f);
-	mPlayerAircraft->AttachChild(std::move(rightEscort));
 }
 
 // ====================================================================================================
@@ -88,19 +80,19 @@ void World::Update(sf::Time dt, bool focused)
 	sf::Vector2i mousePosition = sf::Mouse::getPosition(mWindow);
 	//sf::Vector2i delta = windowCenter – mousePosition;
 	if (focused) sf::Mouse::setPosition(windowCenter, mWindow);
+	
 
-	sf::Vector2f movement(0.f, 0.f);
-	float playerspeed = 100.0f;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-		movement.y -= playerspeed;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-		movement.y += playerspeed;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		movement.x -= playerspeed;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-		movement.x += playerspeed;
-	mPlayerAircraft->move(movement * dt.asSeconds());
+	while (!mCommandQueue.isEmpty())
+		mSceneGraph.onCommand(mCommandQueue.pop(), dt);
+
 	mSceneGraph.Update(dt);
-
 	//mWorldView.setCenter(mWorldBounds.left, mWorldBounds.top);
+}
+
+// ====================================================================================================
+// getCommandQueue
+// ====================================================================================================
+CommandQueue& World::GetCommandQueue()
+{
+	return mCommandQueue;
 }

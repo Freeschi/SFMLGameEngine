@@ -4,6 +4,8 @@
 #ifndef H_SCENE_NODE
 #define H_SCENE_NODE
 
+#include "Command.h"
+
 class SceneNode : public sf::Transformable, public sf::Drawable, private sf::NonCopyable
 {
 public:
@@ -17,6 +19,8 @@ public:
 
 	void Update(sf::Time dt);
 
+	void onCommand(const Command& command, sf::Time dt);
+
 	sf::Transform GetWorldTransform() const;
 	sf::Vector2f GetWorldPosition() const;
 
@@ -25,7 +29,8 @@ private:
 	virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const {};
 	virtual void UpdateCurrent(sf::Time dt) {};
 	void UpdateChildren(sf::Time dt);
-	void onCommand(const Command& command, sf::Time dt);
+	
+	unsigned int SceneNode::GetCategory() const;
 
 	std::vector<Ptr> mChildren;
 	SceneNode* mParent;

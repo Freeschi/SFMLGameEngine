@@ -10,6 +10,7 @@ public:
 	explicit World(sf::RenderWindow& window);
 	void Update(sf::Time dt, bool hasfocus);
 	void Draw();
+	CommandQueue& GetCommandQueue();
 
 private:
 	void LoadTextures();
@@ -28,6 +29,7 @@ private:
 	TextureHolder mTextures;
 	SceneNode mSceneGraph;
 	std::array<SceneNode*, LayerCount> mSceneLayers;
+	CommandQueue mCommandQueue;
 
 	sf::FloatRect mWorldBounds;
 	sf::Vector2f mSpawnPosition;

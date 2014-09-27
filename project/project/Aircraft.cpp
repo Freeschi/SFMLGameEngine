@@ -24,7 +24,7 @@ Textures::ID toTextureID(Aircraft::Type type)
 // ====================================================================================================
 Aircraft::Aircraft(Type type, const TextureHolder& textures) : mType(type), mSprite(textures.Get(toTextureID(type)))
 {
-	//
+	
 }
 
 // ====================================================================================================

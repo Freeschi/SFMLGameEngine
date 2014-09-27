@@ -10,9 +10,9 @@ const float Game::PlayerSpeed = 100.f;
 // Constructor of the Game class
 // ====================================================================================================
 TextureHolder textures;
-Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML Application"), mPlayer(), mTexture(), mIsMovingUp(false), mIsMovingDown(false), mIsMovingLeft(false), mIsMovingRight(false), mWorld(mWindow)
+Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML Application"), mPlayerSprite(), mTexture(), mIsMovingUp(false), mIsMovingDown(false), mIsMovingLeft(false), mIsMovingRight(false), mWorld(mWindow)
 {
-	mPlayer.setPosition(100.f, 100.f);
+	mPlayerSprite.setPosition(100.f, 100.f);
 }
 
 // ====================================================================================================
@@ -31,6 +31,7 @@ void Game::Run()
 		{
 			timeSinceLastUpdate -= TimePerFrame;
 			ProcessEvents();
+			ProcessInput();
 			Update(TimePerFrame);
 		}
 		Render();
@@ -49,13 +50,13 @@ void Game::ProcessEvents()
 		{
 			case sf::Event::Closed:
 				mWindow.close();
-				break;
+				break;/*
 			case sf::Event::KeyPressed:
 				HandlePlayerInput(event.key.code, true);
 				break;
 			case sf::Event::KeyReleased:
 				HandlePlayerInput(event.key.code, false);
-				break;
+				break;*/
 			case sf::Event::GainedFocus:
 				m_bHasFocus = true;
 				printf("[Game] Gained focus\n");
@@ -69,18 +70,21 @@ void Game::ProcessEvents()
 }
 
 // ====================================================================================================
-// Game::HandlePlayerInput
+// Game::ProcessInput
 // ====================================================================================================
-void Game::HandlePlayerInput(sf::Keyboard::Key key, bool isPressed)
+void Game::ProcessInput()
 {
-	if (key == sf::Keyboard::W)
-		mIsMovingUp = isPressed;
-	else if (key == sf::Keyboard::S)
-		mIsMovingDown = isPressed;
-	else if (key == sf::Keyboard::A)
-		mIsMovingLeft = isPressed;
-	else if (key == sf::Keyboard::D)
-		mIsMovingRight = isPressed;
+	CommandQueue& commands = mWorld.GetCommandQueue();
+	sf::Event event;
+
+	while (mWindow.pollEvent(event))
+	{
+		mPlayer.HandleEvent(event, commands);
+		if (event.type == sf::Event::Closed)
+			mWindow.close();
+	}
+
+	mPlayer.HandleRealtimeInput(commands);
 }
 
 // ====================================================================================================

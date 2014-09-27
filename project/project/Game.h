@@ -19,7 +19,7 @@ private:
 	void Update(sf::Time deltaTime);
 	void Render();
 
-	void HandlePlayerInput(sf::Keyboard::Key key, bool isPressed);
+	void ProcessInput();
 
 	bool mIsMovingUp;
 	bool mIsMovingDown;
@@ -28,8 +28,10 @@ private:
 
 	sf::RenderWindow mWindow;
 	sf::Texture mTexture;
-	sf::Sprite mPlayer;
+	sf::Sprite mPlayerSprite;
 	World mWorld;
+	Player mPlayer;
+	CommandQueue commands;
 	bool m_bHasFocus;
 };
 
