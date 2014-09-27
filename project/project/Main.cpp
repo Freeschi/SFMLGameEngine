@@ -10,8 +10,8 @@ int main()
 {
 	try
 	{
-		Game game;
-		game.Run();
+		g_pGame = new Game();
+		g_pGame->Run();
 	}
 	catch (std::exception& e)
 	{
@@ -20,6 +20,9 @@ int main()
 		printf("-----------------------------------------------\n");
 		printf("%s\n", e.what());
 	}
+
+	// Cleanup
+	delete g_pGame;
 
 	return 0;
 }

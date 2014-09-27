@@ -35,4 +35,6 @@ private:
 	bool m_bHasFocus;
 };
 
+extern Game* g_pGame;
+
 #endif
