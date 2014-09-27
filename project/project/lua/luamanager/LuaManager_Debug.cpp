@@ -2,7 +2,6 @@
 // Includes
 // ====================================================================================================
 #include "../../Includes.h"
-#include "Lua.h"
 #include <sstream>
 #include <vector>
 

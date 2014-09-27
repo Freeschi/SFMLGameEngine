@@ -91,6 +91,7 @@
     <ClCompile Include="lua\luamanager\LuaManager.cpp" />
     <ClCompile Include="lua\luamanager\LuaManager_Debug.cpp" />
     <ClCompile Include="lua\luamanager\LuaManager_General.cpp" />
+    <ClCompile Include="lua\LuaWrapper_Entity.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SceneNode.cpp" />

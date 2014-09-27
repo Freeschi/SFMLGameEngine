@@ -93,6 +93,9 @@
     <ClCompile Include="lua\luamanager\LuaManager_Debug.cpp">
       <Filter>Quelldateien\Lua</Filter>
     </ClCompile>
+    <ClCompile Include="lua\LuaWrapper_Entity.cpp">
+      <Filter>Quelldateien\Lua</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aircraft.h">

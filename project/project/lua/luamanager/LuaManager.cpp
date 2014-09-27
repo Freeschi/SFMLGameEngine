@@ -35,17 +35,20 @@ void LuaManager::Init()
 		return;
 	}
 
-	// Default Functions, Libs
-	luaL_openlibs(m_pState);
-	luabind::module(m_pState)[
-		luabind::def("include", LuaFunctions::include)
-	];
-
 	// Error Handling
 	lua_atpanic(m_pState, LuaPanicHandler);
 
+	// Default Libs
+	luaL_openlibs(m_pState);
+
 	// LuaBind
 	luabind::open(m_pState);
+
+	// Register Functions
+	luabind::module(m_pState)[
+		luabind::def("include", LuaFunctions::include)
+	];
+	LuaFunctions::RegisterClassWrapper();
 
 	// Done
 	printf("[LuaManager] Initialized Lua successfully\n");

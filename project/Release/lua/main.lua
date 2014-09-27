@@ -8,5 +8,11 @@ function _main()
 	-- Events
 	event.AddListener("OnGameInitialized", function()
 		print("Hi!")
+		
+		local sftime = sfTime()
+		
+		local ent = Entity()
+		print(ent:GetClassName())
+		ent:Update(sftime)
 	end)
 end
