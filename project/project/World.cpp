@@ -48,16 +48,7 @@ void World::BuildScene()
 	std::unique_ptr<Aircraft> leader(new Aircraft(Aircraft::Eagle, mTextures));
 	mPlayerAircraft = leader.get();
 	mPlayerAircraft->setPosition(mSpawnPosition);
-	//printf("mPlayerAircraft::GetCategory = %i\n", mPlayerAircraft->GetCategory());
-	//mPlayerAircraft->SetVelocity(40.f, mScrollSpeed);
 	mSceneLayers[Air]->AttachChild(std::move(leader));
-
-	/*
-	typedef std::unique_ptr<SceneNode> t;
-	for (t& child : mSceneLayers[Air]->mChildren)
-	{
-		printf("mSceneLayers[Air] has a child\n");
-	}*/
 }
 
 // ====================================================================================================

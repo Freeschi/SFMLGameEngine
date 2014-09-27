@@ -3,6 +3,9 @@
 // ====================================================================================================
 #include "Includes.h"
 
+// ====================================================================================================
+// Aircraft Mover
+// ====================================================================================================
 struct AircraftMover
 {
 	AircraftMover(float vx, float vy) : velocity(vx, vy)
@@ -19,6 +22,9 @@ struct AircraftMover
 	sf::Vector2f velocity;
 };
 
+// ====================================================================================================
+// Utility Function
+// ====================================================================================================
 template <typename GameObject, typename Function>
 std::function<void(SceneNode&, sf::Time)>
 derivedAction(Function fn)
@@ -32,6 +38,9 @@ derivedAction(Function fn)
 	};
 }
 
+// ====================================================================================================
+// Realtime Input
+// ====================================================================================================
 void Player::HandleRealtimeInput(CommandQueue& commands)
 {
 	const float PlayerSpeed = 31.0f;
@@ -44,8 +53,10 @@ void Player::HandleRealtimeInput(CommandQueue& commands)
 	}
 }
 
-void Player::HandleEvent(const sf::Event& event,
-	CommandQueue& commands)
+// ====================================================================================================
+// Event HAndling
+// ====================================================================================================
+void Player::HandleEvent(const sf::Event& event, CommandQueue& commands)
 {
 	if (event.type == sf::Event::KeyPressed
 		&& event.key.code == sf::Keyboard::P)

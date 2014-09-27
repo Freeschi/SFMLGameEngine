@@ -3,13 +3,16 @@
 // ====================================================================================================
 #include "Includes.h"
 
+// ====================================================================================================
+// Definitions
+// ====================================================================================================
 const float Game::PlayerSpeed = 100.f;
+TextureHolder textures;
 
 // ====================================================================================================
 // Game::Game
 // Constructor of the Game class
 // ====================================================================================================
-TextureHolder textures;
 Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML Application"), mPlayerSprite(), mTexture(), mIsMovingUp(false), mIsMovingDown(false), mIsMovingLeft(false), mIsMovingRight(false), mWorld(mWindow)
 {
 	mPlayerSprite.setPosition(100.f, 100.f);
@@ -50,13 +53,7 @@ void Game::ProcessEvents()
 		{
 			case sf::Event::Closed:
 				mWindow.close();
-				break;/*
-			case sf::Event::KeyPressed:
-				HandlePlayerInput(event.key.code, true);
 				break;
-			case sf::Event::KeyReleased:
-				HandlePlayerInput(event.key.code, false);
-				break;*/
 			case sf::Event::GainedFocus:
 				m_bHasFocus = true;
 				printf("[Game] Gained focus\n");

@@ -71,11 +71,6 @@ sf::Vector2f SceneNode::GetWorldPosition() const
 // ====================================================================================================
 void SceneNode::onCommand(const Command& command, sf::Time dt)
 {
-	if (GetCategory() & Category::PlayerAircraft)
-	{
-		printf("Aircraft::onCommand\n");
-	}
-	printf("SceneNode::onCommand => Category = %i => mChildren = %i\n", (int)GetCategory(), (int)mChildren.size());
 	if (command.category & GetCategory())
 		command.action(*this, dt);
 
@@ -84,12 +79,13 @@ void SceneNode::onCommand(const Command& command, sf::Time dt)
 }
 
 // ====================================================================================================
-// SceneNode::GetCategory()
+// SceneNode::GetCategory
 // ====================================================================================================
 unsigned int SceneNode::GetCategory() const
 {
 	return Category::Scene;
 }
+
 // ====================================================================================================
 // SceneNode::Update
 // ====================================================================================================
