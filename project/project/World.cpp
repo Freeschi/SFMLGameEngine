@@ -36,7 +36,7 @@ void World::BuildScene()
 		mSceneLayers[i] = layer.get();
 		mSceneGraph.AttachChild(std::move(layer));
 	}
-
+	
 	sf::Texture& texture = mTextures.Get(Textures::Desert);
 	sf::IntRect textureRect(mWorldBounds);
 	texture.setRepeated(true);
@@ -48,8 +48,16 @@ void World::BuildScene()
 	std::unique_ptr<Aircraft> leader(new Aircraft(Aircraft::Eagle, mTextures));
 	mPlayerAircraft = leader.get();
 	mPlayerAircraft->setPosition(mSpawnPosition);
+	//printf("mPlayerAircraft::GetCategory = %i\n", mPlayerAircraft->GetCategory());
 	//mPlayerAircraft->SetVelocity(40.f, mScrollSpeed);
 	mSceneLayers[Air]->AttachChild(std::move(leader));
+
+	/*
+	typedef std::unique_ptr<SceneNode> t;
+	for (t& child : mSceneLayers[Air]->mChildren)
+	{
+		printf("mSceneLayers[Air] has a child\n");
+	}*/
 }
 
 // ====================================================================================================
@@ -66,27 +74,14 @@ void World::Draw()
 // ====================================================================================================
 void World::Update(sf::Time dt, bool focused)
 {
-	/*mWorldView.move(0.f, mScrollSpeed * dt.asSeconds());
-	sf::Vector2f position = mPlayerAircraft->getPosition();
-	sf::Vector2f velocity = mPlayerAircraft->GetVelocity();
-	if (position.x <= mWorldBounds.left + 150
-		|| position.x >= mWorldBounds.left + mWorldBounds.width - 150)
-	{
-		velocity.x = -velocity.x;
-		mPlayerAircraft->SetVelocity(velocity);
-	}*/
-
 	sf::Vector2i windowCenter(mWindow.getSize() / 2u);
 	sf::Vector2i mousePosition = sf::Mouse::getPosition(mWindow);
-	//sf::Vector2i delta = windowCenter – mousePosition;
-	if (focused) sf::Mouse::setPosition(windowCenter, mWindow);
-	
+	//if (focused) sf::Mouse::setPosition(windowCenter, mWindow);
 
 	while (!mCommandQueue.isEmpty())
 		mSceneGraph.onCommand(mCommandQueue.pop(), dt);
 
 	mSceneGraph.Update(dt);
-	//mWorldView.setCenter(mWorldBounds.left, mWorldBounds.top);
 }
 
 // ====================================================================================================

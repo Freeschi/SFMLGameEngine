@@ -24,15 +24,16 @@ public:
 	sf::Transform GetWorldTransform() const;
 	sf::Vector2f GetWorldPosition() const;
 
+	std::vector<Ptr> mChildren;
+
 private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const {};
 	virtual void UpdateCurrent(sf::Time dt) {};
 	void UpdateChildren(sf::Time dt);
 	
-	unsigned int SceneNode::GetCategory() const;
-
-	std::vector<Ptr> mChildren;
+	virtual unsigned int SceneNode::GetCategory() const; // das hier behebt unseren fehler -> die funktion war nicht virtual und konnte daher nicht überschrieben werden
+	
 	SceneNode* mParent;
 };
 
