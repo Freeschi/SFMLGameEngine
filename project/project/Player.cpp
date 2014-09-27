@@ -16,7 +16,6 @@ struct AircraftMover
 	void operator() (Aircraft& aircraft, sf::Time) const
 	{
 		aircraft.Accelerate(velocity);
-		printf("accelerate you piece of shit\n");
 	}
 
 	sf::Vector2f velocity;
@@ -43,8 +42,11 @@ derivedAction(Function fn)
 // ====================================================================================================
 void Player::HandleRealtimeInput(CommandQueue& commands)
 {
-	const float PlayerSpeed = 31.0f;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+	const float PlayerSpeed = 10.0f;
+
+	// TO-DO: Make this work
+	// Move Left
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
 		Command moveLeft;
 		moveLeft.category = Category::PlayerAircraft;
@@ -54,19 +56,18 @@ void Player::HandleRealtimeInput(CommandQueue& commands)
 }
 
 // ====================================================================================================
-// Event HAndling
+// Event Handling
+// TO-DO: This functions is never called!
 // ====================================================================================================
 void Player::HandleEvent(const sf::Event& event, CommandQueue& commands)
 {
-	if (event.type == sf::Event::KeyPressed
-		&& event.key.code == sf::Keyboard::P)
+	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
 	{
 		Command output;
 		output.category = Category::PlayerAircraft;
 		output.action = [] (SceneNode& s, sf::Time)
 		{
-			std::cout << s.getPosition().x << ","
-				<< s.getPosition().y << "\n";
+			std::cout << s.getPosition().x << "," << s.getPosition().y << "\n";
 		};
 		commands.push(output);
 	}
