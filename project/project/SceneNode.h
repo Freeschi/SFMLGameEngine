@@ -25,6 +25,7 @@ private:
 	virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const {};
 	virtual void UpdateCurrent(sf::Time dt) {};
 	void UpdateChildren(sf::Time dt);
+	void onCommand(const Command& command, sf::Time dt);
 
 	std::vector<Ptr> mChildren;
 	SceneNode* mParent;

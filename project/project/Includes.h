@@ -6,6 +6,7 @@
 #include <memory>
 #include <map>
 #include <array>
+#include <functional>
 #include <SFML/Graphics.hpp>
 
 // ====================================================================================================
@@ -43,5 +44,6 @@ class World;
 #include "SpriteNode.h"
 #include "World.h"
 #include "Game.h"
+#include "Command.h"
 #include "Entity.h"
 #include "Aircraft.h"
