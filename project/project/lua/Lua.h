@@ -16,3 +16,4 @@
 // Lua Manager
 // ====================================================================================================
 #include "luamanager/LuaManager.h"
+#include "GeneralFunctions.h"

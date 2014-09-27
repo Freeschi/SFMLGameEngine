@@ -87,6 +87,12 @@
     <ClCompile Include="lua\luamanager\LuaManager_General.cpp">
       <Filter>Quelldateien\Lua</Filter>
     </ClCompile>
+    <ClCompile Include="lua\GeneralFunctions.cpp">
+      <Filter>Quelldateien\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\luamanager\LuaManager_Debug.cpp">
+      <Filter>Quelldateien\Lua</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aircraft.h">
@@ -129,6 +135,9 @@
       <Filter>Headerdateien\Lua</Filter>
     </ClInclude>
     <ClInclude Include="lua\luamanager\LuaManager.h">
+      <Filter>Headerdateien\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\GeneralFunctions.h">
       <Filter>Headerdateien\Lua</Filter>
     </ClInclude>
   </ItemGroup>

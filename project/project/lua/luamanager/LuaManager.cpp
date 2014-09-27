@@ -37,6 +37,9 @@ void LuaManager::Init()
 
 	// Default Functions, Libs
 	luaL_openlibs(m_pState);
+	luabind::module(m_pState)[
+		luabind::def("include", LuaFunctions::include)
+	];
 
 	// Error Handling
 	lua_atpanic(m_pState, LuaPanicHandler);

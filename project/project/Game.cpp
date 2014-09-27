@@ -16,6 +16,27 @@ Game* g_pGame = NULL;
 Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML Application"), mPlayerSprite(), mTexture(), mIsMovingUp(false), mIsMovingDown(false), mIsMovingLeft(false), mIsMovingRight(false), mWorld(mWindow)
 {
 	mPlayerSprite.setPosition(100.f, 100.f);
+
+	// Lua
+	lua = new LuaManager();
+	lua->Init();
+
+	// main.lua
+	if (!lua->IncludeFile("lua/main.lua"))
+	{
+		printf("\n[Lua] Proper startup not possible, because lua/main.lua was not found!\n");
+		printf("[Game] Please make sure the lua environment is setup correctly!\n\n");
+		return;
+	}
+
+	// call init function
+	lua->GetGlobal("_main");
+	if (!lua->ProtectedCall())
+	{
+		printf("\n[Lua] Unable to call _main()\n");
+		printf("[Game] Please make sure the lua environment is setup correctly!\n\n");
+		return;
+	}
 }
 
 // ====================================================================================================
