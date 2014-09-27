@@ -3,5 +3,5 @@
 // ====================================================================================================
 namespace LuaFunctions
 {
-	int include(lua_State* L);
+	void include(std::string file);
 }

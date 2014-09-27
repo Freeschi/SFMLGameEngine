@@ -24,6 +24,7 @@ public:
 
 	// Get*
 	void GetGlobal(char* sName);
+	void GetEvent(char* sName);
 	char* GetString(int iStackIndex = -1);
 	double GetNumber(int iStackIndex = -1);
 	bool GetBool(int iStackIndex = -1);

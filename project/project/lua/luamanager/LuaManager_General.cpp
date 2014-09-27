@@ -7,6 +7,7 @@
 // Get*
 // ====================================================================================================
 void   LuaManager::GetGlobal(char* sName) { lua_getglobal(m_pState, sName); }
+void   LuaManager::GetEvent(char* sName) { GetGlobal("event"); GetField("Call"); PushString(sName); }
 char*  LuaManager::GetString(int iStackIndex) { return const_cast<char*>(lua_tostring(m_pState, iStackIndex)); }
 double LuaManager::GetNumber(int iStackIndex) { return lua_tonumber(m_pState, iStackIndex); }
 bool   LuaManager::GetBool(int iStackIndex) { return lua_toboolean(m_pState, iStackIndex); }

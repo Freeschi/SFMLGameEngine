@@ -37,4 +37,6 @@ private:
 	Aircraft* mPlayerAircraft;
 };
 
+extern World* g_pWorld;
+
 #endif

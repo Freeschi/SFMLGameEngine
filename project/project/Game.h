@@ -12,6 +12,8 @@ public:
 
 	static const float PlayerSpeed;
 
+	void OnFullyInitialized();
+
 	bool HasFocus() { return m_bHasFocus;  }
 
 private:
@@ -29,7 +31,6 @@ private:
 	sf::RenderWindow mWindow;
 	sf::Texture mTexture;
 	sf::Sprite mPlayerSprite;
-	World mWorld;
 	Player mPlayer;
 	CommandQueue commands;
 	bool m_bHasFocus;

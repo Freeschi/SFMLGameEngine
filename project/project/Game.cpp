@@ -13,7 +13,7 @@ Game* g_pGame = NULL;
 // Game::Game
 // Constructor of the Game class
 // ====================================================================================================
-Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML Application"), mPlayerSprite(), mTexture(), mIsMovingUp(false), mIsMovingDown(false), mIsMovingLeft(false), mIsMovingRight(false), mWorld(mWindow)
+Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML Application"), mPlayerSprite(), mTexture(), mIsMovingUp(false), mIsMovingDown(false), mIsMovingLeft(false), mIsMovingRight(false)
 {
 	mPlayerSprite.setPosition(100.f, 100.f);
 
@@ -37,6 +37,9 @@ Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML Application"), mPlayerSpri
 		printf("[Game] Please make sure the lua environment is setup correctly!\n\n");
 		return;
 	}
+
+	// Init World
+	g_pWorld = new World(mWindow);
 }
 
 // ====================================================================================================
@@ -92,7 +95,7 @@ void Game::ProcessEvents()
 // ====================================================================================================
 void Game::ProcessInput()
 {
-	CommandQueue& commands = mWorld.GetCommandQueue();
+	CommandQueue& commands = g_pWorld->GetCommandQueue();
 	sf::Event event;
 
 	while (mWindow.pollEvent(event))
@@ -106,11 +109,22 @@ void Game::ProcessInput()
 }
 
 // ====================================================================================================
+// Game::OnFullyInitialized
+// Called when textures are loaded & scene built (see World)
+// ====================================================================================================
+void Game::OnFullyInitialized()
+{
+	// Lua event
+	lua->GetEvent("OnGameInitialized");
+	lua->ProtectedCall(1);
+}
+
+// ====================================================================================================
 // Game::Update
 // ====================================================================================================
 void Game::Update(sf::Time deltaTime)
 {
-	mWorld.Update(deltaTime, HasFocus());
+	g_pWorld->Update(deltaTime, HasFocus());
 }
 
 // ====================================================================================================
@@ -119,7 +133,7 @@ void Game::Update(sf::Time deltaTime)
 void Game::Render()
 {
 	mWindow.clear();
-	mWorld.Draw();
+	g_pWorld->Draw();
 
 	mWindow.setView(mWindow.getDefaultView());
 	mWindow.display();
