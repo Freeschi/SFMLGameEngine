@@ -2,6 +2,7 @@
 // Includes
 // ====================================================================================================
 #include <stdio.h>
+#include <string>
 #include <iostream>
 #include <memory>
 #include <map>
@@ -10,6 +11,7 @@
 #include <functional>
 #include <SFML/Graphics.hpp>
 #include <cassert>
+#include <exception>
 
 // ====================================================================================================
 // Libraries

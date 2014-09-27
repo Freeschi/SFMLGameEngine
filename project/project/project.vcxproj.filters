@@ -22,75 +22,114 @@
     <Filter Include="Headerdateien\Resources">
       <UniqueIdentifier>{a8e9eaa4-fbf2-422c-9351-62150171af89}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\Commands">
+      <UniqueIdentifier>{17529b69-fe58-4bd6-8db2-e99a8055d89f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Core">
+      <UniqueIdentifier>{fd732b56-ce29-48fb-b40c-730613735a95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Nodes">
+      <UniqueIdentifier>{57a8dca2-badb-4e55-8dff-e75b6e8262c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Utility">
+      <UniqueIdentifier>{0b34f14e-f35a-414f-b2ac-60308e9bceee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Nodes">
+      <UniqueIdentifier>{83e5450b-5e39-49da-a715-e24707386592}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Commands">
+      <UniqueIdentifier>{12e185cd-7709-4be9-9134-0c4b2704940d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Core">
+      <UniqueIdentifier>{3963a5d5-8c8e-4eef-a2e8-55a160327efb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headerdateien\Lua">
+      <UniqueIdentifier>{95714ee5-bea2-48ff-baaf-50c982f02309}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Lua">
+      <UniqueIdentifier>{457f8830-fbf4-463d-968e-dd051ade57b8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Aircraft.cpp">
       <Filter>Quelldateien\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="SceneNode.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteNode.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="World.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="Command.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
-    <ClCompile Include="CommandQueue.cpp">
-      <Filter>Quelldateien</Filter>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Quelldateien\Entities</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNode.cpp">
+      <Filter>Quelldateien\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteNode.cpp">
+      <Filter>Quelldateien\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>Quelldateien\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandQueue.cpp">
+      <Filter>Quelldateien\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Quelldateien\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Quelldateien\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Quelldateien\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\luamanager\LuaManager.cpp">
+      <Filter>Quelldateien\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\luamanager\LuaManager_General.cpp">
+      <Filter>Quelldateien\Lua</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Includes.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="Aircraft.h">
       <Filter>Headerdateien\Entities</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneNode.h">
-      <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
       <Filter>Headerdateien\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteNode.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="World.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="Command.h">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
-    <ClInclude Include="Category.h">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\Commands</Filter>
     </ClInclude>
     <ClInclude Include="CommandQueue.h">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\Commands</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Headerdateien</Filter>
+      <Filter>Headerdateien\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Headerdateien\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneNode.h">
+      <Filter>Headerdateien\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteNode.h">
+      <Filter>Headerdateien\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="Category.h">
+      <Filter>Headerdateien\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes.h">
+      <Filter>Headerdateien\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\Lua.h">
+      <Filter>Headerdateien\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="lua\luamanager\LuaManager.h">
+      <Filter>Headerdateien\Lua</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
