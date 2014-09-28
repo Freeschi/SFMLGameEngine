@@ -4,6 +4,11 @@
 #include "Includes.h"
 
 // ====================================================================================================
+// Definitions
+// ====================================================================================================
+Player* g_pPlayer = NULL;
+
+// ====================================================================================================
 // Aircraft Mover
 // ====================================================================================================
 struct AircraftMover
@@ -133,6 +138,7 @@ bool Player::isRealtimeAction(Action action)
 // ====================================================================================================
 void Player::HandleEvent(const sf::Event& event, CommandQueue* commands)
 {
+	std::cout << "Player Handlevenet" << std::endl;
 	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
 	{
 		Command output;

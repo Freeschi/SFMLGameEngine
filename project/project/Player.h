@@ -28,4 +28,7 @@ public:
 		std::map<sf::Keyboard::Key, Action> mKeyBinding;
 		std::map<Action, Command> mActionBinding;
 };
+
+extern Player* g_pPlayer;
+
 #endif

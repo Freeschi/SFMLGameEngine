@@ -43,6 +43,7 @@ public:
 	SceneNode* GetSceneLayer(Layer layer) { if (layer >= LayerCount) return NULL; return mSceneLayers[layer]; }
 	TextureHolder* GetTextureHolder() { return mTextures;  }
 	FontHolder* GetFontHolder() { return mFonts; }
+	sf::RenderWindow& GetWindow() { return mWindow; }
 	sf::View* GetView() { return mWorldView; }
 
 	void LoadTextures();
