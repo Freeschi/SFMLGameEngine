@@ -134,11 +134,9 @@ bool Player::isRealtimeAction(Action action)
 
 // ====================================================================================================
 // Event Handling
-// TO-DO: This functions is never called!
 // ====================================================================================================
 void Player::HandleEvent(const sf::Event& event, CommandQueue* commands)
 {
-	std::cout << "Player Handlevenet" << std::endl;
 	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
 	{
 		Command output;

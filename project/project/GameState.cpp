@@ -47,7 +47,6 @@ bool GameState::Update(sf::Time dt)
 // ====================================================================================================
 bool GameState::HandleEvent(const sf::Event& event)
 {
-	std::cout << "HandleEvent" << std::endl;
 	// Game input handling
 	CommandQueue* commands = g_pWorld->GetCommandQueue();
 	g_pPlayer->HandleEvent(event, commands);

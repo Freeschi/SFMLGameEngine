@@ -19,6 +19,6 @@ function _main()
 			print("test_lua_entity")
 		end
 		
-		print(world.GetSceneLayer(0))
+		--print(world.GetSceneLayer(0))
 	end)
 end

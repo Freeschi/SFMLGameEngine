@@ -40,7 +40,7 @@ void MenuState::UpdateOptionText()
 	FOREACH(sf::Text& text, mOptions)
 		text.setColor(sf::Color::White);
 
-	if (mOptionIndex > mOptions.size())
+	if (mOptionIndex < 0 || mOptionIndex > mOptions.size())
 		mOptionIndex = mOptions.size();
 	mOptions[mOptionIndex].setColor(sf::Color::Red);
 }
