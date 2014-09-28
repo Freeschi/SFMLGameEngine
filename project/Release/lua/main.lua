@@ -20,5 +20,7 @@ function _main()
 		end
 		
 		--print(world.GetSceneLayer(0))
+		local ent = create_entity("aircraft_eagle")
+		ent:Activate()
 	end)
 end

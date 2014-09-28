@@ -53,6 +53,11 @@ void StateStack::Update(sf::Time dt)
 	}
 
 	ApplyPendingChanges();
+
+	if (IsEmpty())
+	{
+		g_pGame->Exit();
+	}
 }
 
 // ====================================================================================================

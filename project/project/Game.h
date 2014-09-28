@@ -9,8 +9,7 @@ class Game
 public:
 	Game();
 	void Run();
-
-	static const float PlayerSpeed;
+	void Exit();
 
 	void OnFullyInitialized();
 
@@ -26,14 +25,7 @@ private:
 
 	void ProcessInput();
 
-	bool mIsMovingUp;
-	bool mIsMovingDown;
-	bool mIsMovingLeft;
-	bool mIsMovingRight;
-
 	sf::RenderWindow mWindow;
-	sf::Texture mTexture;
-	sf::Sprite mPlayerSprite;
 	StateStack* mStateStack;
 	Player mPlayer;
 	CommandQueue commands;

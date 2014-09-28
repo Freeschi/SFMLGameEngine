@@ -6,17 +6,14 @@
 // ====================================================================================================
 // Definitions
 // ====================================================================================================
-const float Game::PlayerSpeed = 100.f;
 Game* g_pGame = NULL;
 
 // ====================================================================================================
 // Game::Game
 // Constructor of the Game class
 // ====================================================================================================
-Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML Application"), mPlayerSprite(), mTexture(), mIsMovingUp(false), mIsMovingDown(false), mIsMovingLeft(false), mIsMovingRight(false), mStateStack(NULL)
+Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML Application"), mStateStack(NULL)
 {
-	mPlayerSprite.setPosition(100.f, 100.f);
-
 	// Lua
 	lua = new LuaManager();
 	lua->Init();
@@ -65,18 +62,29 @@ void Game::Run()
 	sf::Time timeSinceLastUpdate = sf::Time::Zero;
 	while (mWindow.isOpen())
 	{
-		ProcessEvents();
 		timeSinceLastUpdate += clock.restart();
+
+		ProcessEvents();
+		
 		while (timeSinceLastUpdate > TimePerFrame)
 		{
 			timeSinceLastUpdate -= TimePerFrame;
+			
 			ProcessEvents();
 			ProcessInput();
 			Update(TimePerFrame);
 			mStateStack->Update(TimePerFrame);
 		}
+
 		Render();
 	}
+}
+
+void Game::Exit()
+{
+	printf("----------------------------------------------------\n");
+	printf("[Game] Exiting..\n");
+	mWindow.close();
 }
 
 // ====================================================================================================
@@ -92,7 +100,7 @@ void Game::ProcessEvents()
 		switch (event.type)
 		{
 			case sf::Event::Closed:
-				mWindow.close();
+				Exit();
 				break;
 			case sf::Event::GainedFocus:
 				m_bHasFocus = true;
@@ -119,7 +127,7 @@ void Game::ProcessInput()
 		mPlayer.HandleEvent(event, commands);
 
 		if (event.type == sf::Event::Closed || mStateStack->IsEmpty())
-			mWindow.close();
+			Exit();
 	}
 
 	mPlayer.HandleRealtimeInput(commands);
@@ -144,7 +152,6 @@ void Game::RegisterStates()
 	mStateStack->RegisterState<MenuState>(States::Menu);
 	mStateStack->RegisterState<GameState>(States::Game);
 	//mStateStack.RegisterState<PauseState>(States::Pause);
-
 }
 
 // ====================================================================================================

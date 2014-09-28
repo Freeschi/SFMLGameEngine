@@ -13,7 +13,6 @@ MenuState::MenuState(StateStack& stack) : State(stack)
 
 	mBackgroundSprite.setTexture(texture);
 
-	// A simple menu demonstration
 	sf::Text playOption;
 	playOption.setFont(font);
 	playOption.setString("Play");
@@ -27,6 +26,8 @@ MenuState::MenuState(StateStack& stack) : State(stack)
 	UTIL::CenterOrigin(exitOption);
 	exitOption.setPosition(playOption.getPosition() + sf::Vector2f(0.f, 30.f));
 	mOptions.push_back(exitOption);
+
+	UpdateOptionText();
 }
 
 // ====================================================================================================
@@ -41,11 +42,14 @@ void MenuState::UpdateOptionText()
 		text.setColor(sf::Color::White);
 
 	if (mOptionIndex < 0 || mOptionIndex > mOptions.size())
-		mOptionIndex = mOptions.size();
+		mOptionIndex = mOptions.size()-1;
+
 	mOptions[mOptionIndex].setColor(sf::Color::Red);
 }
 
-
+// ====================================================================================================
+// State: Draw
+// ====================================================================================================
 void MenuState::Draw()
 {
 	sf::RenderWindow& window = g_pGame->GetWindow();
@@ -57,18 +61,25 @@ void MenuState::Draw()
 		window.draw(text);
 }
 
+// ====================================================================================================
+// State: Update
+// ====================================================================================================
 bool MenuState::Update(sf::Time)
 {
 	return true;
 }
 
+// ====================================================================================================
+// State: Handle Events
+// ====================================================================================================
 bool MenuState::HandleEvent(const sf::Event& event)
 {
-	// The demonstration menu logic
 	if (event.type != sf::Event::KeyPressed)
 		return false;
 
-	if (event.key.code == sf::Keyboard::Return)
+	sf::Keyboard::Key keycode = event.key.code;
+
+	if (keycode == sf::Keyboard::Return)
 	{
 		if (mOptionIndex == Play)
 		{
@@ -79,27 +90,27 @@ bool MenuState::HandleEvent(const sf::Event& event)
 		{
 			RequestStackPop();
 		}
+
+		return false;
 	}
 
-	else if (event.key.code == sf::Keyboard::Up)
+	else if (keycode == sf::Keyboard::Up)
 	{
 		if (mOptionIndex > 0)
 			mOptionIndex--;
 		else
 			mOptionIndex = mOptions.size() - 1;
-
-		UpdateOptionText();
 	}
 
-	else if (event.key.code == sf::Keyboard::Down)
+	else if (keycode == sf::Keyboard::Down)
 	{
 		if (mOptionIndex < mOptions.size() - 1)
 			mOptionIndex++;
 		else
 			mOptionIndex = 0;
-
-		UpdateOptionText();
 	}
+
+	UpdateOptionText();
 
 	return true;
 }
