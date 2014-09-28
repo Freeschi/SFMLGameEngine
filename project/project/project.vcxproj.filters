@@ -49,6 +49,12 @@
     <Filter Include="Quelldateien\Lua">
       <UniqueIdentifier>{457f8830-fbf4-463d-968e-dd051ade57b8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\States">
+      <UniqueIdentifier>{3c8b0d27-f094-4d72-855b-42c8493c8546}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\States">
+      <UniqueIdentifier>{b3e0cdbe-b590-4f68-9c9c-bd9a9cda9573}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Aircraft.cpp">
@@ -95,6 +101,24 @@
     </ClCompile>
     <ClCompile Include="lua\LuaWrapper_Entity.cpp">
       <Filter>Quelldateien\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="StateStack.cpp">
+      <Filter>Quelldateien\States</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleState.cpp">
+      <Filter>Quelldateien\States</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuState.cpp">
+      <Filter>Quelldateien\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>Quelldateien\States</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>Quelldateien\States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +168,27 @@
       <Filter>Headerdateien\Lua</Filter>
     </ClInclude>
     <ClInclude Include="Foreach.hpp">
+      <Filter>Headerdateien\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Headerdateien\States</Filter>
+    </ClInclude>
+    <ClInclude Include="StateStack.h">
+      <Filter>Headerdateien\States</Filter>
+    </ClInclude>
+    <ClInclude Include="StateIdentifiers.h">
+      <Filter>Headerdateien\States</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Headerdateien\States</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleState.h">
+      <Filter>Headerdateien\States</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuState.h">
+      <Filter>Headerdateien\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
       <Filter>Headerdateien\Utility</Filter>
     </ClInclude>
   </ItemGroup>

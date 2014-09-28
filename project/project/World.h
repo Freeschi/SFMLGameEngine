@@ -42,6 +42,8 @@ public:
 	CommandQueue* GetCommandQueue() { return mCommandQueue;  }
 	SceneNode* GetSceneLayer(Layer layer) { if (layer >= LayerCount) return NULL; return mSceneLayers[layer]; }
 	TextureHolder* GetTextureHolder() { return mTextures;  }
+	FontHolder* GetFontHolder() { return mFonts; }
+	sf::View* GetView() { return mWorldView; }
 
 	void LoadTextures();
 	void BuildScene();
@@ -53,8 +55,9 @@ public:
 
 private:
 	sf::RenderWindow& mWindow;
-	sf::View mWorldView;
+	sf::View* mWorldView;
 	TextureHolder* mTextures;
+	FontHolder* mFonts;
 	SceneNode mSceneGraph;
 	std::array<SceneNode*, LayerCount> mSceneLayers;
 	CommandQueue* mCommandQueue;

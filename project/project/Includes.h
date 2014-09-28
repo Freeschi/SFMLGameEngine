@@ -52,16 +52,20 @@ class World;
 class SceneNode;
 struct Command;
 class CommandQueue;
+class State;
+class StateStack;
 
 // ====================================================================================================
 // Internal Includes
 // ====================================================================================================
+#include "Utility.h"
 #include "Foreach.hpp"
 #include "ResourceManager.h"
 #include "SceneNode.h"
 #include "SpriteNode.h"
 #include "Command.h"
 #include "CommandQueue.h"
+#include "State.h"
 #include "World.h"
 #include "Player.h"
 #include "Game.h"

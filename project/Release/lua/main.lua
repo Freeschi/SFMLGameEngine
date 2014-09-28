@@ -17,8 +17,8 @@ function _main()
 			print("test_lua_entity")
 		end
 		
-		local e = create_entity("aircraft_eagle")
-		print(e:GetClassName())
-		e:Activate()
+		--local e = create_entity("aircraft_eagle")
+		--print(e:GetClassName())
+		--e:Activate()
 	end)
 end

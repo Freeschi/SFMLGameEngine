@@ -15,8 +15,11 @@ public:
 	void OnFullyInitialized();
 
 	bool HasFocus() { return m_bHasFocus;  }
+	sf::RenderWindow& GetWindow() { return mWindow; }
 
 private:
+	void RegisterStates();
+
 	void ProcessEvents();
 	void Update(sf::Time deltaTime);
 	void Render();
@@ -31,6 +34,7 @@ private:
 	sf::RenderWindow mWindow;
 	sf::Texture mTexture;
 	sf::Sprite mPlayerSprite;
+	StateStack* mStateStack;
 	Player mPlayer;
 	CommandQueue commands;
 	bool m_bHasFocus;

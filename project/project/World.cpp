@@ -11,15 +11,15 @@ World* g_pWorld = NULL;
 // ====================================================================================================
 // World
 // ====================================================================================================
-World::World(sf::RenderWindow& window) : mWindow(window), mWorldView(window.getDefaultView()), 
+World::World(sf::RenderWindow& window) : mWindow(window), mWorldView(new sf::View(window.getDefaultView())), 
 										mTextures(new TextureHolder()), mSceneGraph(), mSceneLayers(), 
-										mWorldBounds(0.f, 0.f, mWorldView.getSize().x, 2000.f), 
-										mSpawnPosition(mWorldView.getSize().x / 2.f, mWorldBounds.height - mWorldView.getSize().y / 2.f), 
+										mWorldBounds(0.f, 0.f, mWorldView->getSize().x, 2000.f), 
+										mSpawnPosition(mWorldView->getSize().x / 2.f, mWorldBounds.height - mWorldView->getSize().y / 2.f), 
 										mScrollSpeed(-50.f), mPlayerAircraft(nullptr),
-										mCommandQueue(new CommandQueue()), mRegisteredEntityClasses()
+										mCommandQueue(new CommandQueue()), mRegisteredEntityClasses(), mFonts(new FontHolder())
 {
 	// Prepare the view
-	mWorldView.setCenter(mSpawnPosition);
+	mWorldView->setCenter(mSpawnPosition);
 }
 
 // ====================================================================================================
@@ -30,6 +30,8 @@ void World::LoadTextures()
 	mTextures->Load(Textures::Eagle, "Media/Textures/Eagle.png");
 	mTextures->Load(Textures::Raptor, "Media/Textures/Raptor.png");
 	mTextures->Load(Textures::Desert, "Media/Textures/Desert.png");
+	mFonts->Load(Fonts::Main, "Media/Sansation.ttf");
+	mTextures->Load(Textures::TitleScreen, "Media/Textures/TitleScreen.png");
 }
 
 // ====================================================================================================
@@ -37,25 +39,12 @@ void World::LoadTextures()
 // ====================================================================================================
 void World::BuildScene()
 {
-	for (std::size_t i = 0; i < LayerCount; ++i)
+	for (std::size_t i = 0; i < g_pWorld->LayerCount; ++i)
 	{
 		SceneNode::Ptr layer(new SceneNode());
 		mSceneLayers[i] = layer.get();
 		mSceneGraph.AttachChild(std::move(layer));
 	}
-	
-	sf::Texture& texture = mTextures->Get(Textures::Desert);
-	sf::IntRect textureRect(mWorldBounds);
-	texture.setRepeated(true);
-
-	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(texture, textureRect));
-	backgroundSprite->setPosition(mWorldBounds.left, mWorldBounds.top);
-	mSceneLayers[Background]->AttachChild(std::move(backgroundSprite));
-	
-	std::unique_ptr<Aircraft> leader(new Aircraft(Aircraft::Eagle));
-	mPlayerAircraft = leader.get();
-	mPlayerAircraft->setPosition(mSpawnPosition);
-	mSceneLayers[Air]->AttachChild(std::move(leader));
 }
 
 // ====================================================================================================
@@ -63,7 +52,7 @@ void World::BuildScene()
 // ====================================================================================================
 void World::Draw()
 {
-	mWindow.setView(mWorldView);
+	mWindow.setView(*mWorldView);
 	mWindow.draw(mSceneGraph);
 }
 
@@ -76,32 +65,10 @@ void World::Update(sf::Time dt, bool focused)
 	sf::Vector2i mousePosition = sf::Mouse::getPosition(mWindow);
 	//if (focused) sf::Mouse::setPosition(windowCenter, mWindow);
 
-	mWorldView.move(0.f, mScrollSpeed * dt.asSeconds());
-	mPlayerAircraft->SetVelocity(0.f, 0.f);
-	sf::Vector2f velocity = mPlayerAircraft->GetVelocity();
-	if (velocity.x != 0.f && velocity.y != 0.f)
-		mPlayerAircraft->SetVelocity(velocity / std::sqrt(2.f));
-	mPlayerAircraft->Accelerate(0.f, mScrollSpeed);
-
 	while (!mCommandQueue->isEmpty())
 		mSceneGraph.onCommand(mCommandQueue->pop(), dt);
 
 	mSceneGraph.Update(dt);
-
-	sf::FloatRect viewBounds(
-		mWorldView.getCenter() - mWorldView.getSize() / 2.f,
-		mWorldView.getSize());
-	const float borderDistance = 40.f;
-	sf::Vector2f position = mPlayerAircraft->getPosition();
-	position.x = std::max(position.x,
-		viewBounds.left + borderDistance);
-	position.x = std::min(position.x,
-		viewBounds.left + viewBounds.width - borderDistance);
-	position.y = std::max(position.y,
-		viewBounds.top + borderDistance);
-	position.y = std::min(position.y,
-		viewBounds.top + viewBounds.height - borderDistance);
-	mPlayerAircraft->setPosition(position);
 }
 
 // ====================================================================================================
@@ -114,11 +81,9 @@ void World::RegisterEntityClass(RegisteredEntityClass* ent)
 }
 RegisteredEntityClass* World::GetEntityClassInfo(std::string classname)
 {
-	printf("World::GetEntityClassInfo %s and %i\n", classname.c_str(), mRegisteredEntityClasses.size());
 	for(std::vector<RegisteredEntityClass*>::iterator it = mRegisteredEntityClasses.begin(); it != mRegisteredEntityClasses.end(); ++it)
 	{
 		RegisteredEntityClass* pInfo = *it;
-		printf("%s => %s\n", pInfo->GetClassName().c_str(), classname.c_str());
 		if (pInfo->GetClassName() == classname)
 			return pInfo;
 	}
@@ -133,6 +98,6 @@ Entity* World::CreateEntityByClassName(std::string classname)
 		printf("[World] Attempted to create entity with unknown classname (%s)\n", classname.c_str());
 		return NULL;
 	}
-	printf("[World] Created %s\n", classname.c_str());
+
 	return pInfo->Create();
 }

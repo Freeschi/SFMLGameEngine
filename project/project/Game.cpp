@@ -13,7 +13,7 @@ Game* g_pGame = NULL;
 // Game::Game
 // Constructor of the Game class
 // ====================================================================================================
-Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML Application"), mPlayerSprite(), mTexture(), mIsMovingUp(false), mIsMovingDown(false), mIsMovingLeft(false), mIsMovingRight(false)
+Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML Application"), mPlayerSprite(), mTexture(), mIsMovingUp(false), mIsMovingDown(false), mIsMovingLeft(false), mIsMovingRight(false), mStateStack(NULL)
 {
 	mPlayerSprite.setPosition(100.f, 100.f);
 
@@ -46,6 +46,11 @@ Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML Application"), mPlayerSpri
 	REGISTER_ENTITY_CLASS(aircraft_eagle, Aircraft(Aircraft::Eagle));
 	REGISTER_ENTITY_CLASS(aircraft_raptor, Aircraft(Aircraft::Raptor));
 
+	// States
+	mStateStack = new StateStack();
+	RegisterStates();
+	mStateStack->PushState(States::Title);
+
 	// Done
 	OnFullyInitialized();
 }
@@ -68,6 +73,7 @@ void Game::Run()
 			ProcessEvents();
 			ProcessInput();
 			Update(TimePerFrame);
+			mStateStack->Update(TimePerFrame);
 		}
 		Render();
 	}
@@ -81,6 +87,8 @@ void Game::ProcessEvents()
 	sf::Event event;
 	while (mWindow.pollEvent(event))
 	{
+		mStateStack->HandleEvent(event);
+
 		switch (event.type)
 		{
 			case sf::Event::Closed:
@@ -109,7 +117,8 @@ void Game::ProcessInput()
 	while (mWindow.pollEvent(event))
 	{
 		mPlayer.HandleEvent(event, commands);
-		if (event.type == sf::Event::Closed)
+
+		if (event.type == sf::Event::Closed || mStateStack->IsEmpty())
 			mWindow.close();
 	}
 
@@ -127,6 +136,18 @@ void Game::OnFullyInitialized()
 }
 
 // ====================================================================================================
+// Game::RegisterStates
+// ====================================================================================================
+void Game::RegisterStates()
+{
+	mStateStack->RegisterState<TitleState>(States::Title);
+	mStateStack->RegisterState<MenuState>(States::Menu);
+	mStateStack->RegisterState<GameState>(States::Game);
+	//mStateStack.RegisterState<PauseState>(States::Pause);
+
+}
+
+// ====================================================================================================
 // Game::Update
 // ====================================================================================================
 void Game::Update(sf::Time deltaTime)
@@ -141,6 +162,7 @@ void Game::Render()
 {
 	mWindow.clear();
 	g_pWorld->Draw();
+	mStateStack->Draw();
 
 	mWindow.setView(mWindow.getDefaultView());
 	mWindow.display();

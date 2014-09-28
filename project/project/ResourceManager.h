@@ -27,12 +27,21 @@ namespace Textures
 	{
 		Eagle,
 		Raptor,
-		Desert
+		Desert,
+		TitleScreen
 	};
-}
+};
+namespace Fonts
+{
+	enum ID
+	{
+		Main,
+	};
+};
 
 //template class ResourceHolder<sf::Texture, Textures::ID>;
 typedef ResourceHolder<sf::Texture, Textures::ID> TextureHolder;
+typedef ResourceHolder<sf::Font, Fonts::ID> FontHolder;
 
 #include "ResourceManager.inl"
 
