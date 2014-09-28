@@ -11,6 +11,8 @@ public:
 	virtual bool HandleEvent(const sf::Event& event);
 
 	void BuildScene();
+private:
+	
 };
 
 #endif

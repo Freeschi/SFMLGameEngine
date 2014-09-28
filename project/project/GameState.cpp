@@ -24,15 +24,20 @@ void GameState::BuildScene()
 // ====================================================================================================
 void GameState::Draw()
 {
-	sf::RenderWindow& window = g_pGame->GetWindow();
-	window.setView(window.getDefaultView());
+	g_pWorld->Draw();
 }
 
 // ====================================================================================================
 // Update
 // ====================================================================================================
-bool GameState::Update(sf::Time)
+bool GameState::Update(sf::Time dt)
 {
+	std::cout << "Update" << std::endl;
+	g_pWorld->Update(dt, true);
+
+	CommandQueue* commands = g_pWorld->GetCommandQueue();
+	g_pPlayer->HandleRealtimeInput(commands);
+
 	return true;
 }
 
@@ -41,5 +46,13 @@ bool GameState::Update(sf::Time)
 // ====================================================================================================
 bool GameState::HandleEvent(const sf::Event& event)
 {
+	std::cout << "HandleEvent" << std::endl;
+	// Game input handling
+	CommandQueue* commands = g_pWorld->GetCommandQueue();
+	g_pPlayer->HandleEvent(event, commands);
+
+	// Escape pressed, trigger the pause screen
+	
+
 	return true;
 }
