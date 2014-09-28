@@ -143,5 +143,8 @@
     <ClInclude Include="lua\GeneralFunctions.h">
       <Filter>Headerdateien\Lua</Filter>
     </ClInclude>
+    <ClInclude Include="Foreach.hpp">
+      <Filter>Headerdateien\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

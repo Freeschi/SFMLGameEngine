@@ -104,6 +104,7 @@
     <ClInclude Include="Command.h" />
     <ClInclude Include="CommandQueue.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Foreach.hpp" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Includes.h" />
     <ClInclude Include="lua\GeneralFunctions.h" />

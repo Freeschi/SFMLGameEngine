@@ -38,22 +38,94 @@ derivedAction(Function fn)
 }
 
 // ====================================================================================================
+// Player::Player
+// ====================================================================================================
+
+Player::Player()
+{
+	mKeyBinding[sf::Keyboard::Left] = MoveLeft;
+	mKeyBinding[sf::Keyboard::Right] = MoveRight;
+	mKeyBinding[sf::Keyboard::Up] = MoveUp;
+	mKeyBinding[sf::Keyboard::Down] = MoveDown;
+
+	InitializeActions();
+	FOREACH(auto& pair, mActionBinding)
+		pair.second.category = Category::PlayerAircraft;
+}
+
+// ====================================================================================================
+// Player::InitializeActions
+// ====================================================================================================
+void Player::InitializeActions()
+{
+	const float playerSpeed = 200.f;
+
+	mActionBinding[MoveLeft].action = derivedAction<Aircraft>(AircraftMover(-playerSpeed, 0.f));
+	mActionBinding[MoveRight].action = derivedAction<Aircraft>(AircraftMover(+playerSpeed, 0.f));
+	mActionBinding[MoveUp].action = derivedAction<Aircraft>(AircraftMover(0.f, -playerSpeed));
+	mActionBinding[MoveDown].action = derivedAction<Aircraft>(AircraftMover(0.f, +playerSpeed));
+}
+
+// ====================================================================================================
+// Player::AssignKey
+// ====================================================================================================
+void Player::AssignKey(Action action, sf::Keyboard::Key key)
+{
+	// Remove all keys that already map to action
+	for (auto itr = mKeyBinding.begin(); itr != mKeyBinding.end();)
+	{
+		if (itr->second == action)
+			mKeyBinding.erase(itr++);
+		else
+			++itr;
+	}
+
+	// Insert new binding
+	mKeyBinding[key] = action;
+}
+
+// ====================================================================================================
+// Player::GetAssignedKey
+// ====================================================================================================
+sf::Keyboard::Key Player::GetAssignedKey(Action action) const
+{
+	FOREACH(auto pair, mKeyBinding)
+	{
+		if (pair.second == action)
+			return pair.first;
+	}
+
+	return sf::Keyboard::Unknown;
+}
+// ====================================================================================================
 // Realtime Input
 // ====================================================================================================
 void Player::HandleRealtimeInput(CommandQueue* commands)
 {
-	const float PlayerSpeed = 10.0f;
-
-	// TO-DO: Make this work
-	// Move Left
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
+	FOREACH(auto pair, mKeyBinding)
 	{
-		Command moveLeft;
-		moveLeft.category = Category::PlayerAircraft;
-		moveLeft.action = derivedAction<Aircraft>(AircraftMover(-PlayerSpeed, 0.f));
-		commands->push(moveLeft);
+		if (sf::Keyboard::isKeyPressed(pair.first) && isRealtimeAction(pair.second))
+			commands->push(mActionBinding[pair.second]);
 	}
 }
+
+// ====================================================================================================
+// isRealtimeAction
+// ====================================================================================================
+bool Player::isRealtimeAction(Action action)
+{
+	switch (action)
+	{
+	case MoveLeft:
+	case MoveRight:
+
+		return true;
+
+	default:
+		return false;
+	}
+}
+
 
 // ====================================================================================================
 // Event Handling

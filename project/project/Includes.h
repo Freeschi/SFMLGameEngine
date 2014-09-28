@@ -56,6 +56,7 @@ class CommandQueue;
 // ====================================================================================================
 // Internal Includes
 // ====================================================================================================
+#include "Foreach.hpp"
 #include "ResourceManager.h"
 #include "SceneNode.h"
 #include "SpriteNode.h"
