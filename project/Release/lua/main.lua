@@ -9,10 +9,15 @@ function _main()
 	event.AddListener("OnGameInitialized", function()
 		print("Hi!")
 		
-		local sftime = sfTime()
+		class 'test_lua_entity' (Entity)
+		function test_lua_entity:__init()
+			Entity.__init(self, "test_lua_entity")
+		end
+		function test_lua_entity:UpdateCurrent()
+			print("test_lua_entity")
+		end
 		
-		local ent = Entity()
-		print(ent:GetClassName())
-		ent:Update(sftime)
+		local e = Entity("test_lua_entity")
+		e:Activate()
 	end)
 end

@@ -24,12 +24,7 @@ Textures::ID toTextureID(Aircraft::Type type)
 // ====================================================================================================
 Aircraft::Aircraft(Type type) : mType(type)
 {
-	printf("%i\n", g_pWorld);
-	Sleep(1000);
-
 	TextureHolder* th = g_pWorld->GetTextureHolder();
-	printf("th = %i\n", th);
-	Sleep(1000);
 	mSprite.setTexture(th->Get(toTextureID(type)));
 }
 
