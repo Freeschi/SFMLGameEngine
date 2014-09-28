@@ -12,6 +12,11 @@ public:
 	typedef std::unique_ptr<SceneNode> Ptr;
 	Ptr m_pSceneNode;
 	lua_scenenode_wrapper(SceneNode* pSceneNode) : m_pSceneNode(pSceneNode) {}
+
+	void SetPosition(sf::Vector2f pos)
+	{
+		m_pSceneNode->setPosition(pos);
+	}
 };
 
 class lua_entity_wrapper : public Entity, public lua_scenenode_wrapper, public luabind::wrap_base
@@ -23,8 +28,7 @@ public:
 
 	void Activate()
 	{
-		Ptr mSelf(this);
-		g_pWorld->GetSceneLayer(g_pWorld->Air)->AttachChild(std::move(mSelf));
+		g_pWorld->GetSceneLayer(g_pWorld->Air)->AttachChild(std::move(m_pEntity));
 	}
 
 	std::string GetClassName() { return m_pEntity->GetClassName(); }
@@ -83,6 +87,7 @@ void LuaFunctions::RegisterClassWrapper()
 		luabind::class_<lua_scenenode_wrapper>("SceneNode")
 			.def(luabind::constructor<SceneNode*>())
 			.def("GetPosition", &lua_scenenode_wrapper::GetWorldPosition)
+			.def("SetPosition", &lua_scenenode_wrapper::SetPosition)
 	];
 
 	// Entity

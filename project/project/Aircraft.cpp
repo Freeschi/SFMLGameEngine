@@ -26,6 +26,8 @@ Aircraft::Aircraft(Type type) : mType(type), Entity("base_aircraft")
 {
 	TextureHolder* th = g_pWorld->GetTextureHolder();
 	mSprite.setTexture(th->Get(toTextureID(type)));
+
+	printf("Aircraft::Aircraft\n");
 }
 
 // ====================================================================================================
@@ -33,5 +35,6 @@ Aircraft::Aircraft(Type type) : mType(type), Entity("base_aircraft")
 // ====================================================================================================
 void Aircraft::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
 {
+	printf("Aircraft::Draw\n");
 	target.draw(mSprite, states);
 }

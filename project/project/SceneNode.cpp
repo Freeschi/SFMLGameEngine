@@ -41,6 +41,8 @@ void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 	drawCurrent(target, states);
 
+	printf("SceneNode::draw with %i children\n", mChildren.size());
+	
 	for (auto itr = mChildren.begin();
 		itr != mChildren.end(); ++itr)
 	{
