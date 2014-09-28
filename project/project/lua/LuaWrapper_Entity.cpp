@@ -6,105 +6,62 @@
 #include "../../Includes.h"
 using namespace LuaFunctions;
 
-// ====================================================================================================
-// SceneNode Wrapper
-// ====================================================================================================
-class LuaWrapper_SceneNode : public SceneNode, public luabind::wrap_base
+class lua_scenenode_wrapper : public SceneNode, public luabind::wrap_base
 {
 public:
-	LuaWrapper_SceneNode() : SceneNode()
-	{
-		printf("SceneNode::SceneNode\n");
-	}
+	lua_scenenode_wrapper() {}
 };
 
-// ====================================================================================================
-// Entity Wrapper
-// ====================================================================================================
-class LuaWrapper_Entity : public Entity, public LuaWrapper_SceneNode, public luabind::wrap_base
+class lua_entity_wrapper : public Entity, public lua_scenenode_wrapper, public luabind::wrap_base
 {
 public:
-	LuaWrapper_Entity(std::string classname) : Entity(classname), LuaWrapper_SceneNode()
+	typedef std::unique_ptr<Entity> Ptr;
+	Ptr m_pEntity;
+	lua_entity_wrapper(Entity* pEntity) : m_pEntity(pEntity) { };
+
+	void Activate()
 	{
-		printf("Entity::Entity\n");
-	}
-	LuaWrapper_Entity() : Entity("lua_base_entity"), LuaWrapper_SceneNode()
-	{
-		printf("Entity::Entity\n");
+		Ptr mSelf(this);
+		g_pWorld->GetSceneLayer(g_pWorld->Air)->AttachChild(std::move(mSelf));
 	}
 
-	virtual void UpdateCurrent(sf::Time df)
-	{
-		printf("Entity::Update\n");
-		//call<void>("UpdateCurrent");
-	}
-
-	static void default_UpdateCurrent(Entity* ptr, sf::Time df)
-	{
-		printf("default\n");
-		return ptr->Entity::UpdateCurrent(df);
-	}
+	std::string GetClassName() { return m_pEntity->GetClassName(); }
 };
 
-LuaWrapper_Entity* create_entity(std::string classname)
+lua_entity_wrapper* create_entity(std::string classname)
 {
-	LuaWrapper_Entity* pEntity = new LuaWrapper_Entity();
-
-	SceneNode::Ptr ptr((Entity*) pEntity);
-	g_pWorld->GetSceneLayer(g_pWorld->Air)->AttachChild(std::move(ptr));
-
-	return pEntity;
+	lua_entity_wrapper* ent = new lua_entity_wrapper(g_pWorld->CreateEntityByClassName(classname));
+	return ent;
 }
 
 
 
-
-
-
-
-
-
-
-
-
-class lua_entity_wrapper : public Entity, public luabind::wrap_base
-{
-public:
-	lua_entity_wrapper(std::string ss) : Entity(ss) { };
-	lua_entity_wrapper() : Entity("lua_base_entity") { };
-
-	void Activate()
-	{
-		SceneNode::Ptr ptr((Entity*)this);
-		g_pWorld->GetSceneLayer(g_pWorld->Air)->AttachChild(std::move(ptr));
-	}
-	
-	virtual void UpdateCurrent(sf::Time dt)
-	{
-		try
-		{
-			call<void>("UpdateCurrent");
-		}
-		catch (...) { }
-	}
-
-	static void default_UpdateCurrent(Entity* ptr, sf::Time dt)
-	{
-		return ptr->Entity::UpdateCurrent(dt);
-	}
-};
-
-
+/*Entity* Create() createfunc \*/
 
 void LuaFunctions::RegisterClassWrapper()
 {
+	/*class RegisteredEntity_Aircraft : public RegisteredEntity
+	{
+	public:
+		RegisteredEntity_Aircraft() : RegisteredEntity("aircraft_eagle") {}
+
+		Entity* Create() { return new Aircraft(Aircraft::Eagle); }
+	};
+	RegisterEntityClass(new RegisteredEntity_Aircraft());
+	*/
 	
+	// SceneNode
+	luabind::module(lua->State())[
+		luabind::class_<lua_scenenode_wrapper>("SceneNode")
+			.def(luabind::constructor<>())
+	];
 
 	luabind::module(lua->State())
 	[
-		luabind::class_<Entity, lua_entity_wrapper>("Entity")
-			.def(luabind::constructor<std::string>())
-			.def("UpdateCurrent", &Entity::UpdateCurrent, &lua_entity_wrapper::default_UpdateCurrent)
+		luabind::class_<lua_entity_wrapper, lua_scenenode_wrapper>("Entity")
+			.def(luabind::constructor<Entity*>())
+			.def("UpdateCurrent", &Entity::UpdateCurrent)
+			.def("GetClassName", &lua_entity_wrapper::GetClassName)
 			.def("Activate", &lua_entity_wrapper::Activate)
 	];
 
@@ -115,11 +72,7 @@ void LuaFunctions::RegisterClassWrapper()
 	.def("asSeconds", &sf::Time::asSeconds)
 	];
 
-	// SceneNode
-	luabind::module(lua->State()) [
-	luabind::class_<SceneNode, LuaWrapper_SceneNode>("SceneNode")
-	.def(luabind::constructor<>())
-	];
+	
 
 	// Entity
 	luabind::module(lua->State()) [
@@ -128,10 +81,10 @@ void LuaFunctions::RegisterClassWrapper()
 	.def(luabind::constructor<std::string>())
 	.def("GetClassName", &Entity::GetClassName)
 	.def("UpdateCurrent", &Entity::UpdateCurrent, &LuaWrapper_Entity::default_UpdateCurrent)
-	];
+	];*/
 
 	// create entity
 	luabind::module(lua->State()) [
-	luabind::def("create_entity", create_entity)
-	];*/
+		luabind::def("create_entity", create_entity)
+	];
 }

@@ -22,7 +22,7 @@ Textures::ID toTextureID(Aircraft::Type type)
 // ====================================================================================================
 // Aircraft
 // ====================================================================================================
-Aircraft::Aircraft(Type type) : mType(type)
+Aircraft::Aircraft(Type type) : mType(type), Entity("base_aircraft")
 {
 	TextureHolder* th = g_pWorld->GetTextureHolder();
 	mSprite.setTexture(th->Get(toTextureID(type)));

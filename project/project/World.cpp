@@ -16,7 +16,7 @@ World::World(sf::RenderWindow& window) : mWindow(window), mWorldView(window.getD
 										mWorldBounds(0.f, 0.f, mWorldView.getSize().x, 2000.f), 
 										mSpawnPosition(mWorldView.getSize().x / 2.f, mWorldBounds.height - mWorldView.getSize().y / 2.f), 
 										mScrollSpeed(-50.f), mPlayerAircraft(nullptr),
-										mCommandQueue(new CommandQueue())
+										mCommandQueue(new CommandQueue()), mRegisteredEntityClasses()
 {
 	// Prepare the view
 	mWorldView.setCenter(mSpawnPosition);
@@ -30,8 +30,6 @@ void World::LoadTextures()
 	mTextures->Load(Textures::Eagle, "Media/Textures/Eagle.png");
 	mTextures->Load(Textures::Raptor, "Media/Textures/Raptor.png");
 	mTextures->Load(Textures::Desert, "Media/Textures/Desert.png");
-
-	printf("World::LoadTextures done\n");
 }
 
 // ====================================================================================================
@@ -58,9 +56,6 @@ void World::BuildScene()
 	mPlayerAircraft = leader.get();
 	mPlayerAircraft->setPosition(mSpawnPosition);
 	mSceneLayers[Air]->AttachChild(std::move(leader));
-
-	printf("World::BuildScene\n");
-	g_pGame->OnFullyInitialized();
 }
 
 // ====================================================================================================
@@ -107,4 +102,37 @@ void World::Update(sf::Time dt, bool focused)
 	position.y = std::min(position.y,
 		viewBounds.top + viewBounds.height - borderDistance);
 	mPlayerAircraft->setPosition(position);
+}
+
+// ====================================================================================================
+// RegisterEntityClass
+// ====================================================================================================
+void World::RegisterEntityClass(RegisteredEntityClass* ent)
+{
+	printf("[Game] Registered entity class %s (Index %i)\n", ent->GetClassName().c_str(), mRegisteredEntityClasses.size());
+	mRegisteredEntityClasses.push_back(ent);
+}
+RegisteredEntityClass* World::GetEntityClassInfo(std::string classname)
+{
+	printf("World::GetEntityClassInfo %s and %i\n", classname.c_str(), mRegisteredEntityClasses.size());
+	for(std::vector<RegisteredEntityClass*>::iterator it = mRegisteredEntityClasses.begin(); it != mRegisteredEntityClasses.end(); ++it)
+	{
+		RegisteredEntityClass* pInfo = *it;
+		printf("%s => %s\n", pInfo->GetClassName().c_str(), classname.c_str());
+		if (pInfo->GetClassName() == classname)
+			return pInfo;
+	}
+
+	return NULL;
+}
+Entity* World::CreateEntityByClassName(std::string classname)
+{
+	RegisteredEntityClass* pInfo = GetEntityClassInfo(classname);
+	if (pInfo == NULL)
+	{
+		printf("[World] Attempted to create entity with unknown classname (%s)\n", classname.c_str());
+		return NULL;
+	}
+	printf("[World] Created %s\n", classname.c_str());
+	return pInfo->Create();
 }

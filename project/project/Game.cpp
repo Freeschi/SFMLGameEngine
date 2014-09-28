@@ -42,6 +42,12 @@ Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML Application"), mPlayerSpri
 	g_pWorld = new World(mWindow);
 	g_pWorld->LoadTextures();
 	g_pWorld->BuildScene();
+
+	REGISTER_ENTITY_CLASS(aircraft_eagle, Aircraft(Aircraft::Eagle));
+	REGISTER_ENTITY_CLASS(aircraft_raptor, Aircraft(Aircraft::Raptor));
+
+	// Done
+	OnFullyInitialized();
 }
 
 // ====================================================================================================
@@ -112,7 +118,6 @@ void Game::ProcessInput()
 
 // ====================================================================================================
 // Game::OnFullyInitialized
-// Called when textures are loaded & scene built (see World)
 // ====================================================================================================
 void Game::OnFullyInitialized()
 {
