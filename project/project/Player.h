@@ -4,7 +4,7 @@
 class Player
 {
 	public:
-		void HandleEvent(const sf::Event& event,CommandQueue& commands);
-		void HandleRealtimeInput(CommandQueue& commands);
+		void HandleEvent(const sf::Event& event, CommandQueue* commands);
+		void HandleRealtimeInput(CommandQueue* commands);
 };
 #endif

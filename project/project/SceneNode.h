@@ -6,6 +6,8 @@
 
 #include "Command.h"
 
+
+
 class SceneNode : public sf::Transformable, public sf::Drawable, private sf::NonCopyable
 {
 public:
@@ -17,22 +19,25 @@ public:
 	void AttachChild(Ptr child);
 	Ptr DetachChild(const SceneNode& node);
 
-	void Update(sf::Time dt);
-
-	void onCommand(const Command& command, sf::Time dt);
+	virtual void Update(sf::Time dt);
+	virtual void UpdateCurrent(sf::Time dt) {};
+	virtual void onCommand(const Command& command, sf::Time dt);
 
 	sf::Transform GetWorldTransform() const;
 	sf::Vector2f GetWorldPosition() const;
 
 	std::vector<Ptr> mChildren;
 
-private:
+	virtual unsigned int SceneNode::GetCategory() const;
+
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const {};
-	virtual void UpdateCurrent(sf::Time dt) {};
+
+	/*void SetParent(SceneNode* parent) { mParent = parent; }
+	SceneNode* GetParent() { return mParent;  }*/
+
+private:
 	void UpdateChildren(sf::Time dt);
-	
-	virtual unsigned int SceneNode::GetCategory() const; // das hier behebt unseren fehler -> die funktion war nicht virtual und konnte daher nicht überschrieben werden
 	
 	SceneNode* mParent;
 };

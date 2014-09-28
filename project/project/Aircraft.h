@@ -14,7 +14,7 @@ public:
 	};
 
 public:
-	explicit Aircraft(Type type, const TextureHolder& textures);
+	explicit Aircraft(Type type);
 	virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	virtual unsigned int GetCategory() const { return Category::PlayerAircraft; };

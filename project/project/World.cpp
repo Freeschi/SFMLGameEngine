@@ -11,11 +11,13 @@ World* g_pWorld = NULL;
 // ====================================================================================================
 // World
 // ====================================================================================================
-World::World(sf::RenderWindow& window) : mWindow(window), mWorldView(window.getDefaultView()), mTextures(), mSceneGraph(), mSceneLayers(), mWorldBounds(0.f, 0.f, mWorldView.getSize().x, 2000.f), mSpawnPosition(mWorldView.getSize().x / 2.f, mWorldBounds.height - mWorldView.getSize().y / 2.f), mScrollSpeed(-50.f), mPlayerAircraft(nullptr)
+World::World(sf::RenderWindow& window) : mWindow(window), mWorldView(window.getDefaultView()), 
+										mTextures(new TextureHolder()), mSceneGraph(), mSceneLayers(), 
+										mWorldBounds(0.f, 0.f, mWorldView.getSize().x, 2000.f), 
+										mSpawnPosition(mWorldView.getSize().x / 2.f, mWorldBounds.height - mWorldView.getSize().y / 2.f), 
+										mScrollSpeed(-50.f), mPlayerAircraft(nullptr),
+										mCommandQueue(new CommandQueue())
 {
-	LoadTextures();
-	BuildScene();
-
 	// Prepare the view
 	mWorldView.setCenter(mSpawnPosition);
 }
@@ -25,9 +27,11 @@ World::World(sf::RenderWindow& window) : mWindow(window), mWorldView(window.getD
 // ====================================================================================================
 void World::LoadTextures()
 {
-	mTextures.Load(Textures::Eagle, "Media/Textures/Eagle.png");
-	mTextures.Load(Textures::Raptor, "Media/Textures/Raptor.png");
-	mTextures.Load(Textures::Desert, "Media/Textures/Desert.png");
+	mTextures->Load(Textures::Eagle, "Media/Textures/Eagle.png");
+	mTextures->Load(Textures::Raptor, "Media/Textures/Raptor.png");
+	mTextures->Load(Textures::Desert, "Media/Textures/Desert.png");
+
+	printf("World::LoadTextures done\n");
 }
 
 // ====================================================================================================
@@ -42,7 +46,7 @@ void World::BuildScene()
 		mSceneGraph.AttachChild(std::move(layer));
 	}
 	
-	sf::Texture& texture = mTextures.Get(Textures::Desert);
+	sf::Texture& texture = mTextures->Get(Textures::Desert);
 	sf::IntRect textureRect(mWorldBounds);
 	texture.setRepeated(true);
 
@@ -50,11 +54,12 @@ void World::BuildScene()
 	backgroundSprite->setPosition(mWorldBounds.left, mWorldBounds.top);
 	mSceneLayers[Background]->AttachChild(std::move(backgroundSprite));
 	
-	std::unique_ptr<Aircraft> leader(new Aircraft(Aircraft::Eagle, mTextures));
+	std::unique_ptr<Aircraft> leader(new Aircraft(Aircraft::Eagle));
 	mPlayerAircraft = leader.get();
 	mPlayerAircraft->setPosition(mSpawnPosition);
 	mSceneLayers[Air]->AttachChild(std::move(leader));
 
+	printf("World::BuildScene\n");
 	g_pGame->OnFullyInitialized();
 }
 
@@ -76,16 +81,8 @@ void World::Update(sf::Time dt, bool focused)
 	sf::Vector2i mousePosition = sf::Mouse::getPosition(mWindow);
 	//if (focused) sf::Mouse::setPosition(windowCenter, mWindow);
 
-	while (!mCommandQueue.isEmpty())
-		mSceneGraph.onCommand(mCommandQueue.pop(), dt);
+	while (!mCommandQueue->isEmpty())
+		mSceneGraph.onCommand(mCommandQueue->pop(), dt);
 
 	mSceneGraph.Update(dt);
-}
-
-// ====================================================================================================
-// getCommandQueue
-// ====================================================================================================
-CommandQueue& World::GetCommandQueue()
-{
-	return mCommandQueue;
 }

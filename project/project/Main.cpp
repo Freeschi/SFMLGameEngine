@@ -19,6 +19,7 @@ int main()
 		printf("UNHANDLED EXCEPTION!\n");
 		printf("-----------------------------------------------\n");
 		printf("%s\n", e.what());
+		std::getchar();
 	}
 
 	// Cleanup

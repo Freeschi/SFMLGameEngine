@@ -38,6 +38,9 @@
 	#define FRESCHI_FATAL_ERROR(msg) exit(0);
 #endif
 
+#define ACCESSOR_FUNC(name, type, mVar) void Set##name(##type _##name) { ##mVar = _##name; }; \
+	##type Get##name() { return mVar; }
+
 // ====================================================================================================
 // Forward Declarations
 // ====================================================================================================

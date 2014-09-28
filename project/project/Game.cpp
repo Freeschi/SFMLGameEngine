@@ -40,6 +40,8 @@ Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML Application"), mPlayerSpri
 
 	// Init World
 	g_pWorld = new World(mWindow);
+	g_pWorld->LoadTextures();
+	g_pWorld->BuildScene();
 }
 
 // ====================================================================================================
@@ -95,7 +97,7 @@ void Game::ProcessEvents()
 // ====================================================================================================
 void Game::ProcessInput()
 {
-	CommandQueue& commands = g_pWorld->GetCommandQueue();
+	CommandQueue* commands = g_pWorld->GetCommandQueue();
 	sf::Event event;
 
 	while (mWindow.pollEvent(event))
