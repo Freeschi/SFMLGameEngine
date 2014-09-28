@@ -16,7 +16,9 @@ GameState::GameState(StateStack& stack) : State(stack)
 // ====================================================================================================
 void GameState::BuildScene()
 {
-
+	if (g_pPlayer != NULL)
+		delete g_pPlayer;
+	g_pPlayer = new Player();
 }
 
 // ====================================================================================================
@@ -32,7 +34,6 @@ void GameState::Draw()
 // ====================================================================================================
 bool GameState::Update(sf::Time dt)
 {
-	std::cout << "Update" << std::endl;
 	g_pWorld->Update(dt, true);
 
 	CommandQueue* commands = g_pWorld->GetCommandQueue();
