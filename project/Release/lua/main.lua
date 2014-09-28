@@ -4,6 +4,8 @@ function _main()
 	
 	-- Includes
 	include("modules/event.lua")
+	include("extensions/vector.lua")
+	include("extensions/util.lua")
 	
 	-- Events
 	event.AddListener("OnGameInitialized", function()
@@ -17,8 +19,6 @@ function _main()
 			print("test_lua_entity")
 		end
 		
-		--local e = create_entity("aircraft_eagle")
-		--print(e:GetClassName())
-		--e:Activate()
+		print(world.GetSceneLayer(0))
 	end)
 end
