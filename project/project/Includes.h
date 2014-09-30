@@ -28,6 +28,18 @@
 //#pragma comment(lib, "sfml-network.lib")
 
 // ====================================================================================================
+// Useless compiler warnings
+// ====================================================================================================
+#pragma warning(disable: 4715) // not all control paths return a value
+#pragma warning(disable: 4297) // function assumed not to throw an exception but does
+#pragma warning(disable: 4540) // dynamic_cast used to convert to inaccessible or ambiguous base
+#pragma warning(disable: 4584) // class a is already a base-class of b
+#pragma warning(disable: 4800) // converting int to bool
+#pragma warning(disable: 4996) // sprintf
+#pragma warning(disable: 4018) // conflict signed and unsigned
+#pragma warning(disable: 4172) // returning temporary local variable
+
+// ====================================================================================================
 // Macros
 // ====================================================================================================
 #ifdef _WIN32
@@ -45,8 +57,6 @@
 // Forward Declarations
 // ====================================================================================================
 #include "ForwardDeclarations.h"
-
-
 
 // ====================================================================================================
 // Internal Includes
