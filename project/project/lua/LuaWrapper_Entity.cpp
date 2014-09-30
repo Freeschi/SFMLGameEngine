@@ -4,65 +4,67 @@
 #pragma warning(disable: 4540)
 #pragma warning(disable: 4584)
 #include "../../Includes.h"
+#include "GeneralFunctions.h"
+#include "ClassWrappers.h"
 using namespace LuaFunctions;
 
-class lua_scenenode_wrapper : public SceneNode, public luabind::wrap_base
+// ====================================================================================================
+// Class Definitions
+// ====================================================================================================
+namespace LuaClasses
 {
-public:
-	typedef std::unique_ptr<SceneNode> Ptr;
-	Ptr m_pSceneNode;
-	lua_scenenode_wrapper(SceneNode* pSceneNode) : m_pSceneNode(pSceneNode) {}
+	// ====================================================================================================
+	// SceneNode
+	// ====================================================================================================
+	lua_scenenode_wrapper::lua_scenenode_wrapper(SceneNode* pSceneNode) : m_pSceneNode(pSceneNode) {}
 
-	void SetPosition(sf::Vector2f pos)
+	// SetPosition
+	void lua_scenenode_wrapper::SetPosition(sf::Vector2f pos)
 	{
 		m_pSceneNode->setPosition(pos);
 	}
-};
 
-class lua_entity_wrapper : public Entity, public lua_scenenode_wrapper, public luabind::wrap_base
-{
-public:
-	typedef std::unique_ptr<Entity> Ptr;
-	Ptr m_pEntity;
-	lua_entity_wrapper(Entity* pEntity) : m_pEntity(pEntity), lua_scenenode_wrapper((SceneNode*) pEntity) { };
+	// ====================================================================================================
+	// Entity
+	// ====================================================================================================
+	lua_entity_wrapper::lua_entity_wrapper(Entity* pEntity) : m_pEntity(pEntity), lua_scenenode_wrapper((SceneNode*)pEntity) { };
+	lua_entity_wrapper::~lua_entity_wrapper() { };
 
-	void Activate()
+	// Valid-Check
+	void lua_entity_wrapper::Invalidate()
 	{
-		g_pWorld->GetSceneLayer(g_pWorld->Air)->AttachChild(std::move(m_pEntity));
+		m_pEntity = NULL;
 	}
-
-	std::string GetClassName() { return m_pEntity->GetClassName(); }
-};
-
-lua_entity_wrapper* create_entity(std::string classname)
-{
-	lua_entity_wrapper* ent = new lua_entity_wrapper(g_pWorld->CreateEntityByClassName(classname));
-	return ent;
-}
-
-namespace LuaFunctions
-{
-	namespace Module_World
+	void lua_entity_wrapper::Validate()
 	{
-		lua_scenenode_wrapper* GetSceneLayer(int iLayer)
+		if (m_pEntity == NULL)
 		{
-			if (iLayer >= g_pWorld->LayerCount)
-			{
-				return NULL;
-			}
-
-			SceneNode* pNode = g_pWorld->GetSceneLayer((World::Layer) iLayer);
-			printf("pNode = %i\n", pNode);
-			lua_scenenode_wrapper* pWrapper = new lua_scenenode_wrapper(pNode);
-			printf("pWrapper = %i\n", pWrapper);
-
-			return pWrapper;
+			lua->PushString("Attempted to use NULL entity!");
+			throw luabind::error(lua->State());
 		}
 	}
-}
+
+	// Activate
+	void lua_entity_wrapper::Activate()
+	{
+		Validate();
+		g_pWorld->GetSceneLayer(g_pWorld->Air)->AttachChild(m_pEntity);
+	}
+
+	// GetClassName
+	std::string lua_entity_wrapper::GetClassName()
+	{
+		Validate();
+		return m_pEntity->GetClassName();
+	}
+};
 
 
-void LuaFunctions::RegisterClassWrapper()
+
+
+
+
+void LuaClasses::RegisterClassWrappers()
 {	
 	// Vector2
 	luabind::module(lua->State()) [
@@ -73,7 +75,7 @@ void LuaFunctions::RegisterClassWrapper()
 			.property("y", &sf::Vector2f::y)
 	];
 
-	// SceneNode
+	// sf
 	luabind::module(lua->State()) [
 		luabind::class_<sf::Transformable>("sfTransformable")
 	];
@@ -83,48 +85,50 @@ void LuaFunctions::RegisterClassWrapper()
 	luabind::module(lua->State())[
 		luabind::class_<sf::NonCopyable>("NonCopyable")
 	];
+
+	// SceneNode
+	luabind::module(lua->State())[
+		luabind::class_<SceneNode>("SceneNode")
+			.def(luabind::constructor<>())
+			.def("GetPosition", &SceneNode::GetWorldPosition)
+	];
+
+	// Entity
+	luabind::module(lua->State())
+		[
+			luabind::class_<Entity>("Entity")
+			.def(luabind::constructor<>())
+			.def("UpdateCurrent", &Entity::UpdateCurrent)
+			.def("GetClassName", &Entity::GetClassName)
+		];
+
+	luabind::module(lua->State())
+		[
+			luabind::class_<Aircraft, Entity>("Aircraft")
+		];
+
+	
+
 	luabind::module(lua->State()) [
-		luabind::class_<lua_scenenode_wrapper>("SceneNode")
-			.def(luabind::constructor<SceneNode*>())
-			.def("GetPosition", &lua_scenenode_wrapper::GetWorldPosition)
-			.def("SetPosition", &lua_scenenode_wrapper::SetPosition)
+		luabind::class_<LuaClasses::lua_scenenode_wrapper>("SceneNodeWrap")
+	.def(luabind::constructor<SceneNode*>())
+	.def("GetPosition", &LuaClasses::lua_scenenode_wrapper::GetWorldPosition)
+	.def("SetPosition", &LuaClasses::lua_scenenode_wrapper::SetPosition)
 	];
 
 	// Entity
 	luabind::module(lua->State())
 	[
-		luabind::class_<lua_entity_wrapper, lua_scenenode_wrapper>("Entity")
-			.def(luabind::constructor<Entity*>())
-			.def("UpdateCurrent", &Entity::UpdateCurrent)
-			.def("GetClassName", &lua_entity_wrapper::GetClassName)
-			.def("Activate", &lua_entity_wrapper::Activate)
+		luabind::class_<LuaClasses::lua_entity_wrapper, LuaClasses::lua_scenenode_wrapper>("EntityWrap")
+	.def(luabind::constructor<Entity*>())
+	.def("UpdateCurrent", &Entity::UpdateCurrent)
+	.def("GetClassName", &LuaClasses::lua_entity_wrapper::GetClassName)
+	.def("Activate", &LuaClasses::lua_entity_wrapper::Activate)
 	];
-
-	// world Module
-	luabind::module(lua->State(), "world")[
-		luabind::def("GetSceneLayer", &LuaFunctions::Module_World::GetSceneLayer)
-	];
-
 	/*// sf::Time
 	luabind::module(lua->State()) [
 	luabind::class_<sf::Time>("sfTime")
 	.def(luabind::constructor<>())
 	.def("asSeconds", &sf::Time::asSeconds)
-	];
-
-	
-
-	// Entity
-	luabind::module(lua->State()) [
-	luabind::class_<Entity, LuaWrapper_Entity, SceneNode>("Entity")
-	.def(luabind::constructor<>())
-	.def(luabind::constructor<std::string>())
-	.def("GetClassName", &Entity::GetClassName)
-	.def("UpdateCurrent", &Entity::UpdateCurrent, &LuaWrapper_Entity::default_UpdateCurrent)
 	];*/
-
-	// create entity
-	luabind::module(lua->State()) [
-		luabind::def("create_entity", create_entity)
-	];
 }

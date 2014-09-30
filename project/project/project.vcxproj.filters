@@ -191,5 +191,11 @@
     <ClInclude Include="Utility.h">
       <Filter>Headerdateien\Utility</Filter>
     </ClInclude>
+    <ClInclude Include="lua\ClassWrappers.h">
+      <Filter>Headerdateien\Lua</Filter>
+    </ClInclude>
+    <ClInclude Include="ForwardDeclarations.h">
+      <Filter>Headerdateien\Utility</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

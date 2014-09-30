@@ -1,7 +1,7 @@
 // ====================================================================================================
 // Includes
 // ====================================================================================================
-#include "Lua.h"
+#include "../Includes.h"
 
 void DumpStack()
 {
@@ -43,12 +43,6 @@ void LuaManager::Init()
 
 	// LuaBind
 	luabind::open(m_pState);
-
-	// Register Functions
-	luabind::module(m_pState)[
-		luabind::def("include", LuaFunctions::include)
-	];
-	LuaFunctions::RegisterClassWrapper();
 
 	// Done
 	printf("[LuaManager] Initialized Lua successfully\n");

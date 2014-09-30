@@ -2,6 +2,29 @@
 // Includes
 // ====================================================================================================
 #include "Includes.h"
+#include "lua/ClassWrappers.h"
+
+// ====================================================================================================
+// Entity
+// ====================================================================================================
+Entity::Entity(std::string classname)
+{
+	m_sClassName = classname;
+	m_pLuaObject = NULL;
+	m_iEntityIndex = g_pWorld->RegisterEntity(this);
+};
+Entity::Entity()
+{
+	m_sClassName = "base_entity";
+	m_pLuaObject = NULL;
+	m_iEntityIndex = g_pWorld->RegisterEntity(this);
+};
+Entity::~Entity()
+{
+	if (m_pLuaObject != NULL)
+		m_pLuaObject->Invalidate();
+	g_pWorld->UnregisterEntity(this);
+};
 
 // ====================================================================================================
 // Velocity

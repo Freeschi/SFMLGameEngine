@@ -11,13 +11,13 @@
 class SceneNode : public sf::Transformable, public sf::Drawable, private sf::NonCopyable
 {
 public:
-	typedef std::unique_ptr<SceneNode> Ptr;
-
-public:
 	SceneNode();
 
-	void AttachChild(Ptr child);
-	Ptr DetachChild(const SceneNode& node);
+	void AttachChild(SceneNode* child);
+	SceneNode* DetachChild(SceneNode* node);
+
+	const void RemoveNextUpdate() { m_bFlaggedForRemoval = true; };
+	bool IsValid() { return !m_bFlaggedForRemoval; }
 
 	virtual void Update(sf::Time dt);
 	virtual void UpdateCurrent(sf::Time dt) {};
@@ -26,7 +26,7 @@ public:
 	sf::Transform GetWorldTransform() const;
 	sf::Vector2f GetWorldPosition() const;
 
-	std::vector<Ptr> mChildren;
+	std::vector<SceneNode*> mChildren;
 
 	virtual unsigned int SceneNode::GetCategory() const;
 
@@ -37,6 +37,7 @@ public:
 	SceneNode* GetParent() { return mParent;  }*/
 
 private:
+	bool m_bFlaggedForRemoval;
 	void UpdateChildren(sf::Time dt);
 	
 	SceneNode* mParent;

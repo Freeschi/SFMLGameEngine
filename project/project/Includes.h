@@ -44,16 +44,9 @@
 // ====================================================================================================
 // Forward Declarations
 // ====================================================================================================
-class Entity;
-class Aircraft;
-class Player;
-class Game;
-class World;
-class SceneNode;
-struct Command;
-class CommandQueue;
-class State;
-class StateStack;
+#include "ForwardDeclarations.h"
+
+
 
 // ====================================================================================================
 // Internal Includes
@@ -73,7 +66,4 @@ class StateStack;
 #include "Entity.h"
 #include "Aircraft.h"
 
-// ====================================================================================================
-// Lua
-// ====================================================================================================
-#include "lua/Lua.h"
+#include "Lua.h"

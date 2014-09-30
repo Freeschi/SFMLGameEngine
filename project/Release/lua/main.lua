@@ -21,7 +21,12 @@ function _main()
 		
 		--print(world.GetSceneLayer(0))
 		local ent = create_entity("aircraft_eagle")
-		ent:SetPosition(Vector2(320, 1760))
-		ent:Activate()
+		print(ent)
+		--ent:SetPosition(Vector2(320, 1760))
+		--ent:Activate()
+	end)
+	
+	event.AddListener("OnSceneNodeDeleted", function()
+		print("OnSceneNodeDeleted")
 	end)
 end

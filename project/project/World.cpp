@@ -19,6 +19,11 @@ World::World(sf::RenderWindow& window) : mWindow(window), mWorldView(new sf::Vie
 {
 	mWorldView->setCenter(mSpawnPosition);
 	printf("[View] Centered at %f %f\n", mSpawnPosition.x, mSpawnPosition.y);
+
+	for (int i = 0; i < MAX_ENTITIES; i++)
+	{
+		mEntityList[i] = NULL;
+	}
 }
 
 // ====================================================================================================
@@ -40,9 +45,9 @@ void World::BuildScene()
 {
 	for (std::size_t i = 0; i < g_pWorld->LayerCount; ++i)
 	{
-		SceneNode::Ptr layer(new SceneNode());
-		mSceneLayers[i] = layer.get();
-		mSceneGraph.AttachChild(std::move(layer));
+		SceneNode* layer = new SceneNode();
+		mSceneLayers[i] = layer;
+		mSceneGraph.AttachChild(layer);
 	}
 }
 
@@ -99,4 +104,87 @@ Entity* World::CreateEntityByClassName(std::string classname)
 	}
 
 	return pInfo->Create();
+}
+
+/*
+ * Entity List
+ int RegisterEntity(Entity* ent);
+ void UnregisterEntity(Entity* ent);
+ int GetEntityIndex(Entity* ent);
+ Entity* GetEntityByIndex(int index);
+ bool IsEntityRegistered(Entity* ent);
+ bool IsEntityRegistered(int index);
+ */
+
+// ====================================================================================================
+// Register / Unregister Entity
+// ====================================================================================================
+int World::RegisterEntity(Entity* ent)
+{
+	if (IsEntityRegistered(ent)) return -1;
+
+	// Search free slot
+	for (int index = 0; index < MAX_ENTITIES; index++)
+	{
+		if (!IsEntityRegistered(index))
+		{
+			mEntityList[index] = ent;
+			return index;
+		}
+	}
+
+	// oh crap
+	// entity list full
+	printf("[World] Warning! Entity List is full!\n");
+	return -1;
+}
+void World::UnregisterEntity(Entity* ent)
+{
+	int iEntityIndex = GetEntityIndex(ent);
+	if (iEntityIndex == -1)
+	{
+		printf("[World] Warning! UnregisterElement called with unregistered entity!\n");
+		return;
+	}
+
+	ent->RemoveNextUpdate();
+	mEntityList[iEntityIndex] = NULL;
+}
+
+// ====================================================================================================
+// GetEntity
+// ====================================================================================================
+int World::GetEntityIndex(Entity* ent)
+{
+	for (int index = 0; index < MAX_ENTITIES; index++)
+	{
+		Entity* pRegisteredEntity = mEntityList[index];
+		if (pRegisteredEntity != NULL && ent == pRegisteredEntity)
+		{
+			return index;
+		}
+	}
+
+	return -1;
+}
+Entity* World::GetEntityByIndex(int iEntityIndex)
+{
+	if (iEntityIndex < 0 || iEntityIndex >= MAX_ENTITIES) {
+		throw std::string("Invalid call to World::GetEntityByIndex! iEntityIndex out of bounds!");
+		return NULL;
+	}
+
+	return mEntityList[iEntityIndex];
+}
+
+// ====================================================================================================
+// IsEntity
+// ====================================================================================================
+bool World::IsEntityRegistered(int iEntityIndex)
+{
+	return GetEntityByIndex(iEntityIndex) != NULL;
+}
+bool World::IsEntityRegistered(Entity* ent)
+{
+	return GetEntityIndex(ent) > 0;
 }

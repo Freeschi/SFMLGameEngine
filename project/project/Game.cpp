@@ -2,6 +2,9 @@
 // Includes
 // ====================================================================================================
 #include "Includes.h"
+#include "Lua.h"
+#include "lua/GeneralFunctions.h"
+#include "lua/ClassWrappers.h"
 
 // ====================================================================================================
 // Definitions
@@ -17,6 +20,12 @@ Game::Game() : mWindow(sf::VideoMode(640, 480), "SFML Application"), mStateStack
 	// Lua
 	lua = new LuaManager();
 	lua->Init();
+
+	// Functions
+	LuaFunctions::RegisterLuaFunctions();
+
+	// Classes
+	LuaClasses::RegisterClassWrappers();
 
 	// main.lua
 	if (!lua->IncludeFile("lua/main.lua"))

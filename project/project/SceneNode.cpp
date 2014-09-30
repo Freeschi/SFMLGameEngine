@@ -2,15 +2,17 @@
 // Includes
 // ====================================================================================================
 #include "Includes.h"
+#include "Lua.h"
 
 SceneNode::SceneNode() : mParent(NULL)
 {
+	m_bFlaggedForRemoval = false;
 }
 
 // ====================================================================================================
 // SceneNode::AttachChild
 // ====================================================================================================
-void SceneNode::AttachChild(Ptr child)
+void SceneNode::AttachChild(SceneNode* child)
 {
 	child->mParent = this;
 	mChildren.push_back(std::move(child));
@@ -19,17 +21,16 @@ void SceneNode::AttachChild(Ptr child)
 // ====================================================================================================
 // SceneNode::DetachChild
 // ====================================================================================================
-SceneNode::Ptr SceneNode::DetachChild(const SceneNode& node)
+SceneNode* SceneNode::DetachChild(SceneNode* node)
 {
 	auto found = std::find_if(mChildren.begin(), mChildren.end(),
-		[&](Ptr& p) -> bool { return p.get() == &node; });
+		[&](SceneNode* p) -> bool { return p == node; });
 
 	if (found == mChildren.end()) return NULL;
 
-	Ptr result = std::move(*found);
-	result->mParent = nullptr;
+	node->mParent = nullptr;
 	mChildren.erase(found);
-	return result;
+	return node;
 }
 
 // ====================================================================================================
@@ -41,12 +42,11 @@ void SceneNode::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 	drawCurrent(target, states);
 
-	printf("SceneNode::draw with %i children\n", mChildren.size());
-	
 	for (auto itr = mChildren.begin();
 		itr != mChildren.end(); ++itr)
 	{
-		(*itr)->draw(target, states);
+		if ((*itr)->IsValid())
+			(*itr)->draw(target, states);
 	}
 }
 
@@ -74,7 +74,7 @@ void SceneNode::onCommand(const Command& command, sf::Time dt)
 	if (command.category & GetCategory())
 		command.action(*this, dt);
 
-	for (Ptr& child : mChildren)
+	for (SceneNode* child : mChildren)
 		child->onCommand(command, dt);
 }
 
@@ -91,11 +91,27 @@ unsigned int SceneNode::GetCategory() const
 // ====================================================================================================
 void SceneNode::Update(sf::Time dt)
 {
-	UpdateCurrent(dt);
-	UpdateChildren(dt);
+	if (IsValid())
+	{
+		UpdateCurrent(dt);
+		UpdateChildren(dt);
+	}
 }
 void SceneNode::UpdateChildren(sf::Time dt)
 {
-	for(Ptr& child : mChildren)
+	for (SceneNode* child : mChildren)
+	{
 		child->Update(dt);
+
+		if (!child->IsValid())
+		{
+			DetachChild(child);
+			delete child;
+
+			lua->GetEvent("OnSceneNodeDeleted");
+			lua->ProtectedCall(1);
+
+			printf("Call to OnSceneNode already placed\n");
+		}
+	}
 }

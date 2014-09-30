@@ -3,7 +3,7 @@
 // ====================================================================================================
 namespace LuaFunctions
 {
-	void RegisterClassWrapper();
+	void RegisterLuaFunctions();
 
 	void include(std::string file);
 }

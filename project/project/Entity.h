@@ -7,9 +7,12 @@
 class Entity : public SceneNode
 {
 public:
-	Entity(std::string classname) { m_sClassName = classname; };
-	Entity() { m_sClassName = "base_entity"; }; // classname will be set to "base_entity"
+	Entity(std::string classname);
+	Entity();
+	~Entity();
+
 	ACCESSOR_FUNC(ClassName, std::string, m_sClassName);
+	ACCESSOR_FUNC(LuaObject, LuaClasses::lua_entity_wrapper*, m_pLuaObject);
 
 	void SetVelocity(sf::Vector2f velocity);
 	void SetVelocity(float vx, float vy);
@@ -23,6 +26,9 @@ public:
 private:
 	sf::Vector2f mVelocity;
 	std::string m_sClassName;
+	LuaClasses::lua_entity_wrapper* m_pLuaObject;
+	int m_iEntityIndex;
 }; 
+
 
 #endif

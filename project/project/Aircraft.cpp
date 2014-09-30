@@ -35,6 +35,11 @@ Aircraft::Aircraft(Type type) : mType(type), Entity("base_aircraft")
 // ====================================================================================================
 void Aircraft::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	printf("Aircraft::Draw\n");
+	//printf("Aircraft::Draw\n");
 	target.draw(mSprite, states);
+}
+
+void Aircraft::UpdateCurrent(sf::Time dt)
+{
+	RemoveNextUpdate();
 }

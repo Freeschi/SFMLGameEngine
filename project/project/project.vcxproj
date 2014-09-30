@@ -111,9 +111,11 @@
     <ClInclude Include="CommandQueue.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Foreach.hpp" />
+    <ClInclude Include="ForwardDeclarations.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="Includes.h" />
+    <ClInclude Include="lua\ClassWrappers.h" />
     <ClInclude Include="lua\GeneralFunctions.h" />
     <ClInclude Include="lua\Lua.h" />
     <ClInclude Include="lua\luamanager\LuaManager.h" />
