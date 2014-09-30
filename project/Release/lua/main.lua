@@ -5,28 +5,23 @@ function _main()
 	-- Includes
 	include("modules/event.lua")
 	include("extensions/vector.lua")
+	include("extensions/entity.lua")
 	include("extensions/util.lua")
 	
 	-- Events
 	event.AddListener("OnGameInitialized", function()
-		print("Hi!")
+		print("OnGameInitialized event")
 		
-		class 'test_lua_entity' (Entity)
-		function test_lua_entity:__init()
-			Entity.__init(self, "test_lua_entity")
-		end
-		function test_lua_entity:UpdateCurrent()
-			print("test_lua_entity")
-		end
-		
-		--print(world.GetSceneLayer(0))
-		local ent = create_entity("aircraft_eagle")
+		local ent = world.CreateEntity("aircraft_raptor")
+		ent:Activate()
 		print(ent)
-		--ent:SetPosition(Vector2(320, 1760))
-		--ent:Activate()
+		--print(ent:GetClassName())
+		--ent:GetTable().test = "helloooo"
 	end)
 	
-	event.AddListener("OnSceneNodeDeleted", function()
-		print("OnSceneNodeDeleted")
+	event.AddListener("OnEntityRemoved", function(ent)
+		print(type(ent))
+		print(ent:GetClassName())
+		--print(ent:GetTable().test)
 	end)
 end

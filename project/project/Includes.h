@@ -53,6 +53,9 @@
 #define ACCESSOR_FUNC(name, type, mVar) void Set##name(##type _##name) { ##mVar = _##name; }; \
 	##type Get##name() { return mVar; }
 
+#define ACCESSOR_FUNC_BOOL(name, mVar) void Set##name(bool _##name) { ##mVar = _##name; } \
+	bool Is##name() { return mVar; }
+
 // ====================================================================================================
 // Forward Declarations
 // ====================================================================================================

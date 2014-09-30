@@ -43,10 +43,7 @@ namespace LuaFunctions
 		LuaClasses::lua_entity_wrapper* CreateEntity(std::string classname)
 		{
 			Entity* pEntity = g_pWorld->CreateEntityByClassName(classname);
-
-			LuaClasses::lua_entity_wrapper* pWrapper = new LuaClasses::lua_entity_wrapper(pEntity);
-			pEntity->SetLuaObject(pWrapper);
-			return pWrapper;
+			return pEntity->GetLuaObject();
 		}
 	}
 }

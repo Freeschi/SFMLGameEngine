@@ -107,9 +107,6 @@ void SceneNode::UpdateChildren(sf::Time dt)
 		{
 			DetachChild(child);
 			delete child;
-
-			lua->GetEvent("OnSceneNodeDeleted");
-			lua->ProtectedCall(1);
 		}
 	}
 }

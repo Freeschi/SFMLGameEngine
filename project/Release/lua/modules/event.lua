@@ -32,7 +32,7 @@ function event.Call(eventname, ...)
 	
 	if event.Listeners[eventname] ~= nil then
 		for _,callback in ipairs(event.Listeners[eventname]) do
-			callback()
+			callback(...)
 		end
 	end
 end
