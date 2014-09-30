@@ -59,11 +59,9 @@ namespace LuaClasses
 	}
 };
 
-
-
-
-
-
+// ====================================================================================================
+// Register Class Wrappers
+// ====================================================================================================
 void LuaClasses::RegisterClassWrappers()
 {	
 	// Vector2
@@ -111,24 +109,18 @@ void LuaClasses::RegisterClassWrappers()
 
 	luabind::module(lua->State()) [
 		luabind::class_<LuaClasses::lua_scenenode_wrapper>("SceneNodeWrap")
-	.def(luabind::constructor<SceneNode*>())
-	.def("GetPosition", &LuaClasses::lua_scenenode_wrapper::GetWorldPosition)
-	.def("SetPosition", &LuaClasses::lua_scenenode_wrapper::SetPosition)
+		.def(luabind::constructor<SceneNode*>())
+		.def("GetPosition", &LuaClasses::lua_scenenode_wrapper::GetWorldPosition)
+		.def("SetPosition", &LuaClasses::lua_scenenode_wrapper::SetPosition)
 	];
 
 	// Entity
 	luabind::module(lua->State())
 	[
 		luabind::class_<LuaClasses::lua_entity_wrapper, LuaClasses::lua_scenenode_wrapper>("EntityWrap")
-	.def(luabind::constructor<Entity*>())
-	.def("UpdateCurrent", &Entity::UpdateCurrent)
-	.def("GetClassName", &LuaClasses::lua_entity_wrapper::GetClassName)
-	.def("Activate", &LuaClasses::lua_entity_wrapper::Activate)
+		.def(luabind::constructor<Entity*>())
+		.def("UpdateCurrent", &Entity::UpdateCurrent)
+		.def("GetClassName", &LuaClasses::lua_entity_wrapper::GetClassName)
+		.def("Activate", &LuaClasses::lua_entity_wrapper::Activate)
 	];
-	/*// sf::Time
-	luabind::module(lua->State()) [
-	luabind::class_<sf::Time>("sfTime")
-	.def(luabind::constructor<>())
-	.def("asSeconds", &sf::Time::asSeconds)
-	];*/
 }

@@ -63,7 +63,7 @@ void LuaFunctions::RegisterLuaFunctions()
 		];
 
 	// world Module
-	luabind::module(lua->State(), "world")[
+	luabind::module(lua->State(), "world") [
 		luabind::def("GetSceneLayer", &LuaFunctions::Module_World::GetSceneLayer),
 		luabind::def("CreateEntity", &LuaFunctions::Module_World::CreateEntity)
 	];

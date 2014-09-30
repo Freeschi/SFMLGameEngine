@@ -33,6 +33,10 @@ int main()
 		sprintf(msg, "%s\ntrace: %s", e.what(), e.traceback());
 		ExceptionOccured("LuaException", const_cast<char*>(msg));
 	}
+	catch (luabind::error& e)
+	{
+		ExceptionOccured("luabind::error", const_cast<char*>(e.what()));
+	}
 	catch (std::exception& e)
 	{
 		ExceptionOccured("std::exception", const_cast<char*>(e.what()));

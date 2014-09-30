@@ -106,16 +106,6 @@ Entity* World::CreateEntityByClassName(std::string classname)
 	return pInfo->Create();
 }
 
-/*
- * Entity List
- int RegisterEntity(Entity* ent);
- void UnregisterEntity(Entity* ent);
- int GetEntityIndex(Entity* ent);
- Entity* GetEntityByIndex(int index);
- bool IsEntityRegistered(Entity* ent);
- bool IsEntityRegistered(int index);
- */
-
 // ====================================================================================================
 // Register / Unregister Entity
 // ====================================================================================================

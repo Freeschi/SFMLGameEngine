@@ -110,8 +110,6 @@ void SceneNode::UpdateChildren(sf::Time dt)
 
 			lua->GetEvent("OnSceneNodeDeleted");
 			lua->ProtectedCall(1);
-
-			printf("Call to OnSceneNode already placed\n");
 		}
 	}
 }
