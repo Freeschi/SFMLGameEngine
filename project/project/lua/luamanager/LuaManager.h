@@ -11,7 +11,9 @@ public:
 	LuaManager();
 	void Init();
 	lua_State* State() { return m_pState; }
-	bool LuaManager::IncludeFile(char* sPath);						// nothrow, uses ProtectedCall
+
+	// Utility
+	bool IncludeFile(char* sPath);									// nothrow, uses ProtectedCall
 
 	// Error Handling
 	bool Success();

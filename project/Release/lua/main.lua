@@ -13,17 +13,17 @@ function _main()
 		print("OnGameInitialized event")
 		
 		local ent = world.CreateEntity("aircraft_raptor")
-		print(type(ent))
 		ent:Activate()
 		ent:SetPosition(Vector2(320,1760))
-		--print(ent)
-		--print(ent:GetClassName())
-		--ent:GetTable().test = "helloooo"
+		
+		local ent2 = world.CreateEntity("aircraft_eagle")
+		ent2:Activate()
+		ent2:SetPosition(ent:GetPosition() + Vector2(50,0))
+		--ent2:SetParent(ent)
+		print(ent2:GetParent())
 	end)
 	
 	event.AddListener("OnEntityRemoved", function(ent)
-		print(type(ent))
-		print(ent:GetClassName())
-		--print(ent:GetTable().test)
+		--
 	end)
 end

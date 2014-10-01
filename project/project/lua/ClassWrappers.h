@@ -58,7 +58,8 @@ namespace LuaClasses
 
 		void lua_AttachChild(lua_scenenode_wrapper* pSceneNode);
 		void lua_DetachChild(lua_scenenode_wrapper* pSceneNode);
-		lua_scenenode_wrapper* lua_GetParent();
+		luabind::object lua_GetParent();
+		void lua_SetParent(lua_scenenode_wrapper* pSceneNode);
 	};
 
 	class lua_entity_wrapper : public lua_scenenode_wrapper, public luabind::wrap_base

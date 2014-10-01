@@ -66,13 +66,14 @@ public:
 	bool IsEntityRegistered(Entity* ent);
 	bool IsEntityRegistered(int index);
 
+	std::array<SceneNode*, LayerCount> mSceneLayers;
+
 private:
 	sf::RenderWindow& mWindow;
 	sf::View* mWorldView;
 	TextureHolder* mTextures;
 	FontHolder* mFonts;
 	SceneNode mSceneGraph;
-	std::array<SceneNode*, LayerCount> mSceneLayers;
 	Entity* mEntityList[MAX_ENTITIES];
 	CommandQueue* mCommandQueue;
 

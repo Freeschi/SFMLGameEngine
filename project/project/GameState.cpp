@@ -39,6 +39,16 @@ bool GameState::Update(sf::Time dt)
 	CommandQueue* commands = g_pWorld->GetCommandQueue();
 	g_pPlayer->HandleRealtimeInput(commands);
 
+	try
+	{
+		luabind::object eventcall = luabind::globals(lua->State())["event"]["Call"];
+		luabind::call_function<void>(eventcall, "Update", dt);
+	}
+	catch (...)
+	{
+		lua->PrintErrorMessage("Tried to call Update event, but something went wrong.");
+	}
+
 	return true;
 }
 

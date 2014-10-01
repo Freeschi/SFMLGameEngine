@@ -10,6 +10,8 @@
 SceneNode::SceneNode() : mParent(NULL)
 {
 	m_bFlaggedForRemoval = false;
+	m_pLuaObject = NULL;
+
 	CreateLuaObject();
 }
 SceneNode::~SceneNode()
@@ -24,7 +26,9 @@ SceneNode::~SceneNode()
 void SceneNode::CreateLuaObject()
 {
 	if (m_pLuaObject != NULL)
-		m_pLuaObject = (LuaClasses::base_class_wrapper*) new LuaClasses::lua_scenenode_wrapper(this);
+		delete m_pLuaObject;
+
+	m_pLuaObject = (LuaClasses::base_class_wrapper*) new LuaClasses::lua_scenenode_wrapper(this);
 }
 
 // ====================================================================================================
@@ -32,8 +36,8 @@ void SceneNode::CreateLuaObject()
 // ====================================================================================================
 void SceneNode::AttachChild(SceneNode* child)
 {
-	child->mParent = this;
-	mChildren.push_back(std::move(child));
+	child->SetParent(this);
+	mChildren.push_back(child);
 }
 
 // ====================================================================================================

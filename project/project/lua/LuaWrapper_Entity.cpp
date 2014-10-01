@@ -75,6 +75,7 @@ namespace LuaClasses
 	};
 	lua_entity_wrapper::~lua_entity_wrapper() { };
 
+	// OnInvalidated
 	void lua_entity_wrapper::OnInvalidated()
 	{
 		if (m_pEntity != NULL)
@@ -116,17 +117,36 @@ namespace LuaClasses
 	}
 	
 	// Parent
-	lua_scenenode_wrapper* lua_scenenode_wrapper::lua_GetParent()
+	luabind::object lua_scenenode_wrapper::lua_GetParent()
 	{
 		CheckValid();
 
 		SceneNode* pParent = m_pSceneNode->GetParent();
 		if (pParent != NULL)
 		{
-			//lua_scenenode_wrapper* pWrapper =
+			LuaClasses::base_class_wrapper* wrapper = pParent->GetLuaObject();
+
+			if (pParent->IsEntity())
+				return luabind::object(lua->State(), (LuaClasses::lua_entity_wrapper*) wrapper);
+
+			// hopefully this actually is a scenenode
+			// check if its a scene layer
+			// scene layers tend to crash TO-DO: figure out why
+			for (int i = 0; i < g_pWorld->LayerCount; i++)
+			{
+				if (pParent == g_pWorld->GetSceneLayer((World::Layer) i))
+					return lua_nil;
+			}
+			return luabind::object(lua->State(), (LuaClasses::lua_scenenode_wrapper*) wrapper);
 		}
 
-		return NULL;
+		return lua_nil;
+	}
+	void lua_scenenode_wrapper::lua_SetParent(lua_scenenode_wrapper* pParent)
+	{
+		CheckValid();
+
+		m_pSceneNode->SetParent(pParent->m_pSceneNode);
 	}
 };
 
@@ -172,6 +192,7 @@ void LuaClasses::RegisterClassWrappers()
 		.def("AttachChild", &LuaClasses::lua_scenenode_wrapper::lua_AttachChild)
 		.def("DetachChild", &LuaClasses::lua_scenenode_wrapper::lua_DetachChild)
 		.def("GetParent", &LuaClasses::lua_scenenode_wrapper::lua_GetParent)
+		.def("SetParent", &LuaClasses::lua_scenenode_wrapper::lua_SetParent)
 	];
 
 	// Entity

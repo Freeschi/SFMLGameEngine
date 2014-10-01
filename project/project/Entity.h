@@ -11,8 +11,10 @@ public:
 	Entity();
 	~Entity();
 
+	bool IsEntity() { return true; }
+
 	ACCESSOR_FUNC(ClassName, std::string, m_sClassName);
-	void CreateLuaObject();
+	virtual void CreateLuaObject();
 
 	void SetVelocity(sf::Vector2f velocity);
 	void SetVelocity(float vx, float vy);

@@ -12,6 +12,8 @@ public:
 	SceneNode();
 	~SceneNode();
 
+	virtual bool IsEntity() { return false; };
+
 	void AttachChild(SceneNode* child);
 	SceneNode* DetachChild(SceneNode* node);
 
@@ -35,12 +37,7 @@ public:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const {};
 
-	SceneNode* GetParent() {
-		return mParent;
-	};
-
-	/*void SetParent(SceneNode* parent) { mParent = parent; }
-	SceneNode* GetParent() { return mParent;  }*/
+	ACCESSOR_FUNC(Parent, SceneNode*, mParent);
 
 private:
 	bool m_bFlaggedForRemoval;

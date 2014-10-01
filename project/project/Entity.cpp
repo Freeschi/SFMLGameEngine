@@ -31,10 +31,10 @@ Entity::~Entity()
 // ====================================================================================================
 void Entity::CreateLuaObject()
 {
-	printf("Entity::CreateLuaObject\n");
-
 	if (GetLuaObject() != NULL)
-		SetLuaObject((LuaClasses::base_class_wrapper*) new LuaClasses::lua_entity_wrapper(this));
+		delete GetLuaObject();
+
+	SetLuaObject((LuaClasses::base_class_wrapper*) new LuaClasses::lua_entity_wrapper(this));
 }
 
 // ====================================================================================================
