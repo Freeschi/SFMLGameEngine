@@ -2,11 +2,29 @@
 // Includes
 // ====================================================================================================
 #include "Includes.h"
-#include "Lua.h"
+#include "lua/ClassWrappers.h"
 
+// ====================================================================================================
+// SceneNode
+// ====================================================================================================
 SceneNode::SceneNode() : mParent(NULL)
 {
 	m_bFlaggedForRemoval = false;
+	CreateLuaObject();
+}
+SceneNode::~SceneNode()
+{
+	if (m_pLuaObject != NULL)
+		m_pLuaObject->Invalidate();
+}
+
+// ====================================================================================================
+// Lua
+// ====================================================================================================
+void SceneNode::CreateLuaObject()
+{
+	if (m_pLuaObject != NULL)
+		m_pLuaObject = (LuaClasses::base_class_wrapper*) new LuaClasses::lua_scenenode_wrapper(this);
 }
 
 // ====================================================================================================

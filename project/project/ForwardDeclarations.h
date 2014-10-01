@@ -11,6 +11,7 @@ class StateStack;
 
 namespace LuaClasses
 {
+	class base_class_wrapper;
 	class lua_scenenode_wrapper;
 	class lua_entity_wrapper;
 };

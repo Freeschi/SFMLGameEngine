@@ -72,8 +72,6 @@ namespace LuaClasses
 	{ 
 		m_pEntity = pEntity;
 		_base_class_wrapper_name("Entity");
-
-		printf("lua_entity_wrapper::lua_entity_wrapper\n");
 	};
 	lua_entity_wrapper::~lua_entity_wrapper() { };
 
@@ -186,26 +184,4 @@ void LuaClasses::RegisterClassWrappers()
 		.def("Activate", &LuaClasses::lua_entity_wrapper::Activate)
 		.def("Index", &LuaClasses::lua_entity_wrapper::Index)
 	];
-
-
-	/*// SceneNode
-	luabind::module(lua->State())[
-	luabind::class_<SceneNode>("SceneNode")
-	.def(luabind::constructor<>())
-	.def("GetPosition", &SceneNode::GetWorldPosition)
-	];
-
-	// Entity
-	luabind::module(lua->State())
-	[
-	luabind::class_<Entity>("Entity")
-	.def(luabind::constructor<>())
-	.def("UpdateCurrent", &Entity::UpdateCurrent)
-	.def("GetClassName", &Entity::GetClassName)
-	];
-
-	luabind::module(lua->State())
-	[
-	luabind::class_<Aircraft, Entity>("Aircraft")
-	];*/
 }

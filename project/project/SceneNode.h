@@ -10,9 +10,13 @@ class SceneNode : public sf::Transformable, public sf::Drawable, private sf::Non
 {
 public:
 	SceneNode();
+	~SceneNode();
 
 	void AttachChild(SceneNode* child);
 	SceneNode* DetachChild(SceneNode* node);
+
+	ACCESSOR_FUNC(LuaObject, LuaClasses::base_class_wrapper*, m_pLuaObject);
+	virtual void CreateLuaObject();
 
 	const void RemoveNextUpdate() { m_bFlaggedForRemoval = true; };
 	bool IsValid() { return !m_bFlaggedForRemoval; }
@@ -41,6 +45,7 @@ public:
 private:
 	bool m_bFlaggedForRemoval;
 	void UpdateChildren(sf::Time dt);
+	LuaClasses::base_class_wrapper* m_pLuaObject;
 	
 	SceneNode* mParent;
 };

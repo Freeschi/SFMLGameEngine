@@ -2,7 +2,7 @@
 // Includes
 // ====================================================================================================
 #include "Includes.h"
-#include "lua/ClassWrappers.h"
+#include "lua/ClassWrappers.h" 
 
 // ====================================================================================================
 // Entity
@@ -12,22 +12,30 @@ Entity::Entity(std::string classname)
 	m_sClassName = classname;
 	m_iEntityIndex = g_pWorld->RegisterEntity(this);
 
-	m_pLuaObject = new LuaClasses::lua_entity_wrapper(this);
+	CreateLuaObject();
 };
 Entity::Entity()
 {
 	m_sClassName = "base_entity";
 	m_iEntityIndex = g_pWorld->RegisterEntity(this);
 
-	m_pLuaObject = new LuaClasses::lua_entity_wrapper(this);
+	CreateLuaObject();
 };
 Entity::~Entity()
 {
-	if (m_pLuaObject != NULL)
-		m_pLuaObject->Invalidate();
-
 	g_pWorld->UnregisterEntity(this);
 };
+
+// ====================================================================================================
+// Lua
+// ====================================================================================================
+void Entity::CreateLuaObject()
+{
+	printf("Entity::CreateLuaObject\n");
+
+	if (GetLuaObject() != NULL)
+		SetLuaObject((LuaClasses::base_class_wrapper*) new LuaClasses::lua_entity_wrapper(this));
+}
 
 // ====================================================================================================
 // Velocity

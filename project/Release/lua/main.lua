@@ -13,7 +13,7 @@ function _main()
 		print("OnGameInitialized event")
 		
 		local ent = world.CreateEntity("aircraft_raptor")
-		print(ent)
+		print(type(ent))
 		ent:Activate()
 		ent:SetPosition(Vector2(320,1760))
 		--print(ent)
