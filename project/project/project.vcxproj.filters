@@ -120,6 +120,15 @@
     <ClCompile Include="GameState.cpp">
       <Filter>Quelldateien\States</Filter>
     </ClCompile>
+    <ClCompile Include="lua\LuaWrapper_SceneNode.cpp">
+      <Filter>Quelldateien\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\LuaWrapper_Base.cpp">
+      <Filter>Quelldateien\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\LuaWrapper_GenericSF.cpp">
+      <Filter>Quelldateien\Lua</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aircraft.h">

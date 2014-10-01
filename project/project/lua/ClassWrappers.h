@@ -10,6 +10,15 @@ namespace LuaClasses
 {
 	void RegisterClassWrappers();
 
+	void RegisterBase();
+	void RegisterGenericSF();
+	void RegisterVector2();
+	void RegisterSceneNode();
+	void RegisterEntity();
+
+	// ====================================================================================================
+	// Base
+	// ====================================================================================================
 	class base_store_info
 	{
 	public:
@@ -46,6 +55,9 @@ namespace LuaClasses
 		std::string m_sClassName;
 	};
 
+	// ====================================================================================================
+	// SceneNode
+	// ====================================================================================================
 	class lua_scenenode_wrapper : public base_class_wrapper, public luabind::wrap_base
 	{
 	public:
@@ -56,12 +68,15 @@ namespace LuaClasses
 		void SetPosition(sf::Vector2f pos);
 		sf::Vector2f GetPosition();
 
-		void lua_AttachChild(lua_scenenode_wrapper* pSceneNode);
-		void lua_DetachChild(lua_scenenode_wrapper* pSceneNode);
-		luabind::object lua_GetParent();
-		void lua_SetParent(lua_scenenode_wrapper* pSceneNode);
+		void AttachChild(lua_scenenode_wrapper* pSceneNode);
+		void DetachChild(lua_scenenode_wrapper* pSceneNode);
+		luabind::object GetParent();
+		void SetParent(lua_scenenode_wrapper* pSceneNode);
 	};
 
+	// ====================================================================================================
+	// Entity
+	// ====================================================================================================
 	class lua_entity_wrapper : public lua_scenenode_wrapper, public luabind::wrap_base
 	{
 	public:
