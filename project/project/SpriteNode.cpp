@@ -6,13 +6,26 @@
 // ====================================================================================================
 // SpriteNode
 // ====================================================================================================
-SpriteNode::SpriteNode(const sf::Texture& texture): mSprite(texture)
+SpriteNode::SpriteNode() : Entity("sprite_node")
 {
 
 }
-SpriteNode::SpriteNode(const sf::Texture& texture, const sf::IntRect& textureRect): mSprite(texture, textureRect)
+SpriteNode::SpriteNode(const sf::Texture& texture) : Entity("sprite_node"), mSprite(texture)
 {
 
+}
+SpriteNode::SpriteNode(const sf::Texture& texture, const sf::IntRect& textureRect) : Entity("sprite_node"), mSprite(texture, textureRect)
+{
+
+}
+
+void SpriteNode::SetTexture(sf::Texture& texture)
+{
+	mSprite.setTexture(texture);
+}
+void SpriteNode::SetRect(sf::IntRect rect)
+{
+	mSprite.setTextureRect(rect);
 }
 
 // ====================================================================================================

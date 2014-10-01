@@ -69,7 +69,6 @@
 #include "Foreach.hpp"
 #include "ResourceManager.h"
 #include "SceneNode.h"
-#include "SpriteNode.h"
 #include "Command.h"
 #include "CommandQueue.h"
 #include "State.h"
@@ -78,6 +77,7 @@
 #include "Game.h"
 #include "Category.h"
 #include "Entity.h"
+#include "SpriteNode.h"
 #include "Aircraft.h"
 
 #include "Lua.h"

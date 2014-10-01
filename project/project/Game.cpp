@@ -15,7 +15,7 @@ Game* g_pGame = NULL;
 // Game::Game
 // Constructor of the Game class
 // ====================================================================================================
-Game::Game() : mWindow(sf::VideoMode(800, 600), "Freeschi"), mStateStack(NULL)
+Game::Game() : mWindow(sf::VideoMode(1280, 720), "Freeschi"), mStateStack(NULL)
 {
 	// Lua
 	lua = new LuaManager();
@@ -51,6 +51,7 @@ Game::Game() : mWindow(sf::VideoMode(800, 600), "Freeschi"), mStateStack(NULL)
 
 	//REGISTER_ENTITY_CLASS(aircraft_eagle, Aircraft(Aircraft::Eagle));
 	//REGISTER_ENTITY_CLASS(aircraft_raptor, Aircraft(Aircraft::Raptor));
+	REGISTER_ENTITY_CLASS(sprite_node, SpriteNode());
 
 	// States
 	mStateStack = new StateStack();
