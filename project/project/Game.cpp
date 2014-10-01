@@ -15,7 +15,7 @@ Game* g_pGame = NULL;
 // Game::Game
 // Constructor of the Game class
 // ====================================================================================================
-Game::Game() : mWindow(sf::VideoMode(800, 800), "SFML Application"), mStateStack(NULL)
+Game::Game() : mWindow(sf::VideoMode(800, 600), "Freeschi"), mStateStack(NULL)
 {
 	// Lua
 	lua = new LuaManager();

@@ -15,6 +15,7 @@ namespace LuaClasses
 	void RegisterVector2();
 	void RegisterSceneNode();
 	void RegisterEntity();
+	void RegisterEnums();
 
 	// ====================================================================================================
 	// Base
@@ -73,9 +74,8 @@ namespace LuaClasses
 		void OnInvalidated();
 
 		luabind::object SetupLuaObject();
-
-		void Test();
 		
+		void Activate(int iLayer);
 		void Activate();
 		int Index();
 		std::string GetClassName();

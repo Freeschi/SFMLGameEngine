@@ -44,10 +44,15 @@ namespace LuaClasses
 	}
 
 	// Activate
+	void lua_entity_wrapper::Activate(int iLayer)
+	{
+		CheckValid();
+		g_pWorld->GetSceneLayer((World::Layer) iLayer)->AttachChild(m_pEntity);
+	}
 	void lua_entity_wrapper::Activate()
 	{
 		CheckValid();
-		g_pWorld->GetSceneLayer(g_pWorld->Air)->AttachChild(m_pEntity);
+		Activate(g_pWorld->LAYER_GENERAL);
 	}
 
 	// GetClassName
@@ -64,14 +69,6 @@ namespace LuaClasses
 		return g_pWorld->GetEntityIndex(m_pEntity);
 	}
 
-	void lua_entity_wrapper::Test()
-	{
-		CheckValid();
-
-		//m_pEntity->SetValue("TestValue", "alles klar - test value is awesomeeezzzz!");
-		printf("%s\n", m_pEntity->GetStringValue("TestValue").c_str());
-	}
-
 	/*
 	 * Register
 	 */
@@ -82,9 +79,9 @@ namespace LuaClasses
 			.def(luabind::constructor<Entity*>())
 			.def("UpdateCurrent", &Entity::UpdateCurrent)
 			.def("GetClassName", &LuaClasses::lua_entity_wrapper::GetClassName)
-			.def("Activate", &LuaClasses::lua_entity_wrapper::Activate)
+			.def("Activate", ( void (LuaClasses::lua_entity_wrapper::*)()	 ) &LuaClasses::lua_entity_wrapper::Activate)
+			.def("Activate", ( void (LuaClasses::lua_entity_wrapper::*)(int) ) &LuaClasses::lua_entity_wrapper::Activate)
 			.def("Index", &LuaClasses::lua_entity_wrapper::Index)
-			.def("Test", &LuaClasses::lua_entity_wrapper::Test)
 		];
 	}
 };

@@ -11,19 +11,17 @@ World* g_pWorld = NULL;
 // ====================================================================================================
 // World
 // ====================================================================================================
-World::World(sf::RenderWindow& window) : mWindow(window), mWorldView(new sf::View(window.getDefaultView())), 
-										mTextures(new TextureHolder()), mSceneGraph(), mSceneLayers(), 
-										mWorldBounds(0.f, 0.f, mWorldView->getSize().x, 2000.f), 
-										mSpawnPosition(mWorldView->getSize().x / 2.f, mWorldBounds.height - mWorldView->getSize().y / 2.f), 
-										mCommandQueue(new CommandQueue()), mRegisteredEntityClasses(), mFonts(new FontHolder())
+World::World(sf::RenderWindow& window) : mWindow(window), mWorldView(new sf::View(window.getDefaultView()))
 {
-	mWorldView->setCenter(mSpawnPosition);
-	printf("[View] Centered at %f %f\n", mSpawnPosition.x, mSpawnPosition.y);
-
 	for (int i = 0; i < MAX_ENTITIES; i++)
 	{
 		mEntityList[i] = NULL;
 	}
+
+	mCommandQueue = new CommandQueue();
+	mFonts = new FontHolder();
+	mTextures = new TextureHolder();
+	mWorldBounds = sf::FloatRect(0.f, 0.f, mWorldView->getSize().x, 2000.f);
 }
 
 // ====================================================================================================
@@ -43,7 +41,7 @@ void World::LoadTextures()
 // ====================================================================================================
 void World::BuildScene()
 {
-	for (std::size_t i = 0; i < g_pWorld->LayerCount; ++i)
+	for (std::size_t i = 0; i < g_pWorld->LAYER_COUNT; ++i)
 	{
 		SceneNode* layer = new SceneNode();
 		mSceneLayers[i] = layer;

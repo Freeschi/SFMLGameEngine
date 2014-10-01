@@ -59,7 +59,7 @@ namespace LuaClasses
 			// hopefully this actually is a scenenode
 			// check if its a scene layer
 			// scene layers tend to crash TO-DO: figure out why
-			for (int i = 0; i < g_pWorld->LayerCount; i++)
+			for (int i = 0; i < g_pWorld->LAYER_COUNT; i++)
 			{
 				if (pParent == g_pWorld->GetSceneLayer((World::Layer) i))
 					return lua_nil;

@@ -26,17 +26,17 @@ namespace LuaFunctions
 	namespace Module_World
 	{
 		// Probabbly broken
-		LuaClasses::lua_scenenode_wrapper* GetSceneLayer(int iLayer)
+		// Untested!
+		luabind::object GetSceneLayer(int iLayer)
 		{
-			if (iLayer >= g_pWorld->LayerCount)
+			if (iLayer >= g_pWorld->LAYER_COUNT)
 			{
-				return NULL;
+				lua->PushString("Invalid SceneLayer ID passed!");
+				throw luabind::error(lua->State());
 			}
 
 			SceneNode* pNode = g_pWorld->GetSceneLayer((World::Layer) iLayer);
-			LuaClasses::lua_scenenode_wrapper* pWrapper = new LuaClasses::lua_scenenode_wrapper(pNode);
-
-			return pWrapper;
+			return pNode->GetLuaObject()->LuaBindObject();
 		}
 
 		// Create Entity
@@ -45,6 +45,10 @@ namespace LuaFunctions
 			Entity* pEntity = g_pWorld->CreateEntityByClassName(classname);
 			return pEntity->GetLuaObject()->LuaBindObject();
 		}
+		
+		// World Bounds
+		sf::FloatRect GetBounds() { return g_pWorld->GetBounds(); }
+		void SetBounds(sf::FloatRect b) { g_pWorld->SetBounds(b); }
 	};
 
 	namespace Module_Game
@@ -70,7 +74,9 @@ void LuaFunctions::RegisterLuaFunctions()
 	// world Module
 	luabind::module(lua->State(), "world") [
 		luabind::def("GetSceneLayer", &LuaFunctions::Module_World::GetSceneLayer),
-		luabind::def("CreateEntity", &LuaFunctions::Module_World::CreateEntity)
+		luabind::def("CreateEntity", &LuaFunctions::Module_World::CreateEntity),
+		luabind::def("GetBounds", &LuaFunctions::Module_World::GetBounds),
+		luabind::def("SetBounds", &LuaFunctions::Module_World::SetBounds)
 	];
 
 	// game Module

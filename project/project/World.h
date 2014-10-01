@@ -31,9 +31,11 @@ class World : private sf::NonCopyable
 public:
 	enum Layer
 	{
-		Background,
-		Air,
-		LayerCount
+		LAYER_MAP,
+		LAYER_GENERAL,
+		LAYER_FOREGROUND,
+		LAYER_HUD,
+		LAYER_COUNT
 	};
 
 	// General
@@ -45,11 +47,14 @@ public:
 
 	// Get-Functions
 	CommandQueue* GetCommandQueue() { return mCommandQueue;  }
-	SceneNode* GetSceneLayer(Layer layer) { if (layer >= LayerCount) return NULL; return mSceneLayers[layer]; }
+	SceneNode* GetSceneLayer(Layer layer) { if (layer >= LAYER_COUNT) return NULL; return mSceneLayers[layer]; }
 	TextureHolder* GetTextureHolder() { return mTextures;  }
 	FontHolder* GetFontHolder() { return mFonts; }
 	sf::RenderWindow& GetWindow() { return mWindow; }
 	sf::View* GetView() { return mWorldView; }
+
+	// Accessor
+	ACCESSOR_FUNC(Bounds, sf::FloatRect, mWorldBounds);
 
 	// Registered Entity Classes
 	std::vector<RegisteredEntityClass*> mRegisteredEntityClasses;
@@ -66,7 +71,6 @@ public:
 	bool IsEntityRegistered(Entity* ent);
 	bool IsEntityRegistered(int index);
 
-	std::array<SceneNode*, LayerCount> mSceneLayers;
 
 private:
 	sf::RenderWindow& mWindow;
@@ -76,9 +80,8 @@ private:
 	SceneNode mSceneGraph;
 	Entity* mEntityList[MAX_ENTITIES];
 	CommandQueue* mCommandQueue;
-
+	std::array<SceneNode*, LAYER_COUNT> mSceneLayers;
 	sf::FloatRect mWorldBounds;
-	sf::Vector2f mSpawnPosition;
 };
 
 extern World* g_pWorld;

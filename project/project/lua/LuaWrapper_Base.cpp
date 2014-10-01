@@ -70,5 +70,6 @@ namespace LuaClasses
 		RegisterVector2();
 		RegisterSceneNode();
 		RegisterEntity();
+		RegisterEnums();
 	}
 };
