@@ -2,6 +2,9 @@
 // Includes
 // ====================================================================================================
 #include "Includes.h"
+#include "Lua.h"
+#include "lua/GeneralFunctions.h"
+#include "lua/ClassWrappers.h"
 
 // ====================================================================================================
 // GameState
@@ -41,12 +44,16 @@ bool GameState::Update(sf::Time dt)
 
 	try
 	{
-		luabind::object eventcall = luabind::globals(lua->State())["event"]["Call"];
-		luabind::call_function<void>(eventcall, "Update", dt);
+		if (g_pWorld->IsEntityRegistered(0))
+		{
+			lua->GetEvent("Update");
+			g_pWorld->GetEntityByIndex(0)->GetLuaObject()->Push();
+			lua->ProtectedCall(2, 0);
+		}
 	}
 	catch (...)
 	{
-		lua->PrintErrorMessage("Tried to call Update event, but something went wrong.");
+		lua->PrintErrorMessage("Tried to call Update event, but something went wrong.", true);
 	}
 
 	return true;

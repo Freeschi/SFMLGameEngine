@@ -40,10 +40,19 @@ namespace LuaFunctions
 		}
 
 		// Create Entity
-		LuaClasses::lua_entity_wrapper* CreateEntity(std::string classname)
+		luabind::object CreateEntity(std::string classname)
 		{
 			Entity* pEntity = g_pWorld->CreateEntityByClassName(classname);
-			return (LuaClasses::lua_entity_wrapper*) pEntity->GetLuaObject();
+			return pEntity->GetLuaObject()->AsReturnValue();
+		}
+	};
+
+	namespace Module_Game
+	{
+		// HasFocus
+		bool HasFocus()
+		{
+			return g_pGame->HasFocus();
 		}
 	}
 }
@@ -54,14 +63,18 @@ namespace LuaFunctions
 void LuaFunctions::RegisterLuaFunctions()
 {
 	// General
-	luabind::module(lua->State())
-		[
-			luabind::def("include", &LuaFunctions::include)
-		];
+	luabind::module(lua->State()) [
+		luabind::def("include", &LuaFunctions::include)
+	];
 
 	// world Module
 	luabind::module(lua->State(), "world") [
 		luabind::def("GetSceneLayer", &LuaFunctions::Module_World::GetSceneLayer),
 		luabind::def("CreateEntity", &LuaFunctions::Module_World::CreateEntity)
+	];
+
+	// game Module
+	luabind::module(lua->State(), "game")[
+		luabind::def("HasFocus", &LuaFunctions::Module_Game::HasFocus)
 	];
 }

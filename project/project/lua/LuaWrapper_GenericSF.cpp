@@ -25,6 +25,10 @@ namespace LuaClasses
 		luabind::module(lua->State()) [
 			luabind::class_<sf::NonCopyable>("NonCopyable")
 		];
+		luabind::module(lua->State()) [
+			luabind::class_<sf::Time>("sfTime")
+				.def("asMilliseconds", &sf::Time::asMilliseconds)
+		];
 	}
 	void RegisterVector2()
 	{

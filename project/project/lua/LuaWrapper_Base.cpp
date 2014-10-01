@@ -10,6 +10,32 @@
 // ====================================================================================================
 namespace LuaClasses
 {
+	// Base Class Wrapper
+	base_class_wrapper::base_class_wrapper() {
+		m_bValid = true;
+		m_sClassName = "";
+	};
+
+	// Internal Init
+	void base_class_wrapper::_base_init(std::string classname)
+	{
+		m_sClassName = classname;
+		m_oLuaObject = SetupLuaObject();
+	}
+
+	// Push
+	void base_class_wrapper::Push()
+	{
+		m_oLuaObject.push(lua->State());
+	}
+
+	// Invalidate
+	void base_class_wrapper::Invalidate()
+	{
+		OnInvalidated();
+		SetValid(false);
+	}
+
 	// Valid-Check
 	void base_class_wrapper::CheckValid()
 	{
@@ -27,15 +53,9 @@ namespace LuaClasses
 	 */
 	void RegisterBase()
 	{
-		// store info
-		luabind::module(lua->State()) [
-			luabind::class_<LuaClasses::base_store_info>("base_store_info")
-				.def("GetTable", &LuaClasses::base_store_info::GetTable)
-		];
-
 		// class wrapper
 		luabind::module(lua->State()) [
-			luabind::class_<LuaClasses::base_class_wrapper, LuaClasses::base_store_info>("base_class_wrapper")
+			luabind::class_<LuaClasses::base_class_wrapper>("base_class_wrapper")
 				.def("IsValid", &LuaClasses::base_class_wrapper::IsValid)
 		];
 	}

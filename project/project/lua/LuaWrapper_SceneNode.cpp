@@ -12,7 +12,7 @@ namespace LuaClasses
 {
 	lua_scenenode_wrapper::lua_scenenode_wrapper(SceneNode* pSceneNode) : m_pSceneNode(pSceneNode)
 	{
-		_base_class_wrapper_name("SceneNode");
+		_base_init("SceneNode");
 	}
 
 	// GetPosition

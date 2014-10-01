@@ -10,12 +10,18 @@
 // ====================================================================================================
 namespace LuaClasses
 {
+	// Entity Wrapper
 	lua_entity_wrapper::lua_entity_wrapper(Entity* pEntity) : lua_scenenode_wrapper((SceneNode*)pEntity)
 	{ 
 		m_pEntity = pEntity;
-		_base_class_wrapper_name("Entity");
+		_base_init("Entity");
 	};
 	lua_entity_wrapper::~lua_entity_wrapper() { };
+	
+	luabind::object lua_entity_wrapper::SetupLuaObject()
+	{
+		return luabind::object(lua->State(), this);
+	}
 
 	// OnInvalidated
 	void lua_entity_wrapper::OnInvalidated()

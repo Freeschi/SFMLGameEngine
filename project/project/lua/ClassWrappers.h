@@ -18,40 +18,27 @@ namespace LuaClasses
 
 	// ====================================================================================================
 	// Base
-	// ====================================================================================================
-	class base_store_info
+	// ====================================================================================================	
+	class base_class_wrapper
 	{
 	public:
-		base_store_info() : mDataTable(luabind::newtable(lua->State())) {};
-		luabind::object GetTable() {
-			return mDataTable;
-		};
+		base_class_wrapper();
+		//template <class T>
+		void _base_init(std::string classname);
 
-	private:
-		luabind::object mDataTable;
-	};
-	
-	class base_class_wrapper : public base_store_info
-	{
-	public:
-		base_class_wrapper() {
-			m_bValid = true;
-			m_sClassName = "";
-		};
-
-		void _base_class_wrapper_name(std::string classname) { m_sClassName = classname; };
-
-		void Invalidate() {
-			OnInvalidated();
-
-			SetValid(false);
-		}
+		void Invalidate();
 		void CheckValid();
 		ACCESSOR_FUNC_BOOL(Valid, m_bValid);
-		virtual void OnInvalidated() {};
+		
+		virtual void OnInvalidated()  {};
+		virtual luabind::object SetupLuaObject() { return luabind::object(); };
+		
+		void Push();
+		luabind::object AsReturnValue() { return m_oLuaObject; }
 
 	private:
 		bool m_bValid;
+		luabind::object m_oLuaObject;
 		std::string m_sClassName;
 	};
 
@@ -84,6 +71,8 @@ namespace LuaClasses
 		lua_entity_wrapper(Entity* pEntity);
 		~lua_entity_wrapper();
 		void OnInvalidated();
+
+		luabind::object SetupLuaObject();
 		
 		void Activate();
 		int Index();
