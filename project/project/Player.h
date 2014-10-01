@@ -18,15 +18,21 @@ public:
 	void AssignKey(Action action, sf::Keyboard::Key key);
 	sf::Keyboard::Key GetAssignedKey(Action action) const;
 
-	public:
-		void HandleEvent(const sf::Event& event, CommandQueue* commands);
-		void HandleRealtimeInput(CommandQueue* commands);
+	PlayerEntity* GetEntity() {
+		return m_pPlayer;
+	};
 
-	private:
-		static bool isRealtimeAction(Action action);
-	private:
-		std::map<sf::Keyboard::Key, Action> mKeyBinding;
-		std::map<Action, Command> mActionBinding;
+public:
+	void HandleEvent(const sf::Event& event, CommandQueue* commands);
+	void HandleRealtimeInput(CommandQueue* commands);
+
+private:
+	static bool isRealtimeAction(Action action);
+
+	std::map<sf::Keyboard::Key, Action> mKeyBinding;
+	std::map<Action, Command> mActionBinding;
+
+	PlayerEntity* m_pPlayer;
 };
 
 extern Player* g_pPlayer;

@@ -23,11 +23,8 @@ private:
 	void Update(sf::Time deltaTime);
 	void Render();
 
-	void ProcessInput();
-
 	sf::RenderWindow mWindow;
 	StateStack* mStateStack;
-	Player mPlayer;
 	CommandQueue commands;
 	bool m_bHasFocus;
 };

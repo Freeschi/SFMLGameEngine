@@ -47,16 +47,21 @@ Game::Game() : mWindow(sf::VideoMode(1280, 720), "Freeschi"), mStateStack(NULL)
 	// Init World
 	g_pWorld = new World(mWindow);
 	g_pWorld->LoadTextures();
-	g_pWorld->BuildScene();
 
 	//REGISTER_ENTITY_CLASS(aircraft_eagle, Aircraft(Aircraft::Eagle));
 	//REGISTER_ENTITY_CLASS(aircraft_raptor, Aircraft(Aircraft::Raptor));
 	REGISTER_ENTITY_CLASS(sprite_node, SpriteNode());
+	REGISTER_ENTITY_CLASS(player, PlayerEntity());
+
+	
 
 	// States
 	mStateStack = new StateStack();
 	RegisterStates();
-	mStateStack->PushState(States::Title);
+	mStateStack->PushState(States::Game);
+
+	// Build Scene
+	g_pWorld->BuildScene();
 
 	// Done
 	OnFullyInitialized();
@@ -81,12 +86,12 @@ void Game::Run()
 			timeSinceLastUpdate -= TimePerFrame;
 			
 			ProcessEvents();
-			ProcessInput();
 			Update(TimePerFrame);
 			mStateStack->Update(TimePerFrame);
 		}
 
 		Render();
+		Sleep(1); 
 	}
 }
 
@@ -122,25 +127,6 @@ void Game::ProcessEvents()
 				break;
 		};
 	}
-}
-
-// ====================================================================================================
-// Game::ProcessInput
-// ====================================================================================================
-void Game::ProcessInput()
-{
-	CommandQueue* commands = g_pWorld->GetCommandQueue();
-	sf::Event event;
-
-	while (mWindow.pollEvent(event))
-	{
-		mPlayer.HandleEvent(event, commands);
-
-		if (event.type == sf::Event::Closed || mStateStack->IsEmpty())
-			Exit();
-	}
-
-	mPlayer.HandleRealtimeInput(commands);
 }
 
 // ====================================================================================================

@@ -89,6 +89,36 @@ sf::Vector2f SceneNode::GetWorldPosition() const
 }
 
 // ====================================================================================================
+// Velocity
+// ====================================================================================================
+void SceneNode::SetVelocity(sf::Vector2f velocity)
+{
+	mVelocity = velocity;
+}
+void SceneNode::SetVelocity(float vx, float vy)
+{
+	mVelocity.x = vx;
+	mVelocity.y = vy;
+}
+sf::Vector2f SceneNode::GetVelocity() const
+{
+	return mVelocity;
+}
+
+// ====================================================================================================
+// Accelerate
+// ====================================================================================================
+void SceneNode::Accelerate(sf::Vector2f velocity)
+{
+	mVelocity += velocity;
+}
+void SceneNode::Accelerate(float vx, float vy)
+{
+	mVelocity.x += vx;
+	mVelocity.y += vy;
+}
+
+// ====================================================================================================
 // SceneNode::OnCommand
 // ====================================================================================================
 void SceneNode::onCommand(const Command& command, sf::Time dt)
@@ -115,6 +145,9 @@ void SceneNode::Update(sf::Time dt)
 {
 	if (IsValid())
 	{
+		// General Updating
+		move(mVelocity * dt.asSeconds()); // Velocity
+
 		UpdateCurrent(dt);
 		UpdateChildren(dt);
 	}

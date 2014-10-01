@@ -83,6 +83,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Aircraft.cpp" />
+    <ClCompile Include="BaseHuman.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="CommandQueue.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -95,11 +96,14 @@
     <ClCompile Include="lua\LuaWrapper_Base.cpp" />
     <ClCompile Include="lua\LuaWrapper_Entity.cpp" />
     <ClCompile Include="lua\LuaWrapper_GenericSF.cpp" />
+    <ClCompile Include="lua\LuaWrapper_Human.cpp" />
     <ClCompile Include="lua\LuaWrapper_SceneBuilder.cpp" />
     <ClCompile Include="lua\LuaWrapper_SceneNode.cpp" />
+    <ClCompile Include="lua\LuaWrapper_SpriteNode.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerEntity.cpp" />
     <ClCompile Include="SceneNode.cpp" />
     <ClCompile Include="SpriteNode.cpp" />
     <ClCompile Include="State.cpp" />
@@ -110,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aircraft.h" />
+    <ClInclude Include="BaseHuman.h" />
     <ClInclude Include="Category.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="CommandQueue.h" />
@@ -125,6 +130,7 @@
     <ClInclude Include="lua\luamanager\LuaManager.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerEntity.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SceneNode.h" />
     <ClInclude Include="SpriteNode.h" />

@@ -85,6 +85,7 @@ namespace LuaClasses
 
 		lua->GetEvent("BuildScene");
 		lua_sb.push(lua->State());
-		lua->ProtectedCall(2);
+		g_pPlayer->GetEntity()->GetLuaObject()->Push();
+		lua->ProtectedCall(3);
 	}
 };

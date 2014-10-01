@@ -10,6 +10,7 @@ public:
 	SpriteNode();
 	explicit SpriteNode(const sf::Texture& texture);
 	SpriteNode(const sf::Texture& texture, const sf::IntRect& rect);
+	void CreateLuaObject();
 
 	void SetTexture(sf::Texture& texture);
 	void SetRect(sf::IntRect rect);

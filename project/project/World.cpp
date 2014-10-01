@@ -29,10 +29,8 @@ World::World(sf::RenderWindow& window) : mWindow(window), mWorldView(new sf::Vie
 // ====================================================================================================
 void World::LoadTextures()
 {
-	mFonts->Load("Main", "Media/Sansation.ttf");
 	mTextures->Load("TitleScreen", "Media/Textures/TitleScreen.png");
-	mTextures->Load("Wall1", "Media/Textures/Wall1.png");
-	mTextures->Load("Background1", "Media/Textures/Background1.png");
+	mFonts->Load("Main", "Media/Sansation.ttf");
 }
 
 // ====================================================================================================

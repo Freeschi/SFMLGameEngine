@@ -6,6 +6,8 @@ function _main()
 	include("modules/event.lua")
 	include("extensions/vector.lua")
 	include("extensions/entity.lua")
+	include("extensions/human.lua")
+	include("extensions/sprite.lua")
 	include("extensions/util.lua")
 	
 	-- Events
@@ -15,8 +17,12 @@ function _main()
 		
 	end)
 	
-	event.AddListener("BuildScene", function(scene)
+	event.AddListener("BuildScene", function(scene, player)
 		print("BuildScene event")
+		
+		game.LoadTexture("Player1", "Media/Textures/Player1.png")
+		game.LoadTexture("Wall1", "Media/Textures/Wall1.png")
+		game.LoadTexture("Background1", "Media/Textures/Background1.png")
 		
 		local bounds = FloatRect(0, 0, 1280, 720)
 		world.SetBounds(bounds)
@@ -43,6 +49,12 @@ function _main()
 			scene:Add(Vector2(128 + 64 * 8,y), "Wall1")
 			scene:Add(Vector2(128 + 64 * 10,y), "Wall1")
 		end
+
+		player:SetPosition(Vector2(64, 64))
+		
+		local sprite = player:GetSprite()
+		sprite:SetTexture("Player1")
+		print(sprite) 
 	end)
 	
 	event.AddListener("OnEntityRemoved", function(ent)

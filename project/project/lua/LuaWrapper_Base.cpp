@@ -72,5 +72,7 @@ namespace LuaClasses
 		RegisterEntity();
 		RegisterEnums();
 		RegisterSceneBuilder();
+		RegisterHuman();
+		RegisterSpriteNode();
 	}
 };

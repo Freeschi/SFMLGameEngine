@@ -18,9 +18,9 @@ struct AircraftMover
 
 	}
 
-	void operator() (Aircraft& aircraft, sf::Time) const
+	void operator() (PlayerEntity& aircraft, sf::Time) const
 	{
-		aircraft.Accelerate(velocity);
+		aircraft.CreateMovement(velocity);
 	}
 
 	sf::Vector2f velocity;
@@ -47,6 +47,9 @@ derivedAction(Function fn)
 // ====================================================================================================
 Player::Player()
 {
+	m_pPlayer = (PlayerEntity*) g_pWorld->CreateEntityByClassName("player");
+	g_pWorld->GetSceneLayer(g_pWorld->LAYER_GENERAL)->AttachChild(m_pPlayer);
+
 	mKeyBinding[sf::Keyboard::Left] = MoveLeft;
 	mKeyBinding[sf::Keyboard::Right] = MoveRight;
 	mKeyBinding[sf::Keyboard::Up] = MoveUp;
@@ -54,7 +57,7 @@ Player::Player()
 
 	InitializeActions();
 	FOREACH(auto& pair, mActionBinding)
-		pair.second.category = Category::PlayerAircraft;
+		pair.second.category = Category::Player;
 }
 
 // ====================================================================================================
@@ -62,12 +65,12 @@ Player::Player()
 // ====================================================================================================
 void Player::InitializeActions()
 {
-	const float playerSpeed = 200.f;
+	const float playerSpeed = 10.f;
 
-	mActionBinding[MoveLeft].action = derivedAction<Aircraft>(AircraftMover(-playerSpeed, 0.f));
-	mActionBinding[MoveRight].action = derivedAction<Aircraft>(AircraftMover(+playerSpeed, 0.f));
-	mActionBinding[MoveUp].action = derivedAction<Aircraft>(AircraftMover(0.f, -playerSpeed));
-	mActionBinding[MoveDown].action = derivedAction<Aircraft>(AircraftMover(0.f, +playerSpeed));
+	mActionBinding[MoveLeft].action = derivedAction<PlayerEntity>(AircraftMover(-playerSpeed, 0.f));
+	mActionBinding[MoveRight].action = derivedAction<PlayerEntity>(AircraftMover(+playerSpeed, 0.f));
+	mActionBinding[MoveUp].action = derivedAction<PlayerEntity>(AircraftMover(0.0f, -playerSpeed));
+	mActionBinding[MoveDown].action = derivedAction<PlayerEntity>(AircraftMover(0.0f, +playerSpeed));
 }
 
 // ====================================================================================================
@@ -122,7 +125,8 @@ bool Player::isRealtimeAction(Action action)
 	{
 	case MoveLeft:
 	case MoveRight:
-
+	case MoveUp:
+	case MoveDown:
 		return true;
 
 	default:
@@ -139,7 +143,7 @@ void Player::HandleEvent(const sf::Event& event, CommandQueue* commands)
 	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
 	{
 		Command output;
-		output.category = Category::PlayerAircraft;
+		output.category = Category::Player;
 		output.action = [] (SceneNode& s, sf::Time)
 		{
 			std::cout << s.getPosition().x << "," << s.getPosition().y << "\n";

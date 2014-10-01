@@ -77,7 +77,9 @@
 #include "Game.h"
 #include "Category.h"
 #include "Entity.h"
+#include "BaseHuman.h"
 #include "SpriteNode.h"
 #include "Aircraft.h"
+#include "PlayerEntity.h"
 
 #include "Lua.h"

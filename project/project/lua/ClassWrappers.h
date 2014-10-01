@@ -15,6 +15,8 @@ namespace LuaClasses
 	void RegisterEntity();
 	void RegisterEnums();
 	void RegisterSceneBuilder();
+	void RegisterHuman();
+	void RegisterSpriteNode();
 
 	void BuildScene();
 
@@ -80,6 +82,45 @@ namespace LuaClasses
 		void Activate();
 		int Index();
 		std::string GetClassName();
+	};
+
+	// ====================================================================================================
+	// SpriteNode
+	// ====================================================================================================
+	class lua_spritenode_wrapper : public lua_entity_wrapper, public luabind::wrap_base
+	{
+	public:
+		SpriteNode* m_pSprite;
+		lua_spritenode_wrapper(SpriteNode* pSprite);
+
+		luabind::object SetupLuaObject();
+
+		void SetTexture(std::string texture);
+	};
+
+	// ====================================================================================================
+	// Human
+	// ====================================================================================================
+	class lua_human_wrapper : public lua_entity_wrapper, public luabind::wrap_base
+	{
+	public:
+		BaseHuman* m_pHuman;
+		lua_human_wrapper(BaseHuman* pHuman);
+
+		luabind::object SetupLuaObject();
+		luabind::object GetSprite();
+	};
+
+	// ====================================================================================================
+	// Player
+	// ====================================================================================================
+	class lua_player_wrapper : public lua_human_wrapper, public luabind::wrap_base
+	{
+	public:
+		PlayerEntity* m_pPlayer;
+		lua_player_wrapper(PlayerEntity* pHuman);
+
+		luabind::object SetupLuaObject();
 	};
 };
 

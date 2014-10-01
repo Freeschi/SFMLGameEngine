@@ -43,6 +43,15 @@ public:
 	float GetFloatValue(std::string key);
 	double GetDoubleValue(std::string key);
 
+	// Velocity
+	void SetVelocity(sf::Vector2f velocity);
+	void SetVelocity(float vx, float vy);
+	sf::Vector2f GetVelocity() const;
+
+	// Movement
+	void Accelerate(sf::Vector2f velocity);
+	void Accelerate(float vx, float vy);
+
 	// Update
 	virtual void Update(sf::Time dt);
 	virtual void UpdateCurrent(sf::Time dt) {};
@@ -53,6 +62,7 @@ public:
 	virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const {};
 
 private:
+	sf::Vector2f mVelocity;
 	bool m_bFlaggedForRemoval;
 	void UpdateChildren(sf::Time dt);
 	LuaClasses::base_class_wrapper* m_pLuaObject;

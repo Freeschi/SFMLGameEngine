@@ -16,9 +16,9 @@ public:
 public:
 	explicit Aircraft(Type type);
 	virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
-	void Aircraft::UpdateCurrent(sf::Time dt);
+	void UpdateCurrent(sf::Time dt);
 
-	virtual unsigned int GetCategory() const { return Category::PlayerAircraft; };
+	virtual unsigned int GetCategory() const { return 0; };
 
 private:
 	Type mType;

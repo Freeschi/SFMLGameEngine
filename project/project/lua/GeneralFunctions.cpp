@@ -57,6 +57,11 @@ namespace LuaFunctions
 	{
 		// HasFocus
 		bool HasFocus() { return g_pGame->HasFocus(); }
+
+		bool LoadTexture(std::string alias, std::string filename)
+		{
+			return g_pWorld->GetTextureHolder()->Load(alias, filename);
+		}
 	}
 }
 
@@ -80,6 +85,7 @@ void LuaFunctions::RegisterLuaFunctions()
 
 	// game Module
 	luabind::module(lua->State(), "game")[
-		luabind::def("HasFocus", &LuaFunctions::Module_Game::HasFocus)
+		luabind::def("HasFocus", &LuaFunctions::Module_Game::HasFocus),
+		luabind::def("LoadTexture", &LuaFunctions::Module_Game::LoadTexture)
 	];
 }

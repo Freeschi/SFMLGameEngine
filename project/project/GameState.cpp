@@ -11,7 +11,7 @@
 // ====================================================================================================
 GameState::GameState(StateStack& stack) : State(stack)
 {
-	BuildScene();
+
 }
 
 // ====================================================================================================
@@ -40,10 +40,17 @@ void GameState::Draw()
 // ====================================================================================================
 bool GameState::Update(sf::Time dt)
 {
+	if (g_pPlayer == NULL)
+	{
+		BuildScene();
+	}
+
 	g_pWorld->Update(dt, true);
 
 	CommandQueue* commands = g_pWorld->GetCommandQueue();
-	g_pPlayer->HandleRealtimeInput(commands);
+
+	if (g_pPlayer != NULL)
+		g_pPlayer->HandleRealtimeInput(commands);
 
 	try
 	{
