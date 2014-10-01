@@ -13,12 +13,8 @@ function _main()
 		print("OnGameInitialized event")
 		
 		local ent = world.CreateEntity("aircraft_raptor")
-		print(type(ent))
 		ent:Activate()
-		ent:SetPosition(Vector2(320,1760))
-		
-		print("----------------------------------")
-		print(ent.AircraftType)
+		ent:SetPosition(Vector2(0, 0))
 	end)
 	
 	event.AddListener("OnEntityRemoved", function(ent)

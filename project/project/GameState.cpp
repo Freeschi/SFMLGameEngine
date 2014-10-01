@@ -47,7 +47,7 @@ bool GameState::Update(sf::Time dt)
 		if (g_pWorld->IsEntityRegistered(0))
 		{
 			lua->GetEvent("Update");
-			g_pWorld->GetEntityByIndex(0)->GetLuaObject()->Push();
+			lua->PushNumber(dt.asMilliseconds());
 			lua->ProtectedCall(2, 0);
 		}
 	}

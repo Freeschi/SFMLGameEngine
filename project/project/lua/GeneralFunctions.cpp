@@ -2,6 +2,7 @@
 // Includes
 // ====================================================================================================
 #include "../Includes.h"
+#include "Lua.h"
 #include "GeneralFunctions.h"
 #include "ClassWrappers.h"
 
@@ -43,6 +44,7 @@ namespace LuaFunctions
 		luabind::object CreateEntity(std::string classname)
 		{
 			Entity* pEntity = g_pWorld->CreateEntityByClassName(classname);
+			if (pEntity == NULL) return lua_nil;
 			return pEntity->GetLuaObject()->LuaBindObject();
 		}
 		
@@ -54,10 +56,7 @@ namespace LuaFunctions
 	namespace Module_Game
 	{
 		// HasFocus
-		bool HasFocus()
-		{
-			return g_pGame->HasFocus();
-		}
+		bool HasFocus() { return g_pGame->HasFocus(); }
 	}
 }
 

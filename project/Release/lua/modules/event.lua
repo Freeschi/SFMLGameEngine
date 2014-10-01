@@ -28,8 +28,6 @@ end
 function event.Call(eventname, ...)
 	assert(type(eventname) == "string")
 	
-	print("event.Call("..eventname..")")
-	
 	if event.Listeners[eventname] ~= nil then
 		for _,callback in ipairs(event.Listeners[eventname]) do
 			callback(...)
