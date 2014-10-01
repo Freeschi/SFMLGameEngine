@@ -230,14 +230,7 @@ template<> struct assert_intrinsic_wchar_t<unsigned short> {};
 //
 // last known and checked version:
 #if (BOOST_INTEL_CXX_VERSION > 1200)
-#  if defined(BOOST_ASSERT_CONFIG)
-#     error "Unknown compiler version - please run the configure tests and report the results"
-#  elif defined(_MSC_VER)
-//
-//      We don't emit this warning any more, since we have so few
-//      defect macros set anyway (just the one).
-//
-//#     pragma message("Unknown compiler version - please run the configure tests and report the results")
+
 #  endif
 #endif
 
