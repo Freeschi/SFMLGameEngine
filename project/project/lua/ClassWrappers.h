@@ -46,7 +46,7 @@ namespace LuaClasses
 		std::string m_sClassName;
 	};
 
-	class lua_scenenode_wrapper : public SceneNode, public base_class_wrapper, public luabind::wrap_base
+	class lua_scenenode_wrapper : public base_class_wrapper, public luabind::wrap_base
 	{
 	public:
 		SceneNode* m_pSceneNode;
@@ -54,9 +54,14 @@ namespace LuaClasses
 		virtual bool IsValid() { return m_pSceneNode != NULL; }
 
 		void SetPosition(sf::Vector2f pos);
+		sf::Vector2f GetPosition();
+
+		void lua_AttachChild(lua_scenenode_wrapper* pSceneNode);
+		void lua_DetachChild(lua_scenenode_wrapper* pSceneNode);
+		lua_scenenode_wrapper* lua_GetParent();
 	};
 
-	class lua_entity_wrapper : public Entity, public lua_scenenode_wrapper, public luabind::wrap_base
+	class lua_entity_wrapper : public lua_scenenode_wrapper, public luabind::wrap_base
 	{
 	public:
 		Entity* m_pEntity;

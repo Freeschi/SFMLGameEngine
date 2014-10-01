@@ -34,18 +34,46 @@ namespace LuaClasses
 		_base_class_wrapper_name("SceneNode");
 	}
 
+	// GetPosition
+	sf::Vector2f lua_scenenode_wrapper::GetPosition()
+	{
+		CheckValid();
+		return m_pSceneNode->getPosition();
+	}
+
 	// SetPosition
 	void lua_scenenode_wrapper::SetPosition(sf::Vector2f pos)
 	{
+		CheckValid();
 		m_pSceneNode->setPosition(pos);
 	}
+
+	// Childs & Parents
+	void lua_scenenode_wrapper::lua_AttachChild(lua_scenenode_wrapper* pWrapper)
+	{
+		CheckValid();
+		pWrapper->CheckValid();
+
+		m_pSceneNode->AttachChild(pWrapper->m_pSceneNode);
+	}
+	void lua_scenenode_wrapper::lua_DetachChild(lua_scenenode_wrapper* pWrapper)
+	{
+		CheckValid();
+		pWrapper->CheckValid();
+
+		m_pSceneNode->DetachChild(pWrapper->m_pSceneNode);
+	}
+	
 
 	// ====================================================================================================
 	// Entity
 	// ====================================================================================================
-	lua_entity_wrapper::lua_entity_wrapper(Entity* pEntity) : m_pEntity(pEntity), lua_scenenode_wrapper((SceneNode*)pEntity)
+	lua_entity_wrapper::lua_entity_wrapper(Entity* pEntity) : lua_scenenode_wrapper((SceneNode*)pEntity)
 	{ 
+		m_pEntity = pEntity;
 		_base_class_wrapper_name("Entity");
+
+		printf("lua_entity_wrapper::lua_entity_wrapper\n");
 	};
 	lua_entity_wrapper::~lua_entity_wrapper() { };
 
@@ -88,6 +116,20 @@ namespace LuaClasses
 		CheckValid();
 		return g_pWorld->GetEntityIndex(m_pEntity);
 	}
+	
+	// Parent
+	lua_scenenode_wrapper* lua_scenenode_wrapper::lua_GetParent()
+	{
+		CheckValid();
+
+		SceneNode* pParent = m_pSceneNode->GetParent();
+		if (pParent != NULL)
+		{
+			//lua_scenenode_wrapper* pWrapper =
+		}
+
+		return NULL;
+	}
 };
 
 // ====================================================================================================
@@ -123,11 +165,15 @@ void LuaClasses::RegisterClassWrappers()
 		luabind::class_<sf::NonCopyable>("NonCopyable")
 	];
 
+	// SceneNode
 	luabind::module(lua->State()) [
 		luabind::class_<LuaClasses::lua_scenenode_wrapper, LuaClasses::base_class_wrapper>("SceneNode")
 		.def(luabind::constructor<SceneNode*>())
-		.def("GetPosition", &LuaClasses::lua_scenenode_wrapper::GetWorldPosition)
+		.def("GetPosition", &LuaClasses::lua_scenenode_wrapper::GetPosition)
 		.def("SetPosition", &LuaClasses::lua_scenenode_wrapper::SetPosition)
+		.def("AttachChild", &LuaClasses::lua_scenenode_wrapper::lua_AttachChild)
+		.def("DetachChild", &LuaClasses::lua_scenenode_wrapper::lua_DetachChild)
+		.def("GetParent", &LuaClasses::lua_scenenode_wrapper::lua_GetParent)
 	];
 
 	// Entity

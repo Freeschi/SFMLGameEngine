@@ -6,8 +6,6 @@
 
 #include "Command.h"
 
-
-
 class SceneNode : public sf::Transformable, public sf::Drawable, private sf::NonCopyable
 {
 public:
@@ -32,6 +30,10 @@ public:
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const {};
+
+	SceneNode* GetParent() {
+		return mParent;
+	};
 
 	/*void SetParent(SceneNode* parent) { mParent = parent; }
 	SceneNode* GetParent() { return mParent;  }*/

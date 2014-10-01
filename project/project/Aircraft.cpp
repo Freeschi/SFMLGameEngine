@@ -44,5 +44,5 @@ void Aircraft::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) co
 void Aircraft::UpdateCurrent(sf::Time dt)
 {
 	// TO-DO
-	RemoveNextUpdate();
+	//RemoveNextUpdate();
 }

@@ -12,21 +12,20 @@ Entity::Entity(std::string classname)
 	m_sClassName = classname;
 	m_iEntityIndex = g_pWorld->RegisterEntity(this);
 
-	LuaClasses::lua_entity_wrapper* pWrapper = new LuaClasses::lua_entity_wrapper(this);
-	m_pLuaObject = pWrapper;
+	m_pLuaObject = new LuaClasses::lua_entity_wrapper(this);
 };
 Entity::Entity()
 {
 	m_sClassName = "base_entity";
 	m_iEntityIndex = g_pWorld->RegisterEntity(this);
 
-	LuaClasses::lua_entity_wrapper* pWrapper = new LuaClasses::lua_entity_wrapper(this);
-	m_pLuaObject = pWrapper;
+	m_pLuaObject = new LuaClasses::lua_entity_wrapper(this);
 };
 Entity::~Entity()
 {
 	if (m_pLuaObject != NULL)
 		m_pLuaObject->Invalidate();
+
 	g_pWorld->UnregisterEntity(this);
 };
 
