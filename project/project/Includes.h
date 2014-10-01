@@ -38,6 +38,7 @@
 #pragma warning(disable: 4996) // sprintf
 #pragma warning(disable: 4018) // conflict signed and unsigned
 #pragma warning(disable: 4172) // returning temporary local variable
+#pragma warning(disable: 4521) // multiple copy constructors
 
 // ====================================================================================================
 // Macros

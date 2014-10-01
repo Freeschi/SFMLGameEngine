@@ -64,6 +64,14 @@ namespace LuaClasses
 		return g_pWorld->GetEntityIndex(m_pEntity);
 	}
 
+	void lua_entity_wrapper::Test()
+	{
+		CheckValid();
+
+		//m_pEntity->SetValue("TestValue", "alles klar - test value is awesomeeezzzz!");
+		printf("%s\n", m_pEntity->GetStringValue("TestValue").c_str());
+	}
+
 	/*
 	 * Register
 	 */
@@ -76,6 +84,7 @@ namespace LuaClasses
 			.def("GetClassName", &LuaClasses::lua_entity_wrapper::GetClassName)
 			.def("Activate", &LuaClasses::lua_entity_wrapper::Activate)
 			.def("Index", &LuaClasses::lua_entity_wrapper::Index)
+			.def("Test", &LuaClasses::lua_entity_wrapper::Test)
 		];
 	}
 };

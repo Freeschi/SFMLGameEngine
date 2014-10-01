@@ -43,7 +43,7 @@ namespace LuaFunctions
 		luabind::object CreateEntity(std::string classname)
 		{
 			Entity* pEntity = g_pWorld->CreateEntityByClassName(classname);
-			return pEntity->GetLuaObject()->AsReturnValue();
+			return pEntity->GetLuaObject()->LuaBindObject();
 		}
 	};
 

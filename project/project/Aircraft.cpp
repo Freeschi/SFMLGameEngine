@@ -27,6 +27,15 @@ Aircraft::Aircraft(Type type) : mType(type), Entity("base_aircraft")
 	TextureHolder* th = g_pWorld->GetTextureHolder();
 	mSprite.setTexture(th->Get(toTextureID(type)));
 
+	if (type == Aircraft::Eagle)
+	{
+		SetValue("AircraftType", "eagle");
+	}
+	else {
+		SetValue("AircraftType", "raptor");
+	}
+	SetValue("AircraftTypeID", (int)type);
+
 	printf("Aircraft::Aircraft\n");
 }
 
@@ -43,6 +52,4 @@ void Aircraft::drawCurrent(sf::RenderTarget& target, sf::RenderStates states) co
 // ====================================================================================================
 void Aircraft::UpdateCurrent(sf::Time dt)
 {
-	// TO-DO
-	//RemoveNextUpdate();
 }

@@ -16,7 +16,9 @@ function _main()
 		print(type(ent))
 		ent:Activate()
 		ent:SetPosition(Vector2(320,1760))
-		ent.Kassel = true
+		
+		print("----------------------------------")
+		print(ent.AircraftType)
 	end)
 	
 	event.AddListener("OnEntityRemoved", function(ent)
@@ -25,6 +27,6 @@ function _main()
 	
 	local tp = 0
 	event.AddListener("Update", function(slo)
-		print(slo:GetClassName())
+		--print(slo:GetClassName())
 	end)
 end

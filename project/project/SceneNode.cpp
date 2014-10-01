@@ -132,3 +132,39 @@ void SceneNode::UpdateChildren(sf::Time dt)
 		}
 	}
 }
+
+// ====================================================================================================
+// Data
+// ====================================================================================================
+void SceneNode::SetValue(std::string key, int value)
+{
+	GetLuaObject()->LuaBindObject()[key] = value;
+}
+void SceneNode::SetValue(std::string key, float value)
+{
+	GetLuaObject()->LuaBindObject()[key] = value;
+}
+void SceneNode::SetValue(std::string key, double value)
+{
+	GetLuaObject()->LuaBindObject()[key] = value;
+}
+void SceneNode::SetValue(std::string key, std::string value)
+{
+	GetLuaObject()->LuaBindObject()[key] = value;
+}
+int SceneNode::GetIntValue(std::string key)
+{
+	return luabind::object_cast<int>(GetLuaObject()->LuaBindObject()[key]);
+}
+float SceneNode::GetFloatValue(std::string key)
+{
+	return luabind::object_cast<float>(GetLuaObject()->LuaBindObject()[key]);
+}
+double SceneNode::GetDoubleValue(std::string key)
+{
+	return luabind::object_cast<double>(GetLuaObject()->LuaBindObject()[key]);
+}
+std::string SceneNode::GetStringValue(std::string key)
+{
+	return luabind::object_cast<std::string>(GetLuaObject()->LuaBindObject()[key]);
+}

@@ -34,7 +34,7 @@ namespace LuaClasses
 		virtual luabind::object SetupLuaObject() { return luabind::object(); };
 		
 		void Push();
-		luabind::object AsReturnValue() { return m_oLuaObject; }
+		luabind::object LuaBindObject() { return m_oLuaObject; }
 
 	private:
 		bool m_bValid;
@@ -73,6 +73,8 @@ namespace LuaClasses
 		void OnInvalidated();
 
 		luabind::object SetupLuaObject();
+
+		void Test();
 		
 		void Activate();
 		int Index();
