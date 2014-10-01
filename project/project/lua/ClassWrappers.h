@@ -4,8 +4,6 @@
 #ifndef H_LUA_CLASS_WRAPPERS
 #define H_LUA_CLASS_WRAPPERS
 
-#pragma warning(disable: 4584)
-
 namespace LuaClasses
 {
 	void RegisterClassWrappers();
@@ -16,6 +14,9 @@ namespace LuaClasses
 	void RegisterSceneNode();
 	void RegisterEntity();
 	void RegisterEnums();
+	void RegisterSceneBuilder();
+
+	void BuildScene();
 
 	// ====================================================================================================
 	// Base

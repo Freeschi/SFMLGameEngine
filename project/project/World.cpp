@@ -29,11 +29,8 @@ World::World(sf::RenderWindow& window) : mWindow(window), mWorldView(new sf::Vie
 // ====================================================================================================
 void World::LoadTextures()
 {
-	mTextures->Load(Textures::Eagle, "Media/Textures/Eagle.png");
-	mTextures->Load(Textures::Raptor, "Media/Textures/Raptor.png");
-	mTextures->Load(Textures::Desert, "Media/Textures/Desert.png");
-	mFonts->Load(Fonts::Main, "Media/Sansation.ttf");
-	mTextures->Load(Textures::TitleScreen, "Media/Textures/TitleScreen.png");
+	mFonts->Load("Main", "Media/Sansation.ttf");
+	mTextures->Load("TitleScreen", "Media/Textures/TitleScreen.png");
 }
 
 // ====================================================================================================

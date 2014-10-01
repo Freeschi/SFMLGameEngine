@@ -12,9 +12,11 @@ function _main()
 	event.AddListener("OnGameInitialized", function()
 		print("OnGameInitialized event")
 		
-		local ent = world.CreateEntity("aircraft_raptor")
-		ent:Activate()
-		ent:SetPosition(Vector2(0, 0))
+		
+	end)
+	
+	event.AddListener("BuildScene", function(scene)
+		
 	end)
 	
 	event.AddListener("OnEntityRemoved", function(ent)

@@ -8,10 +8,9 @@
 // ====================================================================================================
 MenuState::MenuState(StateStack& stack) : State(stack)
 {
-	sf::Texture& texture = g_pWorld->GetTextureHolder()->Get(Textures::TitleScreen);
-	sf::Font& font = g_pWorld->GetFontHolder()->Get(Fonts::Main);
+	sf::Font& font = g_pWorld->GetFontHolder()->Get("Main");
 
-	mBackgroundSprite.setTexture(texture);
+	mBackgroundSprite.setTexture(g_pWorld->GetTextureHolder()->Get("TitleScreen"));
 
 	sf::Text playOption;
 	playOption.setFont(font);

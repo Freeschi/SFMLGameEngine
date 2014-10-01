@@ -49,8 +49,8 @@ Game::Game() : mWindow(sf::VideoMode(800, 600), "Freeschi"), mStateStack(NULL)
 	g_pWorld->LoadTextures();
 	g_pWorld->BuildScene();
 
-	REGISTER_ENTITY_CLASS(aircraft_eagle, Aircraft(Aircraft::Eagle));
-	REGISTER_ENTITY_CLASS(aircraft_raptor, Aircraft(Aircraft::Raptor));
+	//REGISTER_ENTITY_CLASS(aircraft_eagle, Aircraft(Aircraft::Eagle));
+	//REGISTER_ENTITY_CLASS(aircraft_raptor, Aircraft(Aircraft::Raptor));
 
 	// States
 	mStateStack = new StateStack();

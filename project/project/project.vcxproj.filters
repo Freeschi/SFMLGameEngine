@@ -132,6 +132,9 @@
     <ClCompile Include="lua\LuaWrapper_SceneNode.cpp">
       <Filter>Quelldateien\Lua\Wrapper</Filter>
     </ClCompile>
+    <ClCompile Include="lua\LuaWrapper_SceneBuilder.cpp">
+      <Filter>Quelldateien\Lua\Wrapper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aircraft.h">

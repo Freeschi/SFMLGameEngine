@@ -71,5 +71,6 @@ namespace LuaClasses
 		RegisterSceneNode();
 		RegisterEntity();
 		RegisterEnums();
+		RegisterSceneBuilder();
 	}
 };

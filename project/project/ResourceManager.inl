@@ -1,59 +1,82 @@
 // ====================================================================================================
 // ResourceHolder::Load
 // ====================================================================================================
-template <typename Resource, typename Identifier>
-bool ResourceHolder<Resource, Identifier>::Load(Identifier id, const std::string& filename)
+template <typename Resource>
+bool ResourceHolder<Resource>::Load(std::string alias, std::string filename)
 {
-	std::unique_ptr<Resource> resource(new Resource());
-	if (!resource->loadFromFile(filename))
+	// Create and load resource
+	RHResource* res = new RHResource();
+	res->m_sAlias = alias;
+	res->m_sFilename = filename;
+	res->m_tResource = new Resource();
+
+	if (!res->m_tResource->loadFromFile(filename))
 	{
 		printf("[ResourceManager] Failed to load file %s\n", filename.c_str());
+		delete res;
 		return false;
 	}
 
-	auto inserted = mResourceMap.insert(std::make_pair(id, std::move(resource)));
-	return inserted.second != NULL;
+	mResources.push_back(res);
+	return true;
 }
 
 // ====================================================================================================
 // ResourceHolder::Load<Parameter>
 // ====================================================================================================
-template <typename Resource, typename Identifier>
+template <typename Resource>
 template <typename Parameter>
-void ResourceHolder<Resource, Identifier>::Load(Identifier id, const std::string& filename, const Parameter& secondParam)
+void ResourceHolder<Resource>::Load(std::string alias, std::string filename, Parameter secondParam)
 {
 	// Create and load resource
-	std::unique_ptr<Resource> resource(new Resource());
-	if (!resource->loadFromFile(filename, secondParam))
+	RHResource* res = new RHResource();
+	res->m_sAlias = alias;
+	res->m_sFilename = filename;
+	res->m_tResource = new Resource();
+
+	if (!res->m_tResource->loadFromFile(filename, secondParam))
 	{
 		printf("[ResourceManager] Failed to load file %s\n", filename.c_str());
+		delete res;
 		return false;
 	}
 
-	// If loading successful, insert resource to map
-	insertResource(id, std::move(resource));
+	mResources.push_back(res);
+	return true;
 }
 
 // ====================================================================================================
 // ResourceHolder::Get
 // ====================================================================================================
-template <typename Resource, typename Identifier>
-Resource& ResourceHolder<Resource, Identifier>::Get(Identifier id)
+template <typename Resource>
+Resource& ResourceHolder<Resource>::Get(std::string id)
 {
-	auto found = mResourceMap.find(id);
-	//assert(found != mResourceMap.end());
+	for (std::vector<RHResource*>::iterator it = mResources.begin(); it != mResources.end(); ++it)
+	{
+		RHResource* hResource = *it;
+		if (hResource->m_sAlias == id || hResource->m_sFilename == id)
+		{
+			return *hResource->m_tResource;
+		}
+	}
 
-	return *found->second;
+	throw std::string("ResourceHolder::Get failed! Unknown resource!");
 }
 
 // ====================================================================================================
 // ResourceHolder::Get (const)
 // ====================================================================================================
-template <typename Resource, typename Identifier>
-const Resource& ResourceHolder<Resource, Identifier>::Get(Identifier id) const
+template <typename Resource>
+const Resource& ResourceHolder<Resource>::Get(std::string id) const
 {
-	auto found = mResourceMap.find(id);
-	//assert(found != mResourceMap.end());
+	for (std::vector<RHResource*>::iterator it = mResources.begin(); it != mResources.end(); ++it)
+	{
+		RHResource* hResource = *it;
+		if (hResource->m_sAlias == id || hResource->m_sFilename == id)
+		{
+			return *hResource->m_tResource;
+		}
+	}
 
-	return *found->second;
+	throw std::string("ResourceHolder::Get failed! Unknown resource!");
 }

@@ -21,7 +21,10 @@ void GameState::BuildScene()
 {
 	if (g_pPlayer != NULL)
 		delete g_pPlayer;
+
 	g_pPlayer = new Player();
+
+	LuaClasses::BuildScene();
 }
 
 // ====================================================================================================

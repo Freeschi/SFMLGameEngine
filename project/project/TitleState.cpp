@@ -8,9 +8,9 @@
 // ====================================================================================================
 TitleState::TitleState(StateStack& stack) : State(stack), mShowText(true), mTextEffectTime(sf::Time::Zero)
 {
-	mBackgroundSprite.setTexture(g_pWorld->GetTextureHolder()->Get(Textures::TitleScreen));
+	mBackgroundSprite.setTexture(g_pWorld->GetTextureHolder()->Get("TitleScreen"));
 
-	mText.setFont(g_pWorld->GetFontHolder()->Get(Fonts::Main));
+	mText.setFont(g_pWorld->GetFontHolder()->Get("Main"));
 	mText.setString("Press any key to start");
 	UTIL::CenterOrigin(mText);
 	mText.setPosition(g_pWorld->GetView()->getSize() / 2.f);
