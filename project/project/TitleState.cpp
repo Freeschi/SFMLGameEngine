@@ -6,14 +6,9 @@
 // ====================================================================================================
 // Title State
 // ====================================================================================================
-TitleState::TitleState(StateStack& stack) : State(stack), mShowText(true), mTextEffectTime(sf::Time::Zero)
+TitleState::TitleState(StateStack& stack) : State(stack), mStateTime(sf::Time::Zero)
 {
-	mBackgroundSprite.setTexture(g_pWorld->GetTextureHolder()->Get("TitleScreen"));
-
-	mText.setFont(g_pWorld->GetFontHolder()->Get("Main"));
-	mText.setString("Press any key to start");
-	UTIL::CenterOrigin(mText);
-	mText.setPosition(g_pWorld->GetView()->getSize() / 2.f);
+	mBackgroundSprite.setTexture(g_pWorld->GetTextureHolder()->Get("FreschiLogo_Big"));
 }
 
 // ====================================================================================================
@@ -21,12 +16,6 @@ TitleState::TitleState(StateStack& stack) : State(stack), mShowText(true), mText
 // ====================================================================================================
 bool TitleState::HandleEvent(const sf::Event& event)
 {
-	if (event.type == sf::Event::KeyPressed)
-	{
-		RequestStackPop();
-		RequestStackPush(States::Menu);
-	}
-
 	return true;
 }
 
@@ -37,10 +26,10 @@ void TitleState::Draw()
 {
 	sf::RenderWindow& window = g_pGame->GetWindow();
 	window.setView(window.getDefaultView());
+	sf::Vector2u ss = mBackgroundSprite.getTexture()->getSize();
+	sf::Vector2u ws = window.getSize();
+	mBackgroundSprite.setPosition(sf::Vector2f(ws.x / 2 - ss.x / 2, ws.y / 2 - ss.y / 2));
 	window.draw(mBackgroundSprite);
-
-	if (mShowText)
-		window.draw(mText);
 }
 
 // ====================================================================================================
@@ -48,11 +37,12 @@ void TitleState::Draw()
 // ====================================================================================================
 bool TitleState::Update(sf::Time dt)
 {
-	mTextEffectTime += dt;
-	if (mTextEffectTime >= sf::seconds(0.5f))
+	mStateTime += dt;
+	if (mStateTime >= sf::seconds(2.0f))
 	{
-		mShowText = !mShowText;
-		mTextEffectTime = sf::Time::Zero;
+		RequestStackPop();
+		RequestStackPush(States::Menu);
+		
 	}
 	return true;
 }

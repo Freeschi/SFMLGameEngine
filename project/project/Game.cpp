@@ -62,7 +62,7 @@ Game::Game() : mWindow(sf::VideoMode(1280, 720), "Freeschi"), mStateStack(NULL),
 	// States
 	mStateStack = new StateStack();
 	RegisterStates();
-	mStateStack->PushState(States::Menu);
+	mStateStack->PushState(States::Title);
 
 	// Build Scene
 	g_pWorld->BuildScene();

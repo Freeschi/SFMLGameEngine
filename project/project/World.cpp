@@ -31,7 +31,7 @@ World::World(sf::RenderWindow& window) : mWindow(window), mWorldView(new sf::Vie
 // ====================================================================================================
 void World::LoadTextures()
 {
-	mTextures->Load("TitleScreen", "Media/Textures/TitleScreen.png");
+	mTextures->Load("FreschiLogo_Big", "Media/Textures/FreschiLogo_Big.png");
 	mFonts->Load("Main", "Media/Sansation.ttf");
 }
 

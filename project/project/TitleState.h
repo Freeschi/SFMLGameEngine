@@ -12,9 +12,7 @@ public:
 
 private:
 	sf::Sprite mBackgroundSprite;
-	sf::Text mText;
-	bool mShowText;
-	sf::Time mTextEffectTime;
+	sf::Time mStateTime;
 };
 
 #endif

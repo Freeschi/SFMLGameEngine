@@ -35,7 +35,6 @@ void GameState::Draw()
 	g_pWorld->Draw();
 
 	lua->GetEvent("DrawHUD");
-
 	LuaClasses::lua_renderwindow rw(g_pWorld->GetWindow());
 	luabind::object lua_rw(lua->State(), rw);
 	lua_rw.push(lua->State());
