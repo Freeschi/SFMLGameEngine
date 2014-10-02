@@ -16,12 +16,17 @@ public:
 	bool HasFocus() { return m_bHasFocus;  }
 	sf::RenderWindow& GetWindow() { return mWindow; }
 
+	void UpdateStats(sf::Time dt);
+	int GetFPS();
+
 private:
 	void RegisterStates();
-
 	void ProcessEvents();
 	void Update(sf::Time deltaTime);
 	void Render();
+
+	int m_iFPS;
+	sf::Time mStatisticsUpdateTime;
 
 	sf::RenderWindow mWindow;
 	StateStack* mStateStack;

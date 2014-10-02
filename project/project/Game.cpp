@@ -15,7 +15,7 @@ Game* g_pGame = NULL;
 // Game::Game
 // Constructor of the Game class
 // ====================================================================================================
-Game::Game() : mWindow(sf::VideoMode(1280, 720), "Freeschi"), mStateStack(NULL)
+Game::Game() : mWindow(sf::VideoMode(1280, 720), "Freeschi"), mStateStack(NULL), m_iFPS(0)
 {
 	// Lua
 	lua = new LuaManager();
@@ -53,8 +53,6 @@ Game::Game() : mWindow(sf::VideoMode(1280, 720), "Freeschi"), mStateStack(NULL)
 	REGISTER_ENTITY_CLASS(sprite_node, SpriteNode());
 	REGISTER_ENTITY_CLASS(player, PlayerEntity());
 
-	
-
 	// States
 	mStateStack = new StateStack();
 	RegisterStates();
@@ -89,7 +87,9 @@ void Game::Run()
 			Update(TimePerFrame);
 			mStateStack->Update(TimePerFrame);
 		}
-
+		 
+		UpdateStats(timeSinceLastUpdate);
+		
 		Render();
 		Sleep(1); 
 	}
@@ -101,6 +101,23 @@ void Game::Exit()
 	printf("[Game] Exiting..\n");
 	mWindow.close();
 }
+
+// ====================================================================================================
+// FPS Counter
+// ====================================================================================================
+int mStatisticsNumFrames = 0;
+void Game::UpdateStats(sf::Time dt)
+{
+	mStatisticsUpdateTime += dt;
+	mStatisticsNumFrames += 1;
+	if (mStatisticsUpdateTime >= sf::seconds(1.0f))
+	{
+		m_iFPS = mStatisticsNumFrames;
+		mStatisticsUpdateTime -= sf::seconds(1.0f);
+		mStatisticsNumFrames = 0;
+	}
+}
+int Game::GetFPS() { return m_iFPS; }
 
 // ====================================================================================================
 // Game::ProcessEvents
