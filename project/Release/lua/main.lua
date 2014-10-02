@@ -51,10 +51,8 @@ function _main()
 		end
 
 		player:SetPosition(Vector2(64, 64))
+		player:SetTexture("Player1")
 		
-		local sprite = player:GetSprite()
-		sprite:SetTexture("Player1")
-		print(sprite) 
 	end)
 	
 	event.AddListener("OnEntityRemoved", function(ent)

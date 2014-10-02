@@ -15,7 +15,7 @@ namespace LuaClasses
 	// Human
 	// ====================================================================================================
 	// Human Wrapper
-	lua_human_wrapper::lua_human_wrapper(BaseHuman* pEntity) : lua_entity_wrapper((Entity*)pEntity)
+	lua_human_wrapper::lua_human_wrapper(BaseHuman* pEntity) : lua_spritenode_wrapper((SpriteNode*)pEntity)
 	{
 		m_pHuman = pEntity;
 		_base_init("Human");
@@ -24,13 +24,6 @@ namespace LuaClasses
 	luabind::object lua_human_wrapper::SetupLuaObject()
 	{
 		return luabind::object(lua->State(), this);
-	}
-
-	luabind::object lua_human_wrapper::GetSprite()
-	{
-		CheckValid();
-
-		return m_pHuman->GetSprite()->GetLuaObject()->LuaBindObject();
 	}
 
 	// ====================================================================================================
@@ -54,8 +47,7 @@ namespace LuaClasses
 	void RegisterHuman()
 	{
 		luabind::module(lua->State())[
-			luabind::class_<LuaClasses::lua_human_wrapper, LuaClasses::lua_entity_wrapper>("Human")
-				.def("GetSprite", &LuaClasses::lua_human_wrapper::GetSprite)
+			luabind::class_<LuaClasses::lua_human_wrapper, LuaClasses::lua_spritenode_wrapper>("Human")
 		];
 
 		luabind::module(lua->State())[

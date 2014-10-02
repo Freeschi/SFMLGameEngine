@@ -9,21 +9,18 @@
 Player* g_pPlayer = NULL;
 
 // ====================================================================================================
-// Aircraft Mover
+// Player Mover
 // ====================================================================================================
-struct AircraftMover
+struct PlayerMover
 {
-	AircraftMover(float vx, float vy) : velocity(vx, vy)
-	{
+	PlayerMover(Movement eMove) : m_eMove(eMove) { }
 
+	void operator() (PlayerEntity& playerent, sf::Time) const
+	{
+		playerent.CreateMovement(m_eMove);
 	}
 
-	void operator() (PlayerEntity& aircraft, sf::Time) const
-	{
-		aircraft.CreateMovement(velocity);
-	}
-
-	sf::Vector2f velocity;
+	Movement m_eMove;
 };
 
 // ====================================================================================================
@@ -65,12 +62,10 @@ Player::Player()
 // ====================================================================================================
 void Player::InitializeActions()
 {
-	const float playerSpeed = 10.f;
-
-	mActionBinding[MoveLeft].action = derivedAction<PlayerEntity>(AircraftMover(-playerSpeed, 0.f));
-	mActionBinding[MoveRight].action = derivedAction<PlayerEntity>(AircraftMover(+playerSpeed, 0.f));
-	mActionBinding[MoveUp].action = derivedAction<PlayerEntity>(AircraftMover(0.0f, -playerSpeed));
-	mActionBinding[MoveDown].action = derivedAction<PlayerEntity>(AircraftMover(0.0f, +playerSpeed));
+	mActionBinding[MoveLeft].action = derivedAction<PlayerEntity>(PlayerMover(MOVEMENT_WALK_LEFT));
+	mActionBinding[MoveRight].action = derivedAction<PlayerEntity>(PlayerMover(MOVEMENT_WALK_RIGHT));
+	mActionBinding[MoveUp].action = derivedAction<PlayerEntity>(PlayerMover(MOVEMENT_WALK_UP));
+	mActionBinding[MoveDown].action = derivedAction<PlayerEntity>(PlayerMover(MOVEMENT_WALK_DOWN));
 }
 
 // ====================================================================================================

@@ -7,14 +7,10 @@
 // ====================================================================================================
 // BaseHuman
 // ====================================================================================================
-BaseHuman::BaseHuman() : Entity("base_human")
+BaseHuman::BaseHuman()
 {
-	mSprite = new SpriteNode();
-	mSprite->SetParent(this);
-	this->AttachChild(mSprite);
+	SetClassName("base_human");
 }
-
-SpriteNode* BaseHuman::GetSprite() { return mSprite;  }
 
 // ====================================================================================================
 // Lua
@@ -27,19 +23,10 @@ void BaseHuman::CreateLuaObject()
 	SetLuaObject((LuaClasses::base_class_wrapper*) new LuaClasses::lua_human_wrapper(this));
 }
 
-bool BaseHuman::CreateMovement(sf::Vector2f direction)
+bool BaseHuman::CreateMovement(Movement eMove)
 {
-	sf::Vector2f vNewPos = GetWorldPosition() + direction;
-	sf::FloatRect vPlayerBounds(vNewPos.x, vNewPos.y, 64.0f, 64.0f);
-	vNewPos.x += vPlayerBounds.width;
-	vNewPos.y += vPlayerBounds.height;
-	sf::FloatRect wb = g_pWorld->GetBounds();
-	if (!wb.intersects(vPlayerBounds))
-		return false;
-	if (vNewPos.x < wb.left && vNewPos.y < wb.top)
-		return false;
+	
 
-	move(direction);
 	return true;
 }
 

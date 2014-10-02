@@ -101,7 +101,7 @@ namespace LuaClasses
 	// ====================================================================================================
 	// Human
 	// ====================================================================================================
-	class lua_human_wrapper : public lua_entity_wrapper, public luabind::wrap_base
+	class lua_human_wrapper : public lua_spritenode_wrapper, public luabind::wrap_base
 	{
 	public:
 		BaseHuman* m_pHuman;
