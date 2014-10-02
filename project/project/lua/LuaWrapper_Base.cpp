@@ -73,5 +73,6 @@ namespace LuaClasses
 		RegisterSceneBuilder();
 		RegisterSpriteNode();
 		RegisterHuman();
+		RegisterSFShapes();
 	}
 };

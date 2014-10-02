@@ -10,6 +10,11 @@
 // ====================================================================================================
 namespace LuaClasses
 {
+	void lua_renderwindow::Draw(sf::Shape& draw)
+	{
+		m_pWindow.draw((sf::Drawable&) draw);
+	}
+
 	/*
 	 * Register
 	 */
@@ -17,20 +22,32 @@ namespace LuaClasses
 	{
 		// Some random sf stuff needed
 		luabind::module(lua->State()) [
-			luabind::class_<sf::Transformable>("sfTransformable")
-		];
-		luabind::module(lua->State()) [
-			luabind::class_<sf::Drawable>("sfDrawable")
-		];
-		luabind::module(lua->State()) [
-			luabind::class_<sf::NonCopyable>("NonCopyable")
-		];
-		luabind::module(lua->State()) [
+			luabind::class_<sf::NonCopyable>("NonCopyable"),
+
 			luabind::class_<sf::Time>("sfTime")
-				.def("asMilliseconds", &sf::Time::asMilliseconds)
+				.def("asMilliseconds", &sf::Time::asMilliseconds),
+
+			luabind::class_<sf::Drawable>("sfDrawable"),
+
+			luabind::class_<lua_renderwindow>("RenderWindow")
+				.def("Draw", &lua_renderwindow::Draw),
+
+				luabind::class_<sf::RenderTarget>("RenderTarget")
 		];
 
-		// FloatRect
+		// Color
+		luabind::module(lua->State()) [
+			luabind::class_<sf::Color>("Color")
+				.def(luabind::constructor<>())
+				.def(luabind::constructor<sf::Uint8, sf::Uint8, sf::Uint8>())
+				.def(luabind::constructor<sf::Uint8, sf::Uint8, sf::Uint8, sf::Uint8>())
+				.property("r", &sf::Color::r)
+				.property("g", &sf::Color::g)
+				.property("b", &sf::Color::b)
+				.property("a", &sf::Color::a)
+		];
+
+		// Rect<>
 		luabind::module(lua->State()) [
 			luabind::class_<sf::FloatRect>("FloatRect")
 				.def(luabind::constructor<>())
@@ -39,6 +56,15 @@ namespace LuaClasses
 				.property("top", &sf::FloatRect::top)
 				.property("width", &sf::FloatRect::width)
 				.property("height", &sf::FloatRect::height)
+		];
+		luabind::module(lua->State())[
+			luabind::class_<sf::IntRect>("IntRect")
+				.def(luabind::constructor<>())
+				.def(luabind::constructor<int, int, int, int>())
+				.property("left", &sf::IntRect::left)
+				.property("top", &sf::IntRect::top)
+				.property("width", &sf::IntRect::width)
+				.property("height", &sf::IntRect::height)
 		];
 
 		// Vector2

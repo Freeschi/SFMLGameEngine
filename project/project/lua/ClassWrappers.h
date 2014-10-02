@@ -16,6 +16,7 @@ namespace LuaClasses
 	void RegisterSceneBuilder();
 	void RegisterHuman();
 	void RegisterSpriteNode();
+	void RegisterSFShapes();
 
 	void BuildScene();
 
@@ -140,6 +141,15 @@ namespace LuaClasses
 		virtual bool IsPlayer() { return true; }
 
 		luabind::object SetupLuaObject();
+	};
+
+	class lua_renderwindow
+	{
+	public:
+		sf::RenderWindow& m_pWindow;
+		lua_renderwindow(sf::RenderWindow& rw) : m_pWindow(rw) {}
+
+		void Draw(sf::Shape& draw);
 	};
 };
 

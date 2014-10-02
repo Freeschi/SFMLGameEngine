@@ -165,6 +165,9 @@
     <ClCompile Include="Config.cpp">
       <Filter>Quelldateien\Core</Filter>
     </ClCompile>
+    <ClCompile Include="LuaWrapper_Shapes.cpp">
+      <Filter>Quelldateien\Lua\Wrapper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aircraft.h">

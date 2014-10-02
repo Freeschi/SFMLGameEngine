@@ -8,6 +8,7 @@ function _main()
 	include("extensions/entity.lua")
 	include("extensions/human.lua")
 	include("extensions/sprite.lua")
+	include("extensions/color.lua")
 	include("extensions/util.lua")
 	
 	-- Events
@@ -17,6 +18,22 @@ function _main()
 	
 	event.AddListener("BuildScene", function(scene, player)
 		print("BuildScene event")
+		
+		if true then return false end
+		
+	end)
+	
+	event.AddListener("DrawHUD", function(window)
+		local shape = sfCircleShape(100)
+		shape:SetPosition(Vector2(50,50))
+		shape:SetFillColor(Color(255,0,0))
+		
+		window:Draw(shape)
+	end)
+	
+	--[[
+	
+		
 		
 		-- Load Textures
 		game.LoadTexture("Player1", "Media/Textures/Player1.png")
@@ -57,5 +74,5 @@ function _main()
 		end
 		
 		print(player:IsPlayer())
-	end)
+		]]
 end
