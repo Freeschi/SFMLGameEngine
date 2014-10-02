@@ -13,8 +13,6 @@ function _main()
 	-- Events
 	event.AddListener("OnGameInitialized", function()
 		print("OnGameInitialized event")
-		
-		
 	end)
 	
 	event.AddListener("BuildScene", function(scene, player)
@@ -59,14 +57,5 @@ function _main()
 		end
 		
 		print(player:IsPlayer())
-	end)
-	
-	event.AddListener("OnEntityRemoved", function(ent)
-		--
-	end)
-	
-	local tp = 0
-	event.AddListener("Update", function(slo)
-		--print(slo:GetClassName())
 	end)
 end

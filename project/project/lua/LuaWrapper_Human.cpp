@@ -43,7 +43,6 @@ namespace LuaClasses
 		m_pPlayer = pEntity;
 		_base_init("Player");
 	};
-
 	luabind::object lua_player_wrapper::SetupLuaObject()
 	{
 		return luabind::object(lua->State(), this);
@@ -54,11 +53,13 @@ namespace LuaClasses
 	 */
 	void RegisterHuman()
 	{
+		// Human
 		luabind::module(lua->State())[
 			luabind::class_<LuaClasses::lua_human_wrapper, LuaClasses::lua_spritenode_wrapper>("Human")
 				.def("CreateMovement", &LuaClasses::lua_human_wrapper::CreateMovement)
 		];
 
+		// Player
 		luabind::module(lua->State())[
 			luabind::class_<LuaClasses::lua_player_wrapper, LuaClasses::lua_human_wrapper>("Player")
 		];

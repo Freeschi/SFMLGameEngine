@@ -67,7 +67,6 @@ namespace LuaClasses
 	{
 		RegisterBase();
 		RegisterGenericSF();
-		RegisterVector2();
 		RegisterSceneNode();
 		RegisterEntity();
 		RegisterEnums();

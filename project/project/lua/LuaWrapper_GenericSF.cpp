@@ -15,7 +15,7 @@ namespace LuaClasses
 	 */
 	void RegisterGenericSF()
 	{
-		// sf
+		// Some random sf stuff needed
 		luabind::module(lua->State()) [
 			luabind::class_<sf::Transformable>("sfTransformable")
 		];
@@ -29,6 +29,8 @@ namespace LuaClasses
 			luabind::class_<sf::Time>("sfTime")
 				.def("asMilliseconds", &sf::Time::asMilliseconds)
 		];
+
+		// FloatRect
 		luabind::module(lua->State()) [
 			luabind::class_<sf::FloatRect>("FloatRect")
 				.def(luabind::constructor<>())
@@ -38,33 +40,14 @@ namespace LuaClasses
 				.property("width", &sf::FloatRect::width)
 				.property("height", &sf::FloatRect::height)
 		];
-	}
-	void RegisterVector2()
-	{
+
 		// Vector2
-		luabind::module(lua->State()) [
+		luabind::module(lua->State())[
 			luabind::class_<sf::Vector2f>("Vector2")
 				.def(luabind::constructor<>())
 				.def(luabind::constructor<float, float>())
 				.property("x", &sf::Vector2f::x)
 				.property("y", &sf::Vector2f::y)
 		];
-	}
-	void RegisterEnums()
-	{
-		luabind::object g = luabind::globals(lua->State());
-
-		// Scene LAYER_
-		g["LAYER_COUNT"]			 = g_pWorld->LAYER_COUNT;
-		g["LAYER_MAP"]				 = g_pWorld->LAYER_MAP;
-		g["LAYER_GENERAL"]			 = g_pWorld->LAYER_GENERAL;
-		g["LAYER_FOREGROUND"]		 = g_pWorld->LAYER_FOREGROUND;
-		g["LAYER_HUD"]				 = g_pWorld->LAYER_HUD;
-
-		// Move MOVEMENT_
-		g["MOVEMENT_WALK_RIGHT"]	 = MOVEMENT_WALK_RIGHT;
-		g["MOVEMENT_WALK_LEFT"]		 = MOVEMENT_WALK_LEFT;
-		g["MOVEMENT_WALK_UP"]		 = MOVEMENT_WALK_UP;
-		g["MOVEMENT_WALK_DOWN"]		 = MOVEMENT_WALK_DOWN;
 	}
 };

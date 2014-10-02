@@ -22,6 +22,7 @@ namespace LuaClasses
 		return luabind::object(lua->State(), this);
 	}
 
+	// Set Texture
 	void lua_spritenode_wrapper::SetTexture(std::string texturename)
 	{
 		CheckValid();
@@ -38,6 +39,9 @@ namespace LuaClasses
 		}
 	}
 
+	/*
+	 * Register
+	 */
 	void RegisterSpriteNode()
 	{
 		luabind::module(lua->State()) [

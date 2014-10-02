@@ -19,12 +19,9 @@ namespace LuaClasses
 		void SetBackgroundTexture(std::string texture);
 		void Add(sf::Vector2f, std::string texture);
 	};
+	SceneBuilder::SceneBuilder() {}
 
-	SceneBuilder::SceneBuilder()
-	{
-		//
-	}
-
+	// Set Background Texture
 	void SceneBuilder::SetBackgroundTexture(std::string texturename)
 	{
 		try
@@ -46,6 +43,7 @@ namespace LuaClasses
 		}
 	}
 
+	// Add Sprite
 	void SceneBuilder::Add(sf::Vector2f pos, std::string texturename)
 	{
 		try
@@ -77,6 +75,7 @@ namespace LuaClasses
 		];
 	}
 
+	// Build Scene
 	void BuildScene()
 	{
 		// Let Lua build the scene

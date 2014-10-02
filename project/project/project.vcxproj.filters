@@ -150,6 +150,9 @@
     <ClCompile Include="Physics.cpp">
       <Filter>Quelldateien\Core</Filter>
     </ClCompile>
+    <ClCompile Include="lua\LuaEnums.cpp">
+      <Filter>Quelldateien\Lua</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aircraft.h">

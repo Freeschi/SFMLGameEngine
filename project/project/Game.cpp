@@ -32,6 +32,8 @@ Game::Game() : mWindow(sf::VideoMode(1280, 720), "Freeschi"), mStateStack(NULL),
 	{
 		printf("\n[Lua] Proper startup not possible, because lua/main.lua was not found!\n");
 		printf("[Game] Please make sure the lua environment is setup correctly!\n\n");
+
+		throw std::string("Scripting errors");
 		return;
 	}
 
@@ -41,6 +43,8 @@ Game::Game() : mWindow(sf::VideoMode(1280, 720), "Freeschi"), mStateStack(NULL),
 	{
 		printf("\n[Lua] Unable to call _main()\n");
 		printf("[Game] Please make sure the lua environment is setup correctly!\n\n");
+
+		throw std::string("Scripting errors");
 		return;
 	}
 
@@ -48,8 +52,7 @@ Game::Game() : mWindow(sf::VideoMode(1280, 720), "Freeschi"), mStateStack(NULL),
 	g_pWorld = new World(mWindow);
 	g_pWorld->LoadTextures();
 
-	//REGISTER_ENTITY_CLASS(aircraft_eagle, Aircraft(Aircraft::Eagle));
-	//REGISTER_ENTITY_CLASS(aircraft_raptor, Aircraft(Aircraft::Raptor));
+	// Registered Entity Classes
 	REGISTER_ENTITY_CLASS(sprite_node, SpriteNode());
 	REGISTER_ENTITY_CLASS(player, PlayerEntity());
 
@@ -95,6 +98,9 @@ void Game::Run()
 	}
 }
 
+// ====================================================================================================
+// Game::Exit
+// ====================================================================================================
 void Game::Exit()
 {
 	printf("----------------------------------------------------\n");

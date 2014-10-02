@@ -90,6 +90,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="lua\GeneralFunctions.cpp" />
+    <ClCompile Include="lua\LuaEnums.cpp" />
     <ClCompile Include="lua\luamanager\LuaManager.cpp" />
     <ClCompile Include="lua\luamanager\LuaManager_Debug.cpp" />
     <ClCompile Include="lua\luamanager\LuaManager_General.cpp" />
