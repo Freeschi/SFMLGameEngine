@@ -17,6 +17,7 @@ namespace LuaClasses
 	void RegisterHuman();
 	void RegisterSpriteNode();
 	void RegisterSFShapes();
+	void RegisterLoadingScreenData();
 
 	void BuildScene();
 
@@ -143,6 +144,10 @@ namespace LuaClasses
 		luabind::object SetupLuaObject();
 	};
 
+	// ====================================================================================================
+	// Render Window
+	// This class is used to draw elements in Lua
+	// ====================================================================================================	
 	class lua_renderwindow
 	{
 	public:
@@ -150,6 +155,31 @@ namespace LuaClasses
 		lua_renderwindow(sf::RenderWindow& rw) : m_pWindow(rw) {}
 
 		void Draw(sf::Shape& draw);
+	};
+
+	// ====================================================================================================
+	// Loading Screen Data
+	// This is used so Lua can add textures that are required to load in loading screen
+	// ====================================================================================================	
+	class lua_loading_screen_data
+	{
+	public:
+		enum ResourceType
+		{
+			RESOURCE_TEXTURE,
+			RESOURCE_FONT
+		};
+		struct ResourceLoadInstruction
+		{
+			ResourceType m_eType;
+			std::string m_sAlias;
+			std::string m_sFilename;
+		};
+		std::vector<ResourceLoadInstruction*> m_vResources;
+		~lua_loading_screen_data();
+
+		void AddTexture(std::string alias, std::string filename);
+		void AddFont(std::string alias, std::string filename);
 	};
 };
 

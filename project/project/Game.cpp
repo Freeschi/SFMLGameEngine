@@ -62,7 +62,7 @@ Game::Game() : mWindow(sf::VideoMode(1280, 720), "Freeschi"), mStateStack(NULL),
 	// States
 	mStateStack = new StateStack();
 	RegisterStates();
-	mStateStack->PushState(States::Game);
+	mStateStack->PushState(States::Menu);
 
 	// Build Scene
 	g_pWorld->BuildScene();
@@ -174,6 +174,7 @@ void Game::RegisterStates()
 {
 	mStateStack->RegisterState<TitleState>(States::Title);
 	mStateStack->RegisterState<MenuState>(States::Menu);
+	mStateStack->RegisterState<LoadingState>(States::Loading);
 	mStateStack->RegisterState<GameState>(States::Game);
 	//mStateStack.RegisterState<PauseState>(States::Pause);
 }

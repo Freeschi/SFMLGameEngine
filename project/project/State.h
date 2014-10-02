@@ -31,5 +31,7 @@ private:
 #include "GameState.h"
 #include "TitleState.h"
 #include "MenuState.h"
+#include "LoadingState.h"
+#include "LoadingTask.h"
 
 #endif

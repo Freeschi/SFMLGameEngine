@@ -17,14 +17,19 @@ function _main()
 		print("OnGameInitialized event")
 	end)
 	
+	event.AddListener("LoadingScreenResources", function(ls)
+		print("Preparing resources..")
+		ls:AddTexture("Big1", "Media/Textures/ReallyBigTexture_1.png")
+		ls:AddTexture("Big2", "Media/Textures/ReallyBigTexture_2.png")
+		ls:AddTexture("Big3", "Media/Textures/ReallyBigTexture_3.png")
+		ls:AddTexture("Player1", "Media/Textures/Player1.png")
+		ls:AddTexture("Wall1", "Media/Textures/Wall1.png")
+		ls:AddTexture("Background1", "Media/Textures/Background1.png")
+		ls:AddTexture("Block1", "Media/Textures/Block1.png")
+	end)
+	
 	event.AddListener("BuildScene", function(scene, player)
 		local bst = util.Benchmark(function()
-		
-		-- Load Textures
-		game.LoadTexture("Player1", "Media/Textures/Player1.png")
-		game.LoadTexture("Wall1", "Media/Textures/Wall1.png")
-		game.LoadTexture("Background1", "Media/Textures/Background1.png")
-		game.LoadTexture("Block1", "Media/Textures/Block1.png")
 		
 		-- Setup World Bounds
 		local bounds = FloatRect(0, 0, 1280, 720)

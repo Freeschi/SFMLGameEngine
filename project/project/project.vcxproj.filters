@@ -168,6 +168,15 @@
     <ClCompile Include="LuaWrapper_Shapes.cpp">
       <Filter>Quelldateien\Lua\Wrapper</Filter>
     </ClCompile>
+    <ClCompile Include="LoadingTask.cpp">
+      <Filter>Quelldateien\States</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadingState.cpp">
+      <Filter>Quelldateien\States</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\LuaWrapper_LoadingScreenData.cpp">
+      <Filter>Quelldateien\Lua\Wrapper</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aircraft.h">
@@ -259,6 +268,12 @@
     </ClInclude>
     <ClInclude Include="Config.h">
       <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadingState.h">
+      <Filter>Headerdateien\States</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadingTask.h">
+      <Filter>Headerdateien\States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

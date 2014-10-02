@@ -90,6 +90,8 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="LoadingState.cpp" />
+    <ClCompile Include="LoadingTask.cpp" />
     <ClCompile Include="LuaWrapper_Shapes.cpp" />
     <ClCompile Include="lua\GeneralFunctions.cpp" />
     <ClCompile Include="lua\LuaEnums.cpp" />
@@ -100,6 +102,7 @@
     <ClCompile Include="lua\LuaWrapper_Entity.cpp" />
     <ClCompile Include="lua\LuaWrapper_GenericSF.cpp" />
     <ClCompile Include="lua\LuaWrapper_Human.cpp" />
+    <ClCompile Include="lua\LuaWrapper_LoadingScreenData.cpp" />
     <ClCompile Include="lua\LuaWrapper_SceneBuilder.cpp" />
     <ClCompile Include="lua\LuaWrapper_SceneNode.cpp" />
     <ClCompile Include="lua\LuaWrapper_SpriteNode.cpp" />
@@ -130,6 +133,8 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="Includes.h" />
+    <ClInclude Include="LoadingState.h" />
+    <ClInclude Include="LoadingTask.h" />
     <ClInclude Include="lua\ClassWrappers.h" />
     <ClInclude Include="lua\GeneralFunctions.h" />
     <ClInclude Include="lua\Lua.h" />
