@@ -20,14 +20,22 @@ function _main()
 	event.AddListener("BuildScene", function(scene, player)
 		print("BuildScene event")
 		
+		-- Load Textures
 		game.LoadTexture("Player1", "Media/Textures/Player1.png")
 		game.LoadTexture("Wall1", "Media/Textures/Wall1.png")
 		game.LoadTexture("Background1", "Media/Textures/Background1.png")
+		game.LoadTexture("Block1", "Media/Textures/Block1.png")
 		
+		-- Setup World Bounds
 		local bounds = FloatRect(0, 0, 1280, 720)
 		world.SetBounds(bounds)
 		scene:SetBackgroundTexture("Background1")
 		
+		-- Player
+		player:SetPosition(Vector2(64 + 9, 64 + 9))
+		player:SetTexture("Player1")
+		
+		-- Area round field
 		for i = 0, 15, 1 do
 			if i > 0 and i < 14 then
 				scene:Add(Vector2(i * 64,0), "Wall1")
@@ -49,10 +57,8 @@ function _main()
 			scene:Add(Vector2(128 + 64 * 8,y), "Wall1")
 			scene:Add(Vector2(128 + 64 * 10,y), "Wall1")
 		end
-
-		player:SetPosition(Vector2(64 + 9, 64 + 9))
-		player:SetTexture("Player1")
 		
+		print(player:IsPlayer())
 	end)
 	
 	event.AddListener("OnEntityRemoved", function(ent)

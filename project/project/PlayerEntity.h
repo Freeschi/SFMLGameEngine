@@ -11,6 +11,7 @@ public:
 	void UpdateCurrent(sf::Time dt);
 	void CreateLuaObject();
 
+	virtual bool IsHuman() const { return false; }
 	virtual bool IsPlayer() const { return true; };
 	virtual unsigned int GetCategory() const { return Category::Player; };
 };

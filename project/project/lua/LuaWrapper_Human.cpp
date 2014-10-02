@@ -26,6 +26,14 @@ namespace LuaClasses
 		return luabind::object(lua->State(), this);
 	}
 
+	// Create Movement
+	bool lua_human_wrapper::CreateMovement(int e)
+	{
+		CheckValid();
+
+		return m_pHuman->CreateMovement((Movement)e);
+	}
+
 	// ====================================================================================================
 	// Player
 	// ====================================================================================================
@@ -48,6 +56,7 @@ namespace LuaClasses
 	{
 		luabind::module(lua->State())[
 			luabind::class_<LuaClasses::lua_human_wrapper, LuaClasses::lua_spritenode_wrapper>("Human")
+				.def("CreateMovement", &LuaClasses::lua_human_wrapper::CreateMovement)
 		];
 
 		luabind::module(lua->State())[

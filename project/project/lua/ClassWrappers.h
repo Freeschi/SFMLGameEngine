@@ -56,8 +56,14 @@ namespace LuaClasses
 		lua_scenenode_wrapper(SceneNode* pSceneNode);
 		virtual bool IsValid() { return m_pSceneNode != NULL; }
 
+		virtual bool IsEntity() { return false; }
+		virtual bool IsHuman()  { return false; }
+		virtual bool IsPlayer() { return false; }
+
 		void SetPosition(sf::Vector2f pos);
 		sf::Vector2f GetPosition();
+
+		sf::FloatRect GetBoundingRect();
 
 		void AttachChild(lua_scenenode_wrapper* pSceneNode);
 		void DetachChild(lua_scenenode_wrapper* pSceneNode);
@@ -75,6 +81,10 @@ namespace LuaClasses
 		lua_entity_wrapper(Entity* pEntity);
 		~lua_entity_wrapper();
 		void OnInvalidated();
+
+		virtual bool IsEntity() { return true; }
+		virtual bool IsHuman()  { return false; }
+		virtual bool IsPlayer() { return false; }
 
 		luabind::object SetupLuaObject();
 		
@@ -107,8 +117,14 @@ namespace LuaClasses
 		BaseHuman* m_pHuman;
 		lua_human_wrapper(BaseHuman* pHuman);
 
+		virtual bool IsEntity() { return true; }
+		virtual bool IsHuman()  { return true; }
+		virtual bool IsPlayer() { return false; }
+
 		luabind::object SetupLuaObject();
 		luabind::object GetSprite();
+
+		bool CreateMovement(int e);
 	};
 
 	// ====================================================================================================
@@ -119,6 +135,10 @@ namespace LuaClasses
 	public:
 		PlayerEntity* m_pPlayer;
 		lua_player_wrapper(PlayerEntity* pHuman);
+
+		virtual bool IsEntity() { return true; }
+		virtual bool IsHuman()  { return false; }
+		virtual bool IsPlayer() { return true; }
 
 		luabind::object SetupLuaObject();
 	};

@@ -76,6 +76,14 @@ namespace LuaClasses
 		m_pSceneNode->SetParent(pParent->m_pSceneNode);
 	}
 
+	// Bounding Rect
+	sf::FloatRect lua_scenenode_wrapper::GetBoundingRect()
+	{
+		CheckValid();
+
+		return m_pSceneNode->GetBoundingRect();
+	}
+
 	/*
 	 * Register
 	 */
@@ -87,10 +95,13 @@ namespace LuaClasses
 				.def(luabind::constructor<SceneNode*>())
 				.def("GetPosition", &LuaClasses::lua_scenenode_wrapper::GetPosition)
 				.def("SetPosition", &LuaClasses::lua_scenenode_wrapper::SetPosition)
-				.def("AttachChild", &LuaClasses::lua_scenenode_wrapper::AttachChild)
+				.def("AttachChild", &LuaClasses::lua_scenenode_wrapper::AttachChild) 
 				.def("DetachChild", &LuaClasses::lua_scenenode_wrapper::DetachChild)
 				.def("GetParent", &LuaClasses::lua_scenenode_wrapper::GetParent)
 				.def("SetParent", &LuaClasses::lua_scenenode_wrapper::SetParent)
+				.def("IsEntity", &LuaClasses::lua_scenenode_wrapper::IsEntity)
+				.def("IsHuman", &LuaClasses::lua_scenenode_wrapper::IsHuman)
+				.def("IsPlayer", &LuaClasses::lua_scenenode_wrapper::IsPlayer)
 		];
 	}
 };
