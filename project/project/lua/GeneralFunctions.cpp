@@ -24,6 +24,12 @@ void LuaFunctions::include(std::string file)
 // ====================================================================================================
 namespace LuaFunctions
 {
+	sf::Clock cl;
+	float uptime()
+	{
+		return (float)(cl.getElapsedTime().asMilliseconds()) / 1000;
+	}
+
 	namespace Module_World
 	{
 		// Probabbly broken
@@ -77,9 +83,12 @@ namespace LuaFunctions
 // ====================================================================================================
 void LuaFunctions::RegisterLuaFunctions()
 {
+	cl.restart();
+
 	// General
 	luabind::module(lua->State()) [
-		luabind::def("include", &LuaFunctions::include)
+		luabind::def("include", &LuaFunctions::include),
+		luabind::def("uptime", &LuaFunctions::uptime)
 	];
 
 	// world Module

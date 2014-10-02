@@ -57,7 +57,6 @@ bool BaseHuman::CreateMovement(Movement eMove, sf::Time dt)
 	if (inters.size() > 0)
 		return false;
 
-	printf("%f\n", (vOffset * dt.asSeconds()).x);
 	move(vOffset * dt.asSeconds());
 
 	return true;
