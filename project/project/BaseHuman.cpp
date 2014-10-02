@@ -10,7 +10,7 @@
 BaseHuman::BaseHuman()
 {
 	SetClassName("base_human"); 
-	SetWalkSpeed(2.0f);
+	SetWalkSpeed(200.0f);
 }
 
 // ====================================================================================================
@@ -27,7 +27,7 @@ void BaseHuman::CreateLuaObject()
 // ====================================================================================================
 // Movement
 // ====================================================================================================
-bool BaseHuman::CreateMovement(Movement eMove)
+bool BaseHuman::CreateMovement(Movement eMove, sf::Time dt)
 {
 	// Offset Vector
 	sf::Vector2f vOffset;
@@ -50,14 +50,15 @@ bool BaseHuman::CreateMovement(Movement eMove)
 	}
 
 	// Check Collision with our new position
-	sf::Vector2f vNewPosition = GetWorldPosition() + vOffset;
+	sf::Vector2f vNewPosition = GetWorldPosition() + vOffset * dt.asSeconds();
 	sf::FloatRect vBoundingRect = GetBoundingRect();
 	sf::FloatRect vNewPosRect(vNewPosition.x, vNewPosition.y, vBoundingRect.width, vBoundingRect.height);
 	std::vector<SceneNode*> inters = g_pWorld->GetPhysics()->GetObjectsIntersecting(vNewPosRect, this);
 	if (inters.size() > 0)
 		return false;
 
-	move(vOffset);
+	printf("%f\n", (vOffset * dt.asSeconds()).x);
+	move(vOffset * dt.asSeconds());
 
 	return true;
 }

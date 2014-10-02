@@ -15,9 +15,9 @@ struct PlayerMover
 {
 	PlayerMover(Movement eMove) : m_eMove(eMove) { }
 
-	void operator() (PlayerEntity& playerent, sf::Time) const
+	void operator() (PlayerEntity& playerent, sf::Time dt) const
 	{
-		playerent.CreateMovement(m_eMove);
+		playerent.CreateMovement(m_eMove, dt);
 	}
 
 	Movement m_eMove;

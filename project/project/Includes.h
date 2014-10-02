@@ -67,6 +67,7 @@
 // ====================================================================================================
 #include "Utility.h"
 #include "Foreach.hpp"
+#include "Config.h"
 #include "ResourceManager.h"
 #include "SceneNode.h"
 #include "Command.h"

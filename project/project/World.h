@@ -25,7 +25,6 @@ public: \
 // ====================================================================================================
 // World
 // ====================================================================================================
-#define MAX_ENTITIES 128
 class World : private sf::NonCopyable
 {
 public:
@@ -79,7 +78,7 @@ private:
 	TextureHolder* mTextures;
 	FontHolder* mFonts;
 	SceneNode mSceneGraph;
-	Entity* mEntityList[MAX_ENTITIES];
+	Entity** mEntityList;
 	CommandQueue* mCommandQueue;
 	std::array<SceneNode*, LAYER_COUNT> mSceneLayers;
 	sf::FloatRect mWorldBounds;

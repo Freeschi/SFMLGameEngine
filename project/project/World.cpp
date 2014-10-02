@@ -13,7 +13,8 @@ World* g_pWorld = NULL;
 // ====================================================================================================
 World::World(sf::RenderWindow& window) : mWindow(window), mWorldView(new sf::View(window.getDefaultView()))
 {
-	for (int i = 0; i < MAX_ENTITIES; i++)
+	mEntityList = (Entity**) malloc(4 * g_pConfig->EntityLimit());
+	for (int i = 0; i < g_pConfig->EntityLimit(); i++)
 	{
 		mEntityList[i] = NULL;
 	}
@@ -110,7 +111,7 @@ int World::RegisterEntity(Entity* ent)
 	if (IsEntityRegistered(ent)) return -1;
 
 	// Search free slot
-	for (int index = 0; index < MAX_ENTITIES; index++)
+	for (int index = 0; index < g_pConfig->EntityLimit(); index++)
 	{
 		if (!IsEntityRegistered(index))
 		{
@@ -142,7 +143,7 @@ void World::UnregisterEntity(Entity* ent)
 // ====================================================================================================
 int World::GetEntityIndex(Entity* ent)
 {
-	for (int index = 0; index < MAX_ENTITIES; index++)
+	for (int index = 0; index < g_pConfig->EntityLimit(); index++)
 	{
 		Entity* pRegisteredEntity = mEntityList[index];
 		if (pRegisteredEntity != NULL && ent == pRegisteredEntity)
@@ -155,7 +156,7 @@ int World::GetEntityIndex(Entity* ent)
 }
 Entity* World::GetEntityByIndex(int iEntityIndex)
 {
-	if (iEntityIndex < 0 || iEntityIndex >= MAX_ENTITIES) {
+	if (iEntityIndex < 0 || iEntityIndex >= g_pConfig->EntityLimit()) {
 		throw std::string("Invalid call to World::GetEntityByIndex! iEntityIndex out of bounds!");
 		return NULL;
 	}

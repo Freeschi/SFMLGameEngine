@@ -30,8 +30,8 @@ namespace LuaClasses
 	bool lua_human_wrapper::CreateMovement(int e)
 	{
 		CheckValid();
-
-		return m_pHuman->CreateMovement((Movement)e);
+		return false;
+		//return m_pHuman->CreateMovement((Movement)e);
 	}
 
 	// ====================================================================================================

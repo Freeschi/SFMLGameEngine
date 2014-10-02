@@ -12,6 +12,7 @@ class State;
 class StateStack;
 class SpriteNode;
 class Physics;
+class CIniFile;
 
 namespace LuaClasses
 {

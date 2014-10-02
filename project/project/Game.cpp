@@ -17,6 +17,9 @@ Game* g_pGame = NULL;
 // ====================================================================================================
 Game::Game() : mWindow(sf::VideoMode(1280, 720), "Freeschi"), mStateStack(NULL), m_iFPS(0)
 {
+	// Config
+	g_pConfig = new Config();
+
 	// Lua
 	lua = new LuaManager();
 	lua->Init();
@@ -94,7 +97,8 @@ void Game::Run()
 		UpdateStats(timeSinceLastUpdate);
 		
 		Render();
-		Sleep(1); 
+
+		Sleep(1); // this needs to be better
 	}
 }
 
@@ -111,15 +115,16 @@ void Game::Exit()
 // ====================================================================================================
 // FPS Counter
 // ====================================================================================================
-int mStatisticsNumFrames = 0;
+int mStatisticsNumFrames = 1000;
+sf::Clock framecounter;
 void Game::UpdateStats(sf::Time dt)
 {
-	mStatisticsUpdateTime += dt;
 	mStatisticsNumFrames += 1;
-	if (mStatisticsUpdateTime >= sf::seconds(1.0f))
+	if (framecounter.getElapsedTime().asSeconds() >= 1.0f)
 	{
+		framecounter.restart();
 		m_iFPS = mStatisticsNumFrames;
-		mStatisticsUpdateTime -= sf::seconds(1.0f);
+		printf("FPS: %i\n", m_iFPS);
 		mStatisticsNumFrames = 0;
 	}
 }

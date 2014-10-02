@@ -22,7 +22,7 @@ public:
 	void CreateLuaObject();
 
 	ACCESSOR_FUNC(WalkSpeed, float, m_fWalkSpeed);
-	bool CreateMovement(Movement move);
+	bool CreateMovement(Movement move, sf::Time dt);
 
 	virtual bool IsHuman() const { return true; }
 	virtual unsigned int GetCategory() const { return Category::Human; };
