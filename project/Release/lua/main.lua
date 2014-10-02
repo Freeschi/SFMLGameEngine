@@ -50,7 +50,7 @@ function _main()
 			scene:Add(Vector2(128 + 64 * 10,y), "Wall1")
 		end
 
-		player:SetPosition(Vector2(64, 64))
+		player:SetPosition(Vector2(64 + 9, 64 + 9))
 		player:SetTexture("Player1")
 		
 	end)

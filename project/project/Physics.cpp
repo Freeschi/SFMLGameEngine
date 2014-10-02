@@ -3,6 +3,9 @@
 // ====================================================================================================
 #include "Includes.h"
 
+// ====================================================================================================
+// Get All Scene Nodes
+// ====================================================================================================
 std::vector<SceneNode*> Physics::GetAllSceneNodes()
 {
 	std::vector<SceneNode*> pObjects;
@@ -22,28 +25,28 @@ std::vector<SceneNode*> Physics::GetAllSceneNodes()
 }
 
 // ====================================================================================================
-// Includes
+// Get Objects Intersecting
 // ====================================================================================================
-std::vector<SceneNode*> Physics::GetObjectsIntersecting(sf::FloatRect rect)
-{
-	return std::vector<SceneNode*>();
-}
-
-std::vector<SceneNode*> Physics::GetObjectsIntersecting(SceneNode* pSceneNode)
+std::vector<SceneNode*> Physics::GetObjectsIntersecting(sf::FloatRect frMine, SceneNode* pIgnoreScene)
 {
 	std::vector<SceneNode*> pObjects;
 	std::vector<SceneNode*> pAllSceneNodes = GetAllSceneNodes();
-	sf::FloatRect frMine = pSceneNode->GetBoundingRect();
 
 	for (std::vector<SceneNode*>::iterator it = pAllSceneNodes.begin(); it != pAllSceneNodes.end(); ++it)
 	{
 		SceneNode* pOther = *it;
 		sf::FloatRect frOther = pOther->GetBoundingRect();
-		if (pOther != pSceneNode && frOther.intersects(frMine))
+		if (pOther != NULL && pOther->IsValid() && pIgnoreScene != pOther && frOther.intersects(frMine))
 		{
 			pObjects.push_back(pOther);
 		}
 	}
 
+	return pObjects;
+}
+std::vector<SceneNode*> Physics::GetObjectsIntersecting(SceneNode* pSceneNode)
+{
+	sf::FloatRect frMine = pSceneNode->GetBoundingRect();
+	std::vector<SceneNode*> pObjects = GetObjectsIntersecting(frMine, pSceneNode);
 	return pObjects;
 }

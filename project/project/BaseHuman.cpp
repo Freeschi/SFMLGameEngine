@@ -49,6 +49,14 @@ bool BaseHuman::CreateMovement(Movement eMove)
 		return false;
 	}
 
+	// Check Collision with our new position
+	sf::Vector2f vNewPosition = GetWorldPosition() + vOffset;
+	sf::FloatRect vBoundingRect = GetBoundingRect();
+	sf::FloatRect vNewPosRect(vNewPosition.x, vNewPosition.y, vBoundingRect.width, vBoundingRect.height);
+	std::vector<SceneNode*> inters = g_pWorld->GetPhysics()->GetObjectsIntersecting(vNewPosRect, this);
+	if (inters.size() > 0)
+		return false;
+
 	move(vOffset);
 
 	return true;
