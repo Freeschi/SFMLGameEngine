@@ -31,6 +31,7 @@ class World : private sf::NonCopyable
 public:
 	enum Layer
 	{
+		LAYER_BACKGROUND,
 		LAYER_MAP,
 		LAYER_GENERAL,
 		LAYER_FOREGROUND,
@@ -52,6 +53,7 @@ public:
 	FontHolder* GetFontHolder() { return mFonts; }
 	sf::RenderWindow& GetWindow() { return mWindow; }
 	sf::View* GetView() { return mWorldView; }
+	Physics* GetPhysics() { return m_pPhysics; }
 
 	// Accessor
 	ACCESSOR_FUNC(Bounds, sf::FloatRect, mWorldBounds);
@@ -71,7 +73,6 @@ public:
 	bool IsEntityRegistered(Entity* ent);
 	bool IsEntityRegistered(int index);
 
-
 private:
 	sf::RenderWindow& mWindow;
 	sf::View* mWorldView;
@@ -82,6 +83,7 @@ private:
 	CommandQueue* mCommandQueue;
 	std::array<SceneNode*, LAYER_COUNT> mSceneLayers;
 	sf::FloatRect mWorldBounds;
+	Physics* m_pPhysics;
 };
 
 extern World* g_pWorld;

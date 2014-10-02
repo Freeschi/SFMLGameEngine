@@ -9,7 +9,8 @@
 // ====================================================================================================
 BaseHuman::BaseHuman()
 {
-	SetClassName("base_human");
+	SetClassName("base_human"); 
+	SetWalkSpeed(2.0f);
 }
 
 // ====================================================================================================
@@ -23,9 +24,32 @@ void BaseHuman::CreateLuaObject()
 	SetLuaObject((LuaClasses::base_class_wrapper*) new LuaClasses::lua_human_wrapper(this));
 }
 
+// ====================================================================================================
+// Movement
+// ====================================================================================================
 bool BaseHuman::CreateMovement(Movement eMove)
 {
-	
+	// Offset Vector
+	sf::Vector2f vOffset;
+	switch (eMove)
+	{
+	case MOVEMENT_WALK_LEFT:
+		vOffset = sf::Vector2f(-GetWalkSpeed(), 0.0f);
+		break;
+	case MOVEMENT_WALK_RIGHT:
+		vOffset = sf::Vector2f(GetWalkSpeed(), 0.0f);
+		break;
+	case MOVEMENT_WALK_DOWN:
+		vOffset = sf::Vector2f(0.0f, GetWalkSpeed());
+		break;
+	case MOVEMENT_WALK_UP:
+		vOffset = sf::Vector2f(0.0f, -GetWalkSpeed());
+		break;
+	default:
+		return false;
+	}
+
+	move(vOffset);
 
 	return true;
 }

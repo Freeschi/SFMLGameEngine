@@ -22,6 +22,7 @@ World::World(sf::RenderWindow& window) : mWindow(window), mWorldView(new sf::Vie
 	mFonts = new FontHolder();
 	mTextures = new TextureHolder();
 	mWorldBounds = sf::FloatRect(0.f, 0.f, mWorldView->getSize().x, 2000.f);
+	m_pPhysics = new Physics();
 }
 
 // ====================================================================================================

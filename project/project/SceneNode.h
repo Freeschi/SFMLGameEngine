@@ -13,12 +13,14 @@ public:
 	~SceneNode();
 
 	// Is-Functions
-	virtual bool IsEntity() { return false; };
-	virtual bool IsPlayer() { return false; }
+	virtual bool IsEntity() const { return false; };
+	virtual bool IsHuman()	const { return false; };
+	virtual bool IsPlayer() const { return false; };
 
 	// Parents & Childs
 	ACCESSOR_FUNC(Parent, SceneNode*, mParent);
 	std::vector<SceneNode*> mChildren;
+	std::vector<SceneNode*> GetAllChildren(); // children + childrens children !
 	void AttachChild(SceneNode* child);
 	SceneNode* DetachChild(SceneNode* node);
 
@@ -51,6 +53,10 @@ public:
 	// Movement
 	void Accelerate(sf::Vector2f velocity);
 	void Accelerate(float vx, float vy);
+
+	// Collisions
+	virtual sf::FloatRect GetBoundingRect() const;
+	bool CollidesWith(SceneNode* pOther) const;
 
 	// Update
 	virtual void Update(sf::Time dt);

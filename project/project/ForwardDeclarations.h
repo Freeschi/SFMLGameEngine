@@ -11,6 +11,7 @@ class CommandQueue;
 class State;
 class StateStack;
 class SpriteNode;
+class Physics;
 
 namespace LuaClasses
 {

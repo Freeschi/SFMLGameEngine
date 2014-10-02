@@ -72,6 +72,7 @@
 #include "Command.h"
 #include "CommandQueue.h"
 #include "State.h"
+#include "Physics.h"
 #include "World.h"
 #include "Player.h"
 #include "Game.h"

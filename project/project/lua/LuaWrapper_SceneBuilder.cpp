@@ -35,9 +35,9 @@ namespace LuaClasses
 			SpriteNode* pSprite = (SpriteNode*)g_pWorld->CreateEntityByClassName("sprite_node");
 			pSprite->SetTexture(texture);
 			sf::FloatRect wb = g_pWorld->GetBounds();
-			pSprite->SetRect(sf::IntRect(wb));
+			pSprite->SetBoundingRect(sf::IntRect(wb));
 
-			g_pWorld->GetSceneLayer(g_pWorld->LAYER_MAP)->AttachChild((SceneNode*)pSprite);
+			g_pWorld->GetSceneLayer(g_pWorld->LAYER_BACKGROUND)->AttachChild((SceneNode*)pSprite);
 		}
 		catch (...)
 		{

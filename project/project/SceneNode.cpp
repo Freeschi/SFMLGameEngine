@@ -118,6 +118,41 @@ void SceneNode::Accelerate(float vx, float vy)
 	mVelocity.y += vy;
 }
 
+bool _has_vector(std::vector<SceneNode*> vec, SceneNode* el)
+{
+	for (std::vector<SceneNode*>::iterator it2 = vec.begin(); it2 != vec.end(); ++it2)
+	{
+		SceneNode* pAlreadyAddedChild = *it2;
+		if (pAlreadyAddedChild == el)
+			return true;
+	}
+
+	return false;
+}
+std::vector<SceneNode*> SceneNode::GetAllChildren()
+{
+	std::vector<SceneNode*> pChildren;
+	
+	for (std::vector<SceneNode*>::iterator it = mChildren.begin(); it != mChildren.end(); ++it)
+	{
+		SceneNode* pChild = *it;
+		pChildren.push_back(pChild);
+
+		// childrens children
+		std::vector<SceneNode*> pChildrensChildren = pChild->GetAllChildren();
+		for (std::vector<SceneNode*>::iterator it2 = pChildrensChildren.begin(); it2 != pChildrensChildren.end(); ++it2)
+		{
+			SceneNode* pChildrenChild = *it2;
+			if (!_has_vector(pChildren, pChildrenChild))
+			{
+				pChildren.push_back(pChildrenChild);
+			}
+		}
+	}
+
+	return pChildren;
+}
+
 // ====================================================================================================
 // SceneNode::OnCommand
 // ====================================================================================================
@@ -164,6 +199,18 @@ void SceneNode::UpdateChildren(sf::Time dt)
 			delete child;
 		}
 	}
+}
+
+// ====================================================================================================
+// Collisions
+// ====================================================================================================
+sf::FloatRect SceneNode::GetBoundingRect() const
+{
+	return sf::FloatRect();
+}
+bool SceneNode::CollidesWith(SceneNode* pOther) const
+{
+	return pOther->GetBoundingRect().intersects(GetBoundingRect());
 }
 
 // ====================================================================================================

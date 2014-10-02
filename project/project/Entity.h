@@ -11,7 +11,7 @@ public:
 	Entity();
 	~Entity();
 
-	bool IsEntity() { return true; }
+	bool IsEntity() const { return true; }
 
 	ACCESSOR_FUNC(ClassName, std::string, m_sClassName);
 	virtual void CreateLuaObject();

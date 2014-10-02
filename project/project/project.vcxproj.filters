@@ -147,6 +147,9 @@
     <ClCompile Include="lua\LuaWrapper_SpriteNode.cpp">
       <Filter>Quelldateien\Lua\Wrapper</Filter>
     </ClCompile>
+    <ClCompile Include="Physics.cpp">
+      <Filter>Quelldateien\Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aircraft.h">
@@ -228,6 +231,9 @@
       <Filter>Headerdateien\Entities</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
+      <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics.h">
       <Filter>Headerdateien\Core</Filter>
     </ClInclude>
   </ItemGroup>
