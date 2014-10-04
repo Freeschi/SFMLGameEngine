@@ -33,5 +33,6 @@ private:
 #include "MenuState.h"
 #include "LoadingState.h"
 #include "LoadingTask.h"
+#include "PauseState.h"
 
 #endif

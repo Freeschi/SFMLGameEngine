@@ -22,6 +22,10 @@ void ExceptionOccured(char* kind, char* what)
 // ====================================================================================================
 int main()
 {
+#ifdef _WIN32
+	DeleteFile("updater_old.exe");
+#endif
+
 	try
 	{
 		g_pGame = new Game();

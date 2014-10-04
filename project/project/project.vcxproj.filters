@@ -177,6 +177,9 @@
     <ClCompile Include="lua\LuaWrapper_LoadingScreenData.cpp">
       <Filter>Quelldateien\Lua\Wrapper</Filter>
     </ClCompile>
+    <ClCompile Include="PauseState.cpp">
+      <Filter>Quelldateien\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aircraft.h">
@@ -273,6 +276,9 @@
       <Filter>Headerdateien\States</Filter>
     </ClInclude>
     <ClInclude Include="LoadingTask.h">
+      <Filter>Headerdateien\States</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseState.h">
       <Filter>Headerdateien\States</Filter>
     </ClInclude>
   </ItemGroup>

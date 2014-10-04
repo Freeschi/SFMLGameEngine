@@ -2,6 +2,7 @@
 // Includes
 // ====================================================================================================
 #include "Includes.h"
+#include "lua/GeneralFunctions.h"
 
 // ====================================================================================================
 // Definitions
@@ -11,6 +12,8 @@ Player* g_pPlayer = NULL;
 // ====================================================================================================
 // Player Mover
 // ====================================================================================================
+
+
 struct PlayerMover
 {
 	PlayerMover(Movement eMove) : m_eMove(eMove) { }
@@ -22,6 +25,9 @@ struct PlayerMover
 
 	Movement m_eMove;
 };
+
+
+
 
 // ====================================================================================================
 // Utility Function
@@ -52,6 +58,7 @@ Player::Player()
 	mKeyBinding[sf::Keyboard::Up] = MoveUp;
 	mKeyBinding[sf::Keyboard::Down] = MoveDown;
 
+
 	InitializeActions();
 	FOREACH(auto& pair, mActionBinding)
 		pair.second.category = Category::Player;
@@ -66,6 +73,7 @@ void Player::InitializeActions()
 	mActionBinding[MoveRight].action = derivedAction<PlayerEntity>(PlayerMover(MOVEMENT_WALK_RIGHT));
 	mActionBinding[MoveUp].action = derivedAction<PlayerEntity>(PlayerMover(MOVEMENT_WALK_UP));
 	mActionBinding[MoveDown].action = derivedAction<PlayerEntity>(PlayerMover(MOVEMENT_WALK_DOWN));
+
 }
 
 // ====================================================================================================
@@ -145,4 +153,15 @@ void Player::HandleEvent(const sf::Event& event, CommandQueue* commands)
 		};
 		commands->push(output);
 	}
+
+	if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+	{
+		if ((g_pGame->flLastPause+0.05f) <= LuaFunctions::uptime())
+		{
+			std::cout << "Game was paused!\n";
+			g_pGame->flLastPause = LuaFunctions::uptime();
+			g_pGame->GetStateStack()->PushState(States::Pause);
+		}
+	}
 }
+

@@ -19,6 +19,9 @@ public:
 	void UpdateStats(sf::Time dt);
 	int GetFPS();
 
+	StateStack* GetStateStack() { return mStateStack; }
+	float flLastPause;
+
 private:
 	void RegisterStates();
 	void ProcessEvents();

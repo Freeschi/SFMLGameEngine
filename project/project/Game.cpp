@@ -59,6 +59,9 @@ Game::Game() : mWindow(sf::VideoMode(1280, 720), "Freeschi"), mStateStack(NULL),
 	REGISTER_ENTITY_CLASS(sprite_node, SpriteNode());
 	REGISTER_ENTITY_CLASS(player, PlayerEntity());
 
+	// Pause
+	flLastPause = 0.0f;
+
 	// States
 	mStateStack = new StateStack();
 	RegisterStates();
@@ -176,7 +179,7 @@ void Game::RegisterStates()
 	mStateStack->RegisterState<MenuState>(States::Menu);
 	mStateStack->RegisterState<LoadingState>(States::Loading);
 	mStateStack->RegisterState<GameState>(States::Game);
-	//mStateStack.RegisterState<PauseState>(States::Pause);
+	mStateStack->RegisterState<PauseState>(States::Pause);
 }
 
 // ====================================================================================================
@@ -199,3 +202,5 @@ void Game::Render()
 	mWindow.setView(mWindow.getDefaultView());
 	mWindow.display();
 }
+
+
