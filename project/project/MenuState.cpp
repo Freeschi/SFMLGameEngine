@@ -10,7 +10,7 @@ MenuState::MenuState(StateStack& stack) : State(stack)
 {
 	sf::Font& font = g_pWorld->GetFontHolder()->Get("Main");
 
-	mBackgroundSprite.setTexture(g_pWorld->GetTextureHolder()->Get("TitleScreen"));
+	//mBackgroundSprite.setTexture(g_pWorld->GetTextureHolder()->Get("TitleScreen"));
 
 	sf::Text playOption;
 	playOption.setFont(font);
