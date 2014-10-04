@@ -16,7 +16,20 @@ void LuaFunctions::include(std::string file)
 
 	char path[364];
 	sprintf(path, "%s%s", currentpath, file.c_str());
-	lua->IncludeFile(path);
+	std::string filepath(path);
+	UTIL::ParseFilePath(filepath);
+	char* sPath = const_cast<char*>(filepath.c_str());
+	lua->IncludeFile(sPath);
+	if (!lua->IsOnFileList(sPath))
+		lua->AddToFileList(sPath);
+}
+
+// ====================================================================================================
+// LocalPlayer
+// ====================================================================================================
+LuaClasses::lua_player_wrapper* LocalPlayer()
+{
+	return (LuaClasses::lua_player_wrapper*) g_pPlayer->GetEntity()->GetLuaObject();
 }
 
 // ====================================================================================================
@@ -64,10 +77,34 @@ namespace LuaFunctions
 		// HasFocus
 		bool HasFocus() { return g_pGame->HasFocus(); }
 
-		// Load Texture
+		// Mouse Position
+		sf::Vector2i GetMousePosition()
+		{
+			return sf::Mouse::getPosition();
+		}
+
+		// Texture
 		bool LoadTexture(std::string alias, std::string filename)
 		{
 			return g_pWorld->GetTextureHolder()->Load(alias, filename);
+		}
+
+		// Font
+		bool LoadFont(std::string alias, std::string filename)
+		{
+			return g_pWorld->GetFontHolder()->Load(alias, filename);
+		}
+		luabind::object GetFont(std::string id)
+		{
+			try
+			{
+				luabind::object obj(lua->State(), g_pWorld->GetFontHolder()->Get(id));
+				return obj;
+			}
+			catch (...)
+			{
+				return lua_nil;
+			}
 		}
 
 		// GetFPS
@@ -88,7 +125,8 @@ void LuaFunctions::RegisterLuaFunctions()
 	// General
 	luabind::module(lua->State()) [
 		luabind::def("include", &LuaFunctions::include),
-		luabind::def("uptime", &LuaFunctions::uptime)
+		luabind::def("uptime", &LuaFunctions::uptime),
+		luabind::def("LocalPlayer", &LocalPlayer)
 	];
 
 	// world Module
@@ -100,9 +138,12 @@ void LuaFunctions::RegisterLuaFunctions()
 	];
 
 	// game Module
-	luabind::module(lua->State(), "game")[
+	luabind::module(lua->State(), "game") [
 		luabind::def("HasFocus", &LuaFunctions::Module_Game::HasFocus),
 		luabind::def("LoadTexture", &LuaFunctions::Module_Game::LoadTexture),
-		luabind::def("GetFPS", &LuaFunctions::Module_Game::GetFPS)
+		luabind::def("LoadFont", &LuaFunctions::Module_Game::LoadFont),
+		luabind::def("GetFont", &LuaFunctions::Module_Game::GetFont),
+		luabind::def("GetFPS", &LuaFunctions::Module_Game::GetFPS),
+		luabind::def("GetMousePosition", &LuaFunctions::Module_Game::GetMousePosition)
 	];
 }

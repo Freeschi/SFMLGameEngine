@@ -14,6 +14,10 @@ namespace LuaClasses
 	{
 		m_pWindow.draw((sf::Drawable&) draw);
 	}
+	void lua_renderwindow::Draw(sf::Text& draw)
+	{
+		m_pWindow.draw((sf::Drawable&) draw);
+	}
 
 	/*
 	 * Register
@@ -25,14 +29,19 @@ namespace LuaClasses
 			luabind::class_<sf::NonCopyable>("NonCopyable"),
 
 			luabind::class_<sf::Time>("sfTime")
+				.def("asSeconds", &sf::Time::asSeconds)
 				.def("asMilliseconds", &sf::Time::asMilliseconds),
 
 			luabind::class_<sf::Drawable>("sfDrawable"),
 
 			luabind::class_<lua_renderwindow>("RenderWindow")
-				.def("Draw", &lua_renderwindow::Draw),
+				.def("Draw",  (void (lua_renderwindow::*)(sf::Shape&)) &lua_renderwindow::Draw)
+				.def("Draw",  (void (lua_renderwindow::*)(sf::Text&))  &lua_renderwindow::Draw),
 
-				luabind::class_<sf::RenderTarget>("RenderTarget")
+			luabind::class_<sf::RenderTarget>("RenderTarget"),
+
+			luabind::class_<sf::String>("sfString")
+				.def(luabind::constructor<std::string>())
 		];
 
 		// Color

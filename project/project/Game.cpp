@@ -33,12 +33,13 @@ Game::Game() : mWindow(sf::VideoMode(1280, 720), "Freeschi"), mStateStack(NULL),
 	// main.lua
 	if (!lua->IncludeFile("lua/main.lua"))
 	{
-		printf("\n[Lua] Proper startup not possible, because lua/main.lua was not found!\n");
+		printf("\n[Lua] Proper startup not possible, because lua/main.lua was not found or failed to load!\n");
 		printf("[Game] Please make sure the lua environment is setup correctly!\n\n");
 
 		throw std::string("Scripting errors");
 		return;
 	}
+	lua->AddToFileList("lua/main.lua");
 
 	// call init function
 	lua->GetGlobal("_main");
@@ -61,11 +62,12 @@ Game::Game() : mWindow(sf::VideoMode(1280, 720), "Freeschi"), mStateStack(NULL),
 
 	// Pause
 	flLastPause = 0.0f;
+	m_bIsPaused = false;
 
 	// States
 	mStateStack = new StateStack();
 	RegisterStates();
-	mStateStack->PushState(States::Title);
+	mStateStack->PushState(States::Menu);
 
 	// Build Scene
 	g_pWorld->BuildScene();
@@ -112,7 +114,14 @@ void Game::Exit()
 {
 	printf("----------------------------------------------------\n");
 	printf("[Game] Exiting..\n");
+
+	lua->GetEvent("OnShutdown");
+	lua->ProtectedCall(1, 0);
+
 	mWindow.close();
+
+	LuaFunctions::Autorefresh::Destroy();
+	lua->Destroy();
 }
 
 // ====================================================================================================
@@ -127,7 +136,6 @@ void Game::UpdateStats(sf::Time dt)
 	{
 		framecounter.restart();
 		m_iFPS = mStatisticsNumFrames;
-		printf("FPS: %i\n", m_iFPS);
 		mStatisticsNumFrames = 0;
 	}
 }
@@ -150,11 +158,13 @@ void Game::ProcessEvents()
 				break;
 			case sf::Event::GainedFocus:
 				m_bHasFocus = true;
-				printf("[Game] Gained focus\n");
+				lua->GetEvent("OnWindowLostFocus");
+				lua->ProtectedCall(1, 0);
 				break;
 			case sf::Event::LostFocus:
 				m_bHasFocus = false;
-				printf("[Game] Lost focus\n");
+				lua->GetEvent("OnWindowGainedFocus");
+				lua->ProtectedCall(1, 0);
 				break;
 		};
 	}
@@ -165,6 +175,8 @@ void Game::ProcessEvents()
 // ====================================================================================================
 void Game::OnFullyInitialized()
 {
+	LuaFunctions::Autorefresh::Init();
+
 	// Lua event
 	lua->GetEvent("OnGameInitialized");
 	lua->ProtectedCall(1);
@@ -188,6 +200,7 @@ void Game::RegisterStates()
 void Game::Update(sf::Time deltaTime)
 {
 	g_pWorld->Update(deltaTime, HasFocus());
+	LuaFunctions::Autorefresh::Update();
 }
 
 // ====================================================================================================

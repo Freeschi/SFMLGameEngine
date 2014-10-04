@@ -64,12 +64,15 @@ void World::Update(sf::Time dt, bool focused)
 {
 	sf::Vector2i windowCenter(mWindow.getSize() / 2u);
 	sf::Vector2i mousePosition = sf::Mouse::getPosition(mWindow);
-	//if (focused) sf::Mouse::setPosition(windowCenter, mWindow);
+	//if(focused) sf::Mouse::setPosition(windowCenter, mWindow);
 
-	while (!mCommandQueue->isEmpty())
-		mSceneGraph.onCommand(mCommandQueue->pop(), dt);
-
-	mSceneGraph.Update(dt);
+	if (!g_pGame->IsPaused())
+	{
+		while (!mCommandQueue->isEmpty())
+			mSceneGraph.onCommand(mCommandQueue->pop(), dt);
+		
+		mSceneGraph.Update(dt);
+	}
 }
 
 // ====================================================================================================

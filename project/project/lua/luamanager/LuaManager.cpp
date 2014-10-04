@@ -53,6 +53,15 @@ void LuaManager::Init()
 }
 
 // ====================================================================================================
+// Destroy
+// ====================================================================================================
+void LuaManager::Destroy()
+{
+	m_bSuccess = false;
+	lua_close(m_pState);
+}
+
+// ====================================================================================================
 // Call
 // ====================================================================================================
 void LuaManager::Call(int narg, int nresults)
@@ -194,4 +203,23 @@ void LuaManager::PrintErrorMessage(char* sErrorMsg, bool bDoNotTriggerLuaError, 
 
 		printf("%s\n", lua_tostring(L, -1));
 	}
+}
+
+// ====================================================================================================
+// File List
+// ====================================================================================================
+void LuaManager::AddToFileList(char* sPath)
+{
+	if (!IsOnFileList(sPath))
+		m_vFileList.push_back(sPath);
+}
+bool LuaManager::IsOnFileList(char* sPath)
+{
+	for (std::vector<char*>::iterator it = m_vFileList.begin(); it != m_vFileList.end(); ++it)
+	{
+		char* p = *it;
+		if (strcmp(p, sPath) == 0)
+			return true;
+	}
+	return false;
 }

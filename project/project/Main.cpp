@@ -64,6 +64,9 @@ int main()
 
 	// Cleanup
 	delete g_pGame;
+	delete g_pPlayer;
+	delete g_pConfig;
+	delete g_pWorld;
 
 	return 0;
 }

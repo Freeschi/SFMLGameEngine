@@ -18,6 +18,7 @@ namespace LuaClasses
 	void RegisterSpriteNode();
 	void RegisterSFShapes();
 	void RegisterLoadingScreenData();
+	void RegisterGUI();
 
 	void BuildScene();
 
@@ -155,6 +156,7 @@ namespace LuaClasses
 		lua_renderwindow(sf::RenderWindow& rw) : m_pWindow(rw) {}
 
 		void Draw(sf::Shape& draw);
+		void Draw(sf::Text& text);
 	};
 
 	// ====================================================================================================

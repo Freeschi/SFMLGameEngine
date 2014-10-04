@@ -64,6 +64,15 @@
     <Filter Include="Quelldateien\States">
       <UniqueIdentifier>{b3e0cdbe-b590-4f68-9c9c-bd9a9cda9573}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Quelldateien\Utility\Thirdparty">
+      <UniqueIdentifier>{16fd5836-5e46-45f0-801f-34ac35330eb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Utility\Thirdparty\IniFile">
+      <UniqueIdentifier>{c3a72792-9695-427f-bd34-cc95d7972b18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Utility\Thirdparty\FileWatcher">
+      <UniqueIdentifier>{54f576e4-ff0f-405e-b578-e168439e84aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Aircraft.cpp">
@@ -159,14 +168,8 @@
     <ClCompile Include="Utility.cpp">
       <Filter>Quelldateien\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="thirdparty\IniFile\IniFile.cpp">
-      <Filter>Quelldateien\Utility</Filter>
-    </ClCompile>
     <ClCompile Include="Config.cpp">
       <Filter>Quelldateien\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="LuaWrapper_Shapes.cpp">
-      <Filter>Quelldateien\Lua\Wrapper</Filter>
     </ClCompile>
     <ClCompile Include="LoadingTask.cpp">
       <Filter>Quelldateien\States</Filter>
@@ -179,6 +182,30 @@
     </ClCompile>
     <ClCompile Include="PauseState.cpp">
       <Filter>Quelldateien\States</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\IniFile\IniFile.cpp">
+      <Filter>Quelldateien\Utility\Thirdparty\IniFile</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\FileWatcher\FileWatcher.cpp">
+      <Filter>Quelldateien\Utility\Thirdparty\FileWatcher</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\FileWatcher\FileWatcherLinux.cpp">
+      <Filter>Quelldateien\Utility\Thirdparty\FileWatcher</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\FileWatcher\FileWatcherOSX.cpp">
+      <Filter>Quelldateien\Utility\Thirdparty\FileWatcher</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\FileWatcher\FileWatcherWin32.cpp">
+      <Filter>Quelldateien\Utility\Thirdparty\FileWatcher</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\LuaAutorefresh.cpp">
+      <Filter>Quelldateien\Lua</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\LuaWrapper_Gui.cpp">
+      <Filter>Quelldateien\Lua\Wrapper</Filter>
+    </ClCompile>
+    <ClCompile Include="lua\LuaWrapper_Shapes.cpp">
+      <Filter>Quelldateien\Lua\Wrapper</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

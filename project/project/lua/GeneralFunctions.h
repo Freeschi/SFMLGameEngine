@@ -7,4 +7,11 @@ namespace LuaFunctions
 
 	void include(std::string file);
 	float uptime();
+
+	namespace Autorefresh
+	{
+		void Update();
+		void Init();
+		void Destroy();
+	}
 }

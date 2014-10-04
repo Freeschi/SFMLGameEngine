@@ -70,13 +70,13 @@ void LoadingTask::RunTask()
 			g_pWorld->GetTextureHolder()->Load(instruction->m_sAlias, instruction->m_sFilename);
 		} else if (instruction->m_eType == LuaClasses::lua_loading_screen_data::RESOURCE_FONT)
 		{
-			// Load Texture
-			g_pWorld->GetTextureHolder()->Load(instruction->m_sAlias, instruction->m_sFilename);
+			// Load Font
+			g_pWorld->GetFontHolder()->Load(instruction->m_sAlias, instruction->m_sFilename);
 		}
 
 		sf::Lock lock(m_mMutex);
 		m_flProgress += flResourceStep;
-		Sleep(175);
+		//Sleep(175);
 	}
 
 	sf::Lock lock(m_mMutex);

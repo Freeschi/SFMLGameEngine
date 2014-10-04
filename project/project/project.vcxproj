@@ -46,7 +46,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>../../sfml/include/;$(IncludePath)</IncludePath>
+    <IncludePath>../../sfml/include/;thirdparty/;$(IncludePath)</IncludePath>
     <LibraryPath>../../sfml/lib/;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -92,8 +92,8 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="LoadingState.cpp" />
     <ClCompile Include="LoadingTask.cpp" />
-    <ClCompile Include="LuaWrapper_Shapes.cpp" />
     <ClCompile Include="lua\GeneralFunctions.cpp" />
+    <ClCompile Include="lua\LuaAutorefresh.cpp" />
     <ClCompile Include="lua\LuaEnums.cpp" />
     <ClCompile Include="lua\luamanager\LuaManager.cpp" />
     <ClCompile Include="lua\luamanager\LuaManager_Debug.cpp" />
@@ -101,10 +101,12 @@
     <ClCompile Include="lua\LuaWrapper_Base.cpp" />
     <ClCompile Include="lua\LuaWrapper_Entity.cpp" />
     <ClCompile Include="lua\LuaWrapper_GenericSF.cpp" />
+    <ClCompile Include="lua\LuaWrapper_Gui.cpp" />
     <ClCompile Include="lua\LuaWrapper_Human.cpp" />
     <ClCompile Include="lua\LuaWrapper_LoadingScreenData.cpp" />
     <ClCompile Include="lua\LuaWrapper_SceneBuilder.cpp" />
     <ClCompile Include="lua\LuaWrapper_SceneNode.cpp" />
+    <ClCompile Include="lua\LuaWrapper_Shapes.cpp" />
     <ClCompile Include="lua\LuaWrapper_SpriteNode.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MenuState.cpp" />
@@ -116,6 +118,10 @@
     <ClCompile Include="SpriteNode.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateStack.cpp" />
+    <ClCompile Include="thirdparty\FileWatcher\FileWatcher.cpp" />
+    <ClCompile Include="thirdparty\FileWatcher\FileWatcherLinux.cpp" />
+    <ClCompile Include="thirdparty\FileWatcher\FileWatcherOSX.cpp" />
+    <ClCompile Include="thirdparty\FileWatcher\FileWatcherWin32.cpp" />
     <ClCompile Include="thirdparty\IniFile\IniFile.cpp" />
     <ClCompile Include="TitleState.cpp" />
     <ClCompile Include="Utility.cpp" />

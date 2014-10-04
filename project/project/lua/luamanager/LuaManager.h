@@ -10,10 +10,14 @@ public:
 	// Main
 	LuaManager();
 	void Init();
+	void Destroy();
 	lua_State* State() { return m_pState; }
 
 	// Utility
 	bool IncludeFile(char* sPath);									// nothrow, uses ProtectedCall
+	void AddToFileList(char* sPath);
+	bool IsOnFileList(char* sPath);
+	void ClearFileList();
 
 	// Error Handling
 	bool Success();
@@ -63,6 +67,7 @@ public:
 	char* DebugGetPath();
 	
 private:
+	std::vector<char*> m_vFileList;
 	lua_State* m_pState;
 	bool m_bSuccess;
 };

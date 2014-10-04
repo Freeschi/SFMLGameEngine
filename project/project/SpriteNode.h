@@ -16,7 +16,7 @@ public:
 	const sf::Texture* GetTexture() const;
 	void SetBoundingRect(sf::IntRect rect);
 	void SetBoundingRect(sf::FloatRect rect);
-	sf::FloatRect GetBoundingRect() const;
+	virtual sf::FloatRect GetBoundingRect() const;
 
 private:
 	virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;

@@ -21,6 +21,7 @@ public:
 
 	StateStack* GetStateStack() { return mStateStack; }
 	float flLastPause;
+	ACCESSOR_FUNC_BOOL(Paused, m_bIsPaused);
 
 private:
 	void RegisterStates();
@@ -34,7 +35,9 @@ private:
 	sf::RenderWindow mWindow;
 	StateStack* mStateStack;
 	CommandQueue commands;
+
 	bool m_bHasFocus;
+	bool m_bIsPaused;
 };
 
 extern Game* g_pGame;

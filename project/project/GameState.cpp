@@ -58,18 +58,12 @@ bool GameState::Update(sf::Time dt)
 	if (g_pPlayer != NULL)
 		g_pPlayer->HandleRealtimeInput(commands);
 
-	try
+
+	if (!g_pGame->IsPaused())
 	{
-		if (g_pWorld->IsEntityRegistered(0))
-		{
-			lua->GetEvent("Update");
-			lua->PushNumber(dt.asMilliseconds());
-			lua->ProtectedCall(2, 0);
-		}
-	}
-	catch (...)
-	{
-		lua->PrintErrorMessage("Tried to call Update event, but something went wrong.", true);
+		lua->GetEvent("Update");
+		lua->PushNumber(dt.asMilliseconds());
+		lua->ProtectedCall(2, 0);
 	}
 
 	return true;

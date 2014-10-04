@@ -75,5 +75,6 @@ namespace LuaClasses
 		RegisterHuman();
 		RegisterSFShapes();
 		RegisterLoadingScreenData();
+		RegisterGUI();
 	}
 };
