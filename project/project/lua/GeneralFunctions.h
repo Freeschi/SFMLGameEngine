@@ -13,5 +13,7 @@ namespace LuaFunctions
 		void Update();
 		void Init();
 		void Destroy();
+
+		void AddDirectory(std::string path);
 	}
 }

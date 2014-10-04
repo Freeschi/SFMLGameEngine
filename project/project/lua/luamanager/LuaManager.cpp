@@ -211,14 +211,16 @@ void LuaManager::PrintErrorMessage(char* sErrorMsg, bool bDoNotTriggerLuaError, 
 void LuaManager::AddToFileList(char* sPath)
 {
 	if (!IsOnFileList(sPath))
-		m_vFileList.push_back(sPath);
+		m_vFileList.push_back(std::string(sPath));
 }
 bool LuaManager::IsOnFileList(char* sPath)
 {
-	for (std::vector<char*>::iterator it = m_vFileList.begin(); it != m_vFileList.end(); ++it)
+	std::string path(sPath);
+
+	for (std::vector<std::string>::iterator it = m_vFileList.begin(); it != m_vFileList.end(); ++it)
 	{
-		char* p = *it;
-		if (strcmp(p, sPath) == 0)
+		std::string p = *it;
+		if (p == path)
 			return true;
 	}
 	return false;

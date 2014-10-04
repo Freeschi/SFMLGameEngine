@@ -5,6 +5,8 @@
 #include "GeneralFunctions.h"
 #include "ClassWrappers.h"
 #include "FileWatcher/FileWatcher.h"
+#include "Shlwapi.h"
+#pragma comment(lib,"shlwapi.lib")
 
 // ====================================================================================================
 // Init Auto Refresh
@@ -13,8 +15,6 @@ namespace LuaFunctions
 {
 	namespace Autorefresh
 	{
-		FW::FileWatcher* fileWatcher = NULL;
-
 		class UpdateListener : public FW::FileWatchListener
 		{
 		public:
@@ -26,7 +26,7 @@ namespace LuaFunctions
 			void handleFileAction(FW::WatchID watchid, const std::string& dir, const std::string& filename, FW::Action action)
 			{
 				char fullpath_c[712];
-				sprintf(fullpath_c, "%s%s", dir.c_str(), filename.c_str());
+				sprintf(fullpath_c, "%s/%s", dir.c_str(), filename.c_str());
 				std::string fullpath(fullpath_c);
 				UTIL::ParseFilePath(fullpath);
 
@@ -47,11 +47,14 @@ namespace LuaFunctions
 			sf::Clock m_cLastRefresh;
 		};
 
+		UpdateListener* listener = NULL;
+		FW::FileWatcher* fileWatcher = NULL;
+
 		void Init()
 		{
 			fileWatcher = new FW::FileWatcher();
-			UpdateListener* listener = new UpdateListener();
-			FW::WatchID watchid = fileWatcher->addWatch("lua/", listener);
+			listener = new UpdateListener();
+			fileWatcher->addWatch("lua/", listener);
 			Update();
 		}
 		void Update()
@@ -60,6 +63,31 @@ namespace LuaFunctions
 				fileWatcher->update();
 			else
 				printf("[Lua] LuaFunctions::Autorefresh::Update called too early!\n");
+		}
+		std::string SplitFilename(const std::string& str)
+		{
+			size_t found;
+			found = str.find_last_of("/");
+			return str.substr(0, found);
+		}
+		std::vector<std::string> vecRegisteredDirectories;
+		void AddDirectory(std::string path)
+		{
+			UTIL::ParseFilePath(path);
+			std::string fn = SplitFilename(path);
+			for (std::vector<std::string>::iterator it = vecRegisteredDirectories.begin(); it != vecRegisteredDirectories.end(); ++it)
+			{
+				if (*it == fn)
+					return;
+			}
+
+			vecRegisteredDirectories.push_back(fn);
+			fileWatcher->addWatch(fn, listener);
+		}
+		void Destroy()
+		{
+			delete fileWatcher;
+			fileWatcher = NULL;
 		}
 	}
 }

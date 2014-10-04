@@ -1,12 +1,12 @@
 -- Includes
 include("modules/event.lua")
 include("modules/util.lua")
-include("modules/vgui/vgui.lua") 
+include("modules/vgui/vgui.lua")  
 include("extensions/vector.lua")
 include("extensions/entity.lua") 
 include("extensions/human.lua")
-include("extensions/sprite.lua")
-include("extensions/color.lua")
+include("extensions/sprite.lua") 
+include("extensions/color.lua")  
 include("extensions/util.lua")
 
 -- Main
@@ -15,12 +15,12 @@ function _main()
 end
 		
 -- Events
-event.AddListener("OnGameInitialized", function()  
+event.AddListener("OnGameInitialized", "_main_OnGameInitialized", function()  
 	print("OnGameInitialized event")
 end)
 
-event.AddListener("LoadingScreenResources", function(ls)
-	print("Preparing resources..")
+event.AddListener("LoadingScreenResources", "_main_loadingscreenresources", function(ls)
+	print("Preparing resources..")    
 	--ls:AddTexture("Big1", "Media/Textures/ReallyBigTexture_1.png")
 	--ls:AddTexture("Big2", "Media/Textures/ReallyBigTexture_2.png")
 	--ls:AddTexture("Big3", "Media/Textures/ReallyBigTexture_3.png")
@@ -32,7 +32,7 @@ event.AddListener("LoadingScreenResources", function(ls)
 end)
 
 PLAYER = nil
-event.AddListener("BuildScene", function(scene, player)
+event.AddListener("BuildScene", "_main_BuildScene", function(scene, player)
 	-- Setup World Bounds
 	local bounds = FloatRect(0, 0, 1280, 720)
 	world.SetBounds(bounds)
@@ -67,6 +67,6 @@ event.AddListener("BuildScene", function(scene, player)
 	end
 end)
 
-event.AddListener("DrawHUD", function(window)
+event.AddListener("DrawHUD", "_main_DrawHUD", function(window)
 	
 end)

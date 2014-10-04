@@ -2,31 +2,34 @@
 event = {}
 
 -- Event Listener Table
-event.Listeners = {}
+if event.Listeners == nil then
+	event.Listeners = {}
+end
 
 -- AddListener
-function event.AddListener(eventname, callback)
-	assert(type(eventname) == "string")
-	assert(type(callback) == "function")
-	
+function event.AddListener(eventname, callbackname, callback)
+	checkarg(1, eventname, "string")
+	checkarg(2, callbackname, "string")
+	checkarg(3, callback, "function")
+
 	if event.Listeners[eventname] == nil then
 		event.Listeners[eventname] = {}
 	end
-	
-	table.insert(event.Listeners[eventname], callback)
+	event.Listeners[eventname][callbackname] = callback
 end
 
 -- RemoveListener
-function event.RemoveListener(eventname, callback)
-	assert(type(eventname) == "string")
-	assert(type(callback) == "function")
+function event.RemoveListener(eventname, callbackname)
+	checkarg(1, eventname, "string")
+	checkarg(2, callbackname, "string")
 	
 	if event.Listeners[eventname] == nil then return end
+	event.Listeners[eventname][callbackname] = nil
 end
 
 -- Call
 function event.Call(eventname, ...)
-	assert(type(eventname) == "string")
+	checkarg(1, eventname, "string") 
 	
 	if event.Listeners[eventname] ~= nil then
 		for _,callback in ipairs(event.Listeners[eventname]) do

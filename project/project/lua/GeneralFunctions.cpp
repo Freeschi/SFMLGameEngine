@@ -18,10 +18,14 @@ void LuaFunctions::include(std::string file)
 	sprintf(path, "%s%s", currentpath, file.c_str());
 	std::string filepath(path);
 	UTIL::ParseFilePath(filepath);
+
 	char* sPath = const_cast<char*>(filepath.c_str());
 	lua->IncludeFile(sPath);
+
 	if (!lua->IsOnFileList(sPath))
 		lua->AddToFileList(sPath);
+
+	LuaFunctions::Autorefresh::AddDirectory(filepath);
 }
 
 // ====================================================================================================

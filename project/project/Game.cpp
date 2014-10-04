@@ -30,6 +30,9 @@ Game::Game() : mWindow(sf::VideoMode(1280, 720), "Freeschi"), mStateStack(NULL),
 	// Classes
 	LuaClasses::RegisterClassWrappers();
 
+	// AutoRefresh
+	LuaFunctions::Autorefresh::Init();
+
 	// main.lua
 	if (!lua->IncludeFile("lua/main.lua"))
 	{
@@ -175,8 +178,6 @@ void Game::ProcessEvents()
 // ====================================================================================================
 void Game::OnFullyInitialized()
 {
-	LuaFunctions::Autorefresh::Init();
-
 	// Lua event
 	lua->GetEvent("OnGameInitialized");
 	lua->ProtectedCall(1);

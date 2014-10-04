@@ -67,7 +67,7 @@ public:
 	char* DebugGetPath();
 	
 private:
-	std::vector<char*> m_vFileList;
+	std::vector<std::string> m_vFileList;
 	lua_State* m_pState;
 	bool m_bSuccess;
 };
