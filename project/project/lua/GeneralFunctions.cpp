@@ -70,12 +70,19 @@ namespace LuaFunctions
 			if (pEntity == NULL) return lua_nil;
 			return pEntity->GetLuaObject()->LuaBindObject();
 		}
-		
+
 		// World Bounds
 		sf::FloatRect GetBounds() { return g_pWorld->GetBounds(); }
 		void SetBounds(sf::FloatRect b) { g_pWorld->SetBounds(b); }
 	};
+};
 
+
+// ====================================================================================================
+// game-Module
+// ====================================================================================================
+namespace LuaFunctions
+{
 	namespace Module_Game
 	{
 		// HasFocus
@@ -117,6 +124,26 @@ namespace LuaFunctions
 			return g_pGame->GetFPS();
 		}
 	}
+};
+
+
+// ====================================================================================================
+// draw-Module
+// ====================================================================================================
+namespace LuaFunctions
+{
+	namespace Module_Draw
+	{
+		void Rectangle(int x, int y, int w, int h, sf::Color color)
+		{
+			sf::RectangleShape rectangle;
+			rectangle.setSize(sf::Vector2f(w, h));
+			rectangle.setFillColor(color);
+			rectangle.setPosition(sf::Vector2f(x, y));
+
+			g_pWorld->GetWindow().draw(rectangle);
+		}
+	}
 }
 
 // ====================================================================================================
@@ -149,5 +176,10 @@ void LuaFunctions::RegisterLuaFunctions()
 		luabind::def("GetFont", &LuaFunctions::Module_Game::GetFont),
 		luabind::def("GetFPS", &LuaFunctions::Module_Game::GetFPS),
 		luabind::def("GetMousePosition", &LuaFunctions::Module_Game::GetMousePosition)
+	];
+
+	// game Module
+	luabind::module(lua->State(), "draw") [
+		luabind::def("Rectangle", &LuaFunctions::Module_Draw::Rectangle)
 	];
 }

@@ -14,7 +14,7 @@ namespace LuaClasses
 	{
 		m_pWindow.draw((sf::Drawable&) draw);
 	}
-	void lua_renderwindow::Draw(sf::Text& draw)
+	void lua_renderwindow::Draw(sfTextWrap draw)
 	{
 		m_pWindow.draw((sf::Drawable&) draw);
 	}
@@ -36,7 +36,7 @@ namespace LuaClasses
 
 			luabind::class_<lua_renderwindow>("RenderWindow")
 				.def("Draw",  (void (lua_renderwindow::*)(sf::Shape&)) &lua_renderwindow::Draw)
-				.def("Draw",  (void (lua_renderwindow::*)(sf::Text&))  &lua_renderwindow::Draw),
+				.def("Draw",  (void (lua_renderwindow::*)(sfTextWrap))  &lua_renderwindow::Draw),
 
 			luabind::class_<sf::RenderTarget>("RenderTarget"),
 

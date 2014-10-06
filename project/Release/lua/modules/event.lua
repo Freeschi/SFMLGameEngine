@@ -1,5 +1,5 @@
 -- Event
-event = {}
+event = event or {}
 
 -- Event Listener Table
 if event.Listeners == nil then
@@ -29,10 +29,10 @@ end
 
 -- Call
 function event.Call(eventname, ...)
-	checkarg(1, eventname, "string") 
+	--checkarg(1, eventname, "string") 
 	
 	if event.Listeners[eventname] ~= nil then
-		for _,callback in ipairs(event.Listeners[eventname]) do
+		for _,callback in pairs(event.Listeners[eventname]) do
 			callback(...)
 		end
 	end

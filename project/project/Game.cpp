@@ -44,6 +44,14 @@ Game::Game() : mWindow(sf::VideoMode(1280, 720), "Freeschi"), mStateStack(NULL),
 	}
 	lua->AddToFileList("lua/main.lua");
 
+	// Init World
+	g_pWorld = new World(mWindow);
+	g_pWorld->LoadTextures();
+
+	// Registered Entity Classes
+	REGISTER_ENTITY_CLASS(sprite_node, SpriteNode());
+	REGISTER_ENTITY_CLASS(player, PlayerEntity());
+
 	// call init function
 	lua->GetGlobal("_main");
 	if (!lua->ProtectedCall())
@@ -55,14 +63,6 @@ Game::Game() : mWindow(sf::VideoMode(1280, 720), "Freeschi"), mStateStack(NULL),
 		return;
 	}
 
-	// Init World
-	g_pWorld = new World(mWindow);
-	g_pWorld->LoadTextures();
-
-	// Registered Entity Classes
-	REGISTER_ENTITY_CLASS(sprite_node, SpriteNode());
-	REGISTER_ENTITY_CLASS(player, PlayerEntity());
-
 	// Pause
 	flLastPause = 0.0f;
 	m_bIsPaused = false;
@@ -70,7 +70,7 @@ Game::Game() : mWindow(sf::VideoMode(1280, 720), "Freeschi"), mStateStack(NULL),
 	// States
 	mStateStack = new StateStack();
 	RegisterStates();
-	mStateStack->PushState(States::Menu);
+	mStateStack->PushState(States::Loading);
 
 	// Build Scene
 	g_pWorld->BuildScene();

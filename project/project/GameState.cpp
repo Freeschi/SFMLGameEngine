@@ -35,10 +35,10 @@ void GameState::Draw()
 	g_pWorld->Draw();
 
 	lua->GetEvent("DrawHUD");
-	LuaClasses::lua_renderwindow rw(g_pWorld->GetWindow());
-	luabind::object lua_rw(lua->State(), rw);
-	lua_rw.push(lua->State());
-	lua->ProtectedCall(2);
+	//LuaClasses::lua_renderwindow rw(g_pWorld->GetWindow());
+	//luabind::object lua_rw(lua->State(), rw);
+	//lua_rw.push(lua->State());
+	lua->ProtectedCall(1);
 }
 
 // ====================================================================================================
@@ -61,10 +61,12 @@ bool GameState::Update(sf::Time dt)
 
 	if (!g_pGame->IsPaused())
 	{
-		lua->GetEvent("Update");
-		lua->PushNumber(dt.asMilliseconds());
-		lua->ProtectedCall(2, 0);
+		//lua->GetEvent("Update");
+		//lua->PushNumber(dt.asMilliseconds());
+		//lua->ProtectedCall(1, 0);
 	}
+
+	printf("%d\n", lua_gc(lua->State(), LUA_GCCOUNT, 0));
 
 	return true;
 }

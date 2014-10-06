@@ -146,20 +146,6 @@ namespace LuaClasses
 	};
 
 	// ====================================================================================================
-	// Render Window
-	// This class is used to draw elements in Lua
-	// ====================================================================================================	
-	class lua_renderwindow
-	{
-	public:
-		sf::RenderWindow& m_pWindow;
-		lua_renderwindow(sf::RenderWindow& rw) : m_pWindow(rw) {}
-
-		void Draw(sf::Shape& draw);
-		void Draw(sf::Text& text);
-	};
-
-	// ====================================================================================================
 	// Loading Screen Data
 	// This is used so Lua can add textures that are required to load in loading screen
 	// ====================================================================================================	
@@ -182,6 +168,34 @@ namespace LuaClasses
 
 		void AddTexture(std::string alias, std::string filename);
 		void AddFont(std::string alias, std::string filename);
+	};
+
+	// ====================================================================================================
+	// Text Wrapper
+	// ====================================================================================================	
+	class sfTextWrap : public sf::Text
+	{
+	public:
+		sfTextWrap() {};
+		sfTextWrap(std::string s, sf::Font f) : sf::Text(s, f) {};
+		sfTextWrap(std::string s, sf::Font f, unsigned int si) : sf::Text(s, f, si) {};
+
+		void lua_SetText(std::string t);
+		std::string lua_GetText();
+	};
+
+	// ====================================================================================================
+	// Render Window
+	// This class is used to draw elements in Lua
+	// ====================================================================================================	
+	class lua_renderwindow
+	{
+	public:
+		sf::RenderWindow& m_pWindow;
+		lua_renderwindow(sf::RenderWindow& rw) : m_pWindow(rw) {}
+
+		void Draw(sf::Shape& draw);
+		void Draw(sfTextWrap text);
 	};
 };
 
