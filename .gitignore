@@ -8,3 +8,6 @@ project/project/Release/project.log
 *.obj
 *.pdb
 project/project/Release/vc120.pdb
+updater/updater/Release/updater.log
+*.opensdf
+updater/Release/updater.exe
