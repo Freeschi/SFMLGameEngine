@@ -86,5 +86,6 @@ namespace LuaClasses
 		lua_sb.push(lua->State());
 		g_pPlayer->GetEntity()->GetLuaObject()->Push();
 		lua->ProtectedCall(3);
+		lua->Pop(3);
 	}
 };

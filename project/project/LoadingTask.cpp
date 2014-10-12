@@ -51,6 +51,7 @@ void LoadingTask::RunTask()
 	luabind::object lua_lsdata(lua->State(), lsdata);
 	lua_lsdata.push(lua->State());
 	lua->ProtectedCall(2);
+	lua->Pop(2);
 
 	// Each resource = flResourceStep %
 	float flResourceStep = 100.0f / (float)lsdata->m_vResources.size();

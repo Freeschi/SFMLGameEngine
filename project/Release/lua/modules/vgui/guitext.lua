@@ -28,7 +28,7 @@ function GUIText:SetFont(f)
 end
 
 -- Draw
-function GUIText:Draw(window)
+function GUIText:Draw()
 	self.Text:SetFont(game.GetFont("Arial"))
 	self.Text:SetSize(self:GetSize())
 	self.Text:SetText(self:GetText())

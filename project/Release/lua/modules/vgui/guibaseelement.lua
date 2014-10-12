@@ -51,16 +51,16 @@ function GUIBaseElement:GetClassName()
 end
 
 -- Draw
-function GUIBaseElement:__draw(window)
+function GUIBaseElement:__draw()
 	-- Draw self
 	if self.Draw ~= nil then
-		self:Draw(window)
+		self:Draw()
 	end
 	
 	-- Draw children
 	for k,v in pairs(self.Children) do
 		if IsValid(v) then
-			v:__draw(window)
+			v:__draw()
 		end
 	end
 end

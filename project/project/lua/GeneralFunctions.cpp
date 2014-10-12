@@ -74,6 +74,16 @@ namespace LuaFunctions
 		// World Bounds
 		sf::FloatRect GetBounds() { return g_pWorld->GetBounds(); }
 		void SetBounds(sf::FloatRect b) { g_pWorld->SetBounds(b); }
+
+		// Draw
+		void DrawShape(sf::Shape& s)
+		{
+			g_pWorld->GetWindow().draw((sf::Drawable&) s);
+		}
+		void DrawText(sf::Text& s)
+		{
+			g_pWorld->GetWindow().draw((sf::Drawable&) s);
+		}
 	};
 };
 
@@ -137,9 +147,9 @@ namespace LuaFunctions
 		void Rectangle(int x, int y, int w, int h, sf::Color color)
 		{
 			sf::RectangleShape rectangle;
-			rectangle.setSize(sf::Vector2f(w, h));
+			rectangle.setSize(sf::Vector2f((float) w, (float) h));
 			rectangle.setFillColor(color);
-			rectangle.setPosition(sf::Vector2f(x, y));
+			rectangle.setPosition(sf::Vector2f((float) x, (float) y));
 
 			g_pWorld->GetWindow().draw(rectangle);
 		}
@@ -149,7 +159,7 @@ namespace LuaFunctions
 // ====================================================================================================
 // Register Functions
 // ====================================================================================================
-void LuaFunctions::RegisterLuaFunctions()
+void LuaFunctions::RegisterLuaFunctions() 
 {
 	cl.restart();
 
@@ -165,7 +175,9 @@ void LuaFunctions::RegisterLuaFunctions()
 		luabind::def("GetSceneLayer", &LuaFunctions::Module_World::GetSceneLayer),
 		luabind::def("CreateEntity", &LuaFunctions::Module_World::CreateEntity),
 		luabind::def("GetBounds", &LuaFunctions::Module_World::GetBounds),
-		luabind::def("SetBounds", &LuaFunctions::Module_World::SetBounds)
+		luabind::def("SetBounds", &LuaFunctions::Module_World::SetBounds),
+		luabind::def("Draw", &LuaFunctions::Module_World::DrawShape),
+		luabind::def("Draw", &LuaFunctions::Module_World::DrawText)
 	];
 
 	// game Module

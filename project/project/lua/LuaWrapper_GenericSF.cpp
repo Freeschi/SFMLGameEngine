@@ -10,15 +10,6 @@
 // ====================================================================================================
 namespace LuaClasses
 {
-	void lua_renderwindow::Draw(sf::Shape& draw)
-	{
-		m_pWindow.draw((sf::Drawable&) draw);
-	}
-	void lua_renderwindow::Draw(sfTextWrap draw)
-	{
-		m_pWindow.draw((sf::Drawable&) draw);
-	}
-
 	/*
 	 * Register
 	 */
@@ -33,10 +24,6 @@ namespace LuaClasses
 				.def("asMilliseconds", &sf::Time::asMilliseconds),
 
 			luabind::class_<sf::Drawable>("sfDrawable"),
-
-			luabind::class_<lua_renderwindow>("RenderWindow")
-				.def("Draw",  (void (lua_renderwindow::*)(sf::Shape&)) &lua_renderwindow::Draw)
-				.def("Draw",  (void (lua_renderwindow::*)(sfTextWrap))  &lua_renderwindow::Draw),
 
 			luabind::class_<sf::RenderTarget>("RenderTarget"),
 

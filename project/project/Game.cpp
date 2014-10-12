@@ -12,11 +12,30 @@
 Game* g_pGame = NULL;
 
 // ====================================================================================================
+// Dump Stack
+// ====================================================================================================
+void DumpStack()
+{
+	lua_State* L = lua->State();
+	int amount = lua->Top();
+	printf("[LUA] Stack Dump: Currently %i item(s) in stack!\n", amount);
+
+	for (int i = 1; i <= amount; i++)
+	{
+		printf("%i:\t%s\n", i, lua_typename(L, i));
+	}
+}
+
+// ====================================================================================================
 // Game::Game
 // Constructor of the Game class
 // ====================================================================================================
 Game::Game() : mWindow(sf::VideoMode(1280, 720), "Freeschi"), mStateStack(NULL), m_iFPS(0)
 {
+	// Console
+	HWND hwnd = GetConsoleWindow();
+	SetWindowPos(hwnd, NULL, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
+
 	// Config
 	g_pConfig = new Config();
 
@@ -44,6 +63,8 @@ Game::Game() : mWindow(sf::VideoMode(1280, 720), "Freeschi"), mStateStack(NULL),
 	}
 	lua->AddToFileList("lua/main.lua");
 
+	DumpStack();
+
 	// Init World
 	g_pWorld = new World(mWindow);
 	g_pWorld->LoadTextures();
@@ -62,6 +83,7 @@ Game::Game() : mWindow(sf::VideoMode(1280, 720), "Freeschi"), mStateStack(NULL),
 		throw std::string("Scripting errors");
 		return;
 	}
+	lua->Pop(1);
 
 	// Pause
 	flLastPause = 0.0f;
@@ -119,7 +141,8 @@ void Game::Exit()
 	printf("[Game] Exiting..\n");
 
 	lua->GetEvent("OnShutdown");
-	lua->ProtectedCall(1, 0);
+	lua->ProtectedCall(1);
+	lua->Pop(2);
 
 	mWindow.close();
 
@@ -162,12 +185,14 @@ void Game::ProcessEvents()
 			case sf::Event::GainedFocus:
 				m_bHasFocus = true;
 				lua->GetEvent("OnWindowLostFocus");
-				lua->ProtectedCall(1, 0);
+				lua->ProtectedCall(1);
+				lua->Pop(2);
 				break;
 			case sf::Event::LostFocus:
 				m_bHasFocus = false;
 				lua->GetEvent("OnWindowGainedFocus");
-				lua->ProtectedCall(1, 0);
+				lua->ProtectedCall(1);
+				lua->Pop(2);
 				break;
 		};
 	}
@@ -181,6 +206,7 @@ void Game::OnFullyInitialized()
 	// Lua event
 	lua->GetEvent("OnGameInitialized");
 	lua->ProtectedCall(1);
+	lua->Pop(2);
 }
 
 // ====================================================================================================

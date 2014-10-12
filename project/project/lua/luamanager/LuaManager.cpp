@@ -3,20 +3,7 @@
 // ====================================================================================================
 #include "../Includes.h"
 
-// ====================================================================================================
-// Dump Stack
-// ====================================================================================================
-void DumpStack()
-{
-	lua_State* L = lua->State();
-	int amount = lua->Top();
-	printf("[LUA] Stack Dump: Currently %i item(s) in stack!\n", amount);
 
-	for (int i = 1; i <= amount; i++)
-	{
-		printf("%i:\t%s\n", i, lua_typename(L, i));
-	}
-}
 
 // ====================================================================================================
 // Global Instance
@@ -132,7 +119,9 @@ bool LuaManager::IncludeFile(char* sPath)
 	}
 
 	// Execute File
-	return ProtectedCall(0, LUA_MULTRET);
+	bool bStatus = ProtectedCall(0, LUA_MULTRET);
+	lua->Pop();
+	return bStatus;
 }
 
 // ====================================================================================================

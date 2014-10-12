@@ -11,7 +11,7 @@ function _main()
 	include("extensions/util.lua")
 	
 	-- VGUI
-	--include("modules/vgui/vgui.lua")  
+	include("modules/vgui/vgui.lua")  
 	
 	-- Go
 	include("core.lua")

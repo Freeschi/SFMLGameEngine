@@ -29,17 +29,17 @@ function vgui.WorldLayer:Remove(obj)
 end
 
 -- Draw
-function vgui.WorldLayer:Draw(window)
+function vgui.WorldLayer:Draw()
 	for k,v in pairs(self.Children) do
 		if IsValid(v) then
 			if v:GetParent() == nil and v.__draw ~= nil then
-				v:__draw(window)
+				v:__draw()
 			end
 		end
 	end
 end
  
 -- Draw
-event.AddListener("DrawHUD", "vgui_draw", function(window)
-	vgui.WorldLayer:Draw(window)
+event.AddListener("DrawHUD", "vgui_draw", function()
+	vgui.WorldLayer:Draw()
 end)

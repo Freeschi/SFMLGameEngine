@@ -49,7 +49,7 @@ event.AddListener("BuildScene", "_main_BuildScene", function(scene, player)
 		scene:Add(Vector2(128 + 64 * 8,y), "Wall1")
 		scene:Add(Vector2(128 + 64 * 10,y), "Wall1") 
 	end    
-end)   
+end)    
 
 event.AddListener("DrawHUD", "_main_DrawHUD", function(window)
 
@@ -59,8 +59,8 @@ if panel ~= nil and panel:IsValid() then
 	panel:Remove()
 	print("Removed") 
 end   
- 
---panel = vgui.Create("Panel") 
---panel:SetSize(400, 200)
---panel:SetPosition(Vector2(50,50))    
---print("Panel created")
+          
+panel = vgui.Create("Panel")    
+panel:SetSize(400, 200)
+panel:SetPosition(Vector2(50,50))    
+print("Panel created") 

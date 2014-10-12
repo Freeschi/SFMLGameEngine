@@ -24,7 +24,7 @@ function GUIPanel:GetSize()
 end
 
 -- Draw
-function GUIPanel:__draw(window)
+function GUIPanel:__draw()
 	local x,y = self:GetPosition().x, self:GetPosition().y
 	local w,h = self:GetSize()
 	local col = self:GetBackgroundColor()

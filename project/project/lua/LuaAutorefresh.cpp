@@ -36,6 +36,7 @@ namespace LuaFunctions
 					{
 						printf("[Lua] Reloaded %s\n", fullpath.c_str());
 						lua->IncludeFile(const_cast<char*>(fullpath.c_str()));
+						//lua->Pop();
 						m_sLastFile = fullpath;
 						m_cLastRefresh.restart();
 					}

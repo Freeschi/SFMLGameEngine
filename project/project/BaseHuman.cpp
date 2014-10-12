@@ -29,15 +29,15 @@ void BaseHuman::CreateLuaObject()
 // ====================================================================================================
 bool BaseHuman::CreateMovement(Movement eMove, sf::Time dt)
 {
-	lua->GetEvent("CreateMovement");
+	/*lua->GetEvent("CreateMovement");
 	lua->PushNumber((double)eMove);
 	luabind::object dtime(lua->State(), dt);
 	dtime.push(lua->State());
-	lua->ProtectedCall(3, 1);
+	lua->ProtectedCall(3, 1);*/
 
 	bool bOverwrite = false;
-	if (!lua->IsNil() && lua->IsBool())
-		bOverwrite = lua->GetBool();
+	/*if (!lua->IsNil() && lua->IsBool())
+		bOverwrite = lua->GetBool();*/
 	if (bOverwrite)
 		return true;
 

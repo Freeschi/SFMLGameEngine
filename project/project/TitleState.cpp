@@ -28,7 +28,7 @@ void TitleState::Draw()
 	window.setView(window.getDefaultView());
 	sf::Vector2u ss = mBackgroundSprite.getTexture()->getSize();
 	sf::Vector2u ws = window.getSize();
-	mBackgroundSprite.setPosition(sf::Vector2f(ws.x / 2 - ss.x / 2, ws.y / 2 - ss.y / 2));
+	mBackgroundSprite.setPosition(sf::Vector2f((float) ws.x / 2 - ss.x / 2, (float) ws.y / 2 - ss.y / 2));
 	window.draw(mBackgroundSprite);
 }
 

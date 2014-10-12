@@ -183,20 +183,6 @@ namespace LuaClasses
 		void lua_SetText(std::string t);
 		std::string lua_GetText();
 	};
-
-	// ====================================================================================================
-	// Render Window
-	// This class is used to draw elements in Lua
-	// ====================================================================================================	
-	class lua_renderwindow
-	{
-	public:
-		sf::RenderWindow& m_pWindow;
-		lua_renderwindow(sf::RenderWindow& rw) : m_pWindow(rw) {}
-
-		void Draw(sf::Shape& draw);
-		void Draw(sfTextWrap text);
-	};
 };
 
 #endif

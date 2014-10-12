@@ -57,7 +57,7 @@ public:
 
 	// Stack Operations
 	int Top(); // stack count [argument count]
-	void Pop(int iStackIndex = -1);
+	void Pop(int iStackIndex = 1);
 	void SetTop(int iStackIndex);
 	void Remove(int iStackIndex = -1);
 
