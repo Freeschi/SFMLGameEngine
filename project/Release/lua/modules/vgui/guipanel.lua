@@ -19,12 +19,14 @@ end
 function GUIPanel:SetSize(w,h)
 	self.m_vSize = Vector2(w,h)
 end
+function GUIPanel:GetWidth() return self.m_vSize.x end
+function GUIPanel:GetHeight() return self.m_vSize.y end
 function GUIPanel:GetSize()
-	return self.m_vSize.x, self.m_vSize.y
+	return self:GetWidth(), self:GetHeight()
 end
 
 -- Draw
-function GUIPanel:__draw()
+function GUIPanel:Draw()
 	local x,y = self:GetPosition().x, self:GetPosition().y
 	local w,h = self:GetSize()
 	local col = self:GetBackgroundColor()

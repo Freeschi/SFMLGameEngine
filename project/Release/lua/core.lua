@@ -13,7 +13,7 @@ event.AddListener("LoadingScreenResources", "_main_loadingscreenresources", func
 	ls:AddTexture("Background1", "Media/Textures/Background1.png")
 	ls:AddTexture("Block1", "Media/Textures/Block1.png")
 	ls:AddFont("Arial", "Media/arial.ttf")
-end) 
+end)  
 
 PLAYER = nil
 event.AddListener("BuildScene", "_main_BuildScene", function(scene, player)
@@ -60,7 +60,7 @@ if panel ~= nil and panel:IsValid() then
 	print("Removed") 
 end   
           
-panel = vgui.Create("Panel")    
+panel = vgui.Create("Window")    
 panel:SetSize(400, 200)
 panel:SetPosition(Vector2(50,50))    
 print("Panel created") 

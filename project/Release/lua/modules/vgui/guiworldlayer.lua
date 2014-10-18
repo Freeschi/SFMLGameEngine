@@ -33,10 +33,13 @@ function vgui.WorldLayer:Draw()
 	for k,v in pairs(self.Children) do
 		if IsValid(v) then
 			if v:GetParent() == nil and v.__draw ~= nil then
+				draw.SetRelativePosition(0, 0)
 				v:__draw()
 			end
 		end
 	end
+	
+	draw.SetRelativePosition(0, 0)
 end
  
 -- Draw

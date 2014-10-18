@@ -2,6 +2,7 @@
 function _main()
 	-- Includes
 	include("modules/event.lua")
+	include("modules/draw.lua")
 	include("modules/util.lua")
 	include("extensions/vector.lua")
 	include("extensions/entity.lua") 

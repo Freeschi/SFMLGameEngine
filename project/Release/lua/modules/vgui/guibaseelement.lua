@@ -52,6 +52,11 @@ end
 
 -- Draw
 function GUIBaseElement:__draw()
+	-- Relative Position
+	local v = self:GetPosition()
+	local r = draw.RelativePosition
+	draw.SetRelativePosition(v.x + r[1], v.y + r[2])
+
 	-- Draw self
 	if self.Draw ~= nil then
 		self:Draw()

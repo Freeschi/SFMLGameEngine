@@ -32,7 +32,7 @@ namespace LuaClasses
 		];
 
 		// Color
-		luabind::module(lua->State()) [
+		/*luabind::module(lua->State()) [
 			luabind::class_<sf::Color>("Color")
 				.def(luabind::constructor<>())
 				.def(luabind::constructor<sf::Uint8, sf::Uint8, sf::Uint8>())
@@ -41,7 +41,7 @@ namespace LuaClasses
 				.property("g", &sf::Color::g)
 				.property("b", &sf::Color::b)
 				.property("a", &sf::Color::a)
-		];
+		];*/
 
 		// Rect<>
 		luabind::module(lua->State()) [

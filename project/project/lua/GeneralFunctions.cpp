@@ -136,6 +136,23 @@ namespace LuaFunctions
 	}
 };
 
+sf::Color ParseColor(luabind::object color)
+{
+	try
+	{
+		int r = luabind::object_cast<int>(color["r"]);
+		int g = luabind::object_cast<int>(color["g"]);
+		int b = luabind::object_cast<int>(color["b"]);
+		int a = luabind::object_cast<int>(color["b"]);
+
+		return sf::Color(r, g, b, a);
+	}
+	catch (...)
+	{
+		lua->PushString("Failed to parse Color!");
+		throw luabind::error(lua->State());
+	}
+}
 
 // ====================================================================================================
 // draw-Module
@@ -144,14 +161,30 @@ namespace LuaFunctions
 {
 	namespace Module_Draw
 	{
-		void Rectangle(int x, int y, int w, int h, sf::Color color)
+		void Rectangle(int x, int y, int w, int h, luabind::object luacolor)
 		{
+			sf::Color color = ParseColor(luacolor);
+
 			sf::RectangleShape rectangle;
 			rectangle.setSize(sf::Vector2f((float) w, (float) h));
 			rectangle.setFillColor(color);
 			rectangle.setPosition(sf::Vector2f((float) x, (float) y));
 
 			g_pWorld->GetWindow().draw(rectangle);
+		}
+		
+		void Line(int x, int y, int x2, int y2, luabind::object luacolor1, luabind::object luacolor2)
+		{
+			sf::Color color1 = ParseColor(luacolor1);
+			sf::Color color2 = ParseColor(luacolor2);
+
+			sf::Vertex line[2];
+			line[0].position = sf::Vector2f(x, y);
+			line[0].color = color1;
+			line[1].position = sf::Vector2f(x2, y2);
+			line[1].color = color2;
+
+			g_pWorld->GetWindow().draw(line, 2, sf::Lines);
 		}
 	}
 }
@@ -192,6 +225,7 @@ void LuaFunctions::RegisterLuaFunctions()
 
 	// game Module
 	luabind::module(lua->State(), "draw") [
-		luabind::def("Rectangle", &LuaFunctions::Module_Draw::Rectangle)
+		luabind::def("internal_Rectangle", &LuaFunctions::Module_Draw::Rectangle),
+		luabind::def("internal_Line", &LuaFunctions::Module_Draw::Line)
 	];
 }
