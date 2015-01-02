@@ -1,10 +1,13 @@
 #ifndef FRAMEWORK_HPP
 #define FRAMEWORK_HPP
 
+#include "Singleton.hpp"
 #include "SDL.h"
 #include <iostream>
 
-class Framework
+#define g_pFramework Framework::Get ()
+
+class Framework : public TSingleton<Framework>
 {
 public:
 	Framework() {}

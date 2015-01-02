@@ -1,21 +1,18 @@
 #include <iostream>
 #include "Framework.hpp"
 
-Framework* Application = nullptr;
 
 int main(int argc, char* argv[])
 {
-	Application = new Framework();
-	Application->Init("Freeschi SDL Port", 100, 100, 640, 480, 0);
-
-	while (Application->IsRunning())
+	g_pFramework->Init("Freeschi SDL Port", 100, 100, 640, 480, 0);
+	while (g_pFramework->IsRunning())
 	{
-		Application->HandleEvents();
+		g_pFramework->HandleEvents();
 		//Application->Update();
-		Application->Render();
+		g_pFramework->Render();
 	}
 
-	Application->Clean();
+	g_pFramework->Clean();
 
 	return 0;
 }
