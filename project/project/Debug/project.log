@@ -1,0 +1,102 @@
+﻿Der Buildvorgang wurde am 23.12.2014 15:09:52 gestartet.
+     1>Projekt "E:\FRESCHISFML\SFMLGameEngine\project\project\project.vcxproj" auf Knoten "2", Build Ziel(e).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Aircraft.cpp BaseHuman.cpp Command.cpp CommandQueue.cpp Config.cpp Entity.cpp Game.cpp GameState.cpp LoadingState.cpp LoadingTask.cpp lua\GeneralFunctions.cpp lua\LuaAutorefresh.cpp lua\LuaEnums.cpp lua\luamanager\LuaManager.cpp lua\luamanager\LuaManager_Debug.cpp lua\luamanager\LuaManager_General.cpp lua\LuaWrapper_Base.cpp lua\LuaWrapper_Entity.cpp lua\LuaWrapper_GenericSF.cpp lua\LuaWrapper_Gui.cpp lua\LuaWrapper_Human.cpp lua\LuaWrapper_LoadingScreenData.cpp lua\LuaWrapper_SceneBuilder.cpp lua\LuaWrapper_SceneNode.cpp lua\LuaWrapper_Shapes.cpp lua\LuaWrapper_SpriteNode.cpp Main.cpp MenuState.cpp PauseState.cpp Physics.cpp Player.cpp PlayerEntity.cpp SceneNode.cpp SpriteNode.cpp State.cpp StateStack.cpp thirdparty\FileWatcher\FileWatcher.cpp thirdparty\FileWatcher\FileWatcherLinux.cpp thirdparty\FileWatcher\FileWatcherOSX.cpp thirdparty\FileWatcher\FileWatcherWin32.cpp thirdparty\IniFile\IniFile.cpp TitleState.cpp Utility.cpp World.cpp
+         World.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\includes.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "stdio.h": No such file or directory
+         Utility.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\includes.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "stdio.h": No such file or directory
+         TitleState.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\includes.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "stdio.h": No such file or directory
+         IniFile.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\thirdparty\inifile\inifile.h(2): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "string": No such file or directory
+         FileWatcherWin32.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\thirdparty\filewatcher\filewatcherwin32.cpp(23): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "FileWatcher/FileWatcherWin32.h": No such file or directory
+         FileWatcherOSX.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\thirdparty\filewatcher\filewatcherosx.cpp(25): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "FileWatcher/FileWatcherOSX.h": No such file or directory
+         FileWatcherLinux.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\thirdparty\filewatcher\filewatcherlinux.cpp(25): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "FileWatcher/FileWatcherLinux.h": No such file or directory
+         FileWatcher.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\thirdparty\filewatcher\filewatcher.cpp(23): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "FileWatcher/FileWatcher.h": No such file or directory
+         StateStack.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\includes.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "stdio.h": No such file or directory
+         State.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\includes.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "stdio.h": No such file or directory
+         SpriteNode.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\includes.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "stdio.h": No such file or directory
+         SceneNode.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\includes.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "stdio.h": No such file or directory
+         PlayerEntity.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\includes.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "stdio.h": No such file or directory
+         Player.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\includes.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "stdio.h": No such file or directory
+         Physics.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\includes.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "stdio.h": No such file or directory
+         PauseState.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\includes.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "stdio.h": No such file or directory
+         MenuState.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\includes.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "stdio.h": No such file or directory
+         Main.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\includes.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "stdio.h": No such file or directory
+         LuaWrapper_SpriteNode.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\lua\luawrapper_spritenode.cpp(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "../../Includes.h": No such file or directory
+         LuaWrapper_Shapes.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\lua\luawrapper_shapes.cpp(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "../../Includes.h": No such file or directory
+         Code wird generiert...
+         Kompilieren...
+         LuaWrapper_SceneNode.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\lua\luawrapper_scenenode.cpp(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "../../Includes.h": No such file or directory
+         LuaWrapper_SceneBuilder.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\lua\luawrapper_scenebuilder.cpp(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "../../Includes.h": No such file or directory
+         LuaWrapper_LoadingScreenData.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\lua\luawrapper_loadingscreendata.cpp(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "../../Includes.h": No such file or directory
+         LuaWrapper_Human.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\lua\luawrapper_human.cpp(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "../../Includes.h": No such file or directory
+         LuaWrapper_Gui.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\lua\luawrapper_gui.cpp(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "../../Includes.h": No such file or directory
+         LuaWrapper_GenericSF.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\lua\luawrapper_genericsf.cpp(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "../../Includes.h": No such file or directory
+         LuaWrapper_Entity.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\lua\luawrapper_entity.cpp(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "../../Includes.h": No such file or directory
+         LuaWrapper_Base.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\lua\luawrapper_base.cpp(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "../../Includes.h": No such file or directory
+         LuaManager_General.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\lua\luamanager\luamanager_general.cpp(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "../Includes.h": No such file or directory
+         LuaManager_Debug.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\includes.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "stdio.h": No such file or directory
+         LuaManager.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\lua\luamanager\luamanager.cpp(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "../Includes.h": No such file or directory
+         LuaEnums.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\lua\luaenums.cpp(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "../../Includes.h": No such file or directory
+         LuaAutorefresh.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\lua\luaautorefresh.cpp(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "../../Includes.h": No such file or directory
+         GeneralFunctions.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\includes.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "stdio.h": No such file or directory
+         LoadingTask.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\includes.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "stdio.h": No such file or directory
+         LoadingState.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\includes.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "stdio.h": No such file or directory
+         GameState.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\includes.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "stdio.h": No such file or directory
+         Game.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\includes.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "stdio.h": No such file or directory
+         Entity.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\includes.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "stdio.h": No such file or directory
+         Config.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\includes.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "stdio.h": No such file or directory
+         Code wird generiert...
+         Kompilieren...
+         CommandQueue.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\includes.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "stdio.h": No such file or directory
+         Command.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\includes.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "stdio.h": No such file or directory
+         BaseHuman.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\includes.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "stdio.h": No such file or directory
+         Aircraft.cpp
+     1>e:\freschisfml\sfmlgameengine\project\project\includes.h(4): fatal error C1083: Datei (Include) kann nicht geöffnet werden: "stdio.h": No such file or directory
+         Code wird generiert...
+     1>Die Erstellung des Projekts "E:\FRESCHISFML\SFMLGameEngine\project\project\project.vcxproj" ist abgeschlossen, Build Ziel(e) -- FEHLER.
+
+Fehler beim Buildvorgang.
+
+Verstrichene Zeit 00:00:01.53

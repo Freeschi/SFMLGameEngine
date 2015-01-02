@@ -60,7 +60,4 @@ if panel ~= nil and panel:IsValid() then
 	print("Removed") 
 end   
           
-panel = vgui.Create("Window")    
-panel:SetSize(400, 200)
-panel:SetPosition(Vector2(50,50))    
-print("Panel created") 
+
