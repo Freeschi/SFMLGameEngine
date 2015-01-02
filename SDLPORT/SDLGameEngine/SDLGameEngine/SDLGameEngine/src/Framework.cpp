@@ -36,6 +36,19 @@ bool Framework::Init(const char* title, int xpos, int ypos, int width, int heigh
 	}
 	std::cout << "[FREESCHI] Main-Init success\n"; //Main-Init completed
 	m_bRunning = true; //All working start the looooooooooooooop!
+
+	SDL_Surface* pTempSurface = SDL_LoadBMP("Data/test.bmp");
+
+	m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
+
+	SDL_FreeSurface(pTempSurface);
+
+	SDL_QueryTexture(m_pTexture, NULL, NULL, &m_sourceRectangle.w, &m_sourceRectangle.h);
+
+	m_destinationRectangle.x = 50;
+	m_destinationRectangle.y = 50;
+	m_destinationRectangle.w = m_sourceRectangle.w = 50;
+	m_destinationRectangle.h = m_sourceRectangle.h = 50;
 	
 	return true;
 }
@@ -43,6 +56,10 @@ bool Framework::Init(const char* title, int xpos, int ypos, int width, int heigh
 void Framework::Render()
 {
 	SDL_RenderClear(m_pRenderer); //Clear
+
+	std::cout << "Test";
+	SDL_RenderCopy(m_pRenderer, m_pTexture,0,0);
+
 	SDL_RenderPresent(m_pRenderer); //Draw
 }
 
