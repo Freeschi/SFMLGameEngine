@@ -40,8 +40,12 @@ bool Framework::Init(const char* title, int xpos, int ypos, int width, int heigh
 
 	g_pTexturemanager->Load("Data/test.png", "Test", m_pRenderer);
 	
-	m_go.Load(100, 100, 128, 82, "Test");
-	m_player.Load(300, 300, 128, 82, "Test");
+
+	
+
+
+	m_GameObjects.push_back(new Player(new Loaderparams(100, 100, 128, 82, "Test")));
+
 	
 	return true;
 }
@@ -50,17 +54,20 @@ void Framework::Render()
 {
 	SDL_RenderClear(m_pRenderer); //Clear
 
-	m_go.Draw(m_pRenderer); 
-	m_player.Draw(m_pRenderer);
-
+	for (std::vector<Gameobject*>::size_type i = 0; i != m_GameObjects.size(); i++)
+	{
+		m_GameObjects[i]->Draw();
+	}
 
 	SDL_RenderPresent(m_pRenderer); //Draw
 }
 
 void Framework::Update()
 {
-	m_go.Update();
-	m_player.Update();
+	for (std::vector<Gameobject*>::size_type i = 0; i != m_GameObjects.size(); i++)
+	{
+		m_GameObjects[i]->Update();
+	}
 }
 void Framework::Clean()
 {

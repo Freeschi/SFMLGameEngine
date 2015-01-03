@@ -1,15 +1,18 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
-#include "Gameobject.hpp"
+#include "SDLGameobject.hpp"
+#include "Loaderparams.hpp"
 
-class Player : public Gameobject
+class Player : public SDLGameobject
 {
 public:
-	void Load(int x, int y, int width, int height, std::string textureID);
-	void Draw(SDL_Renderer* pRenderer);
-	void Update();
-	void Clean();
+	
+	Player(const Loaderparams* pParams);
+
+	virtual void Draw();
+	virtual void Update();
+	virtual void Clean();
 };
 
 

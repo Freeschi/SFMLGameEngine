@@ -1,8 +1,9 @@
 #ifndef FRAMEWORK_HPP
 #define FRAMEWORK_HPP
 
+#include <vector>
 #include <iostream>
-#include "Gameobject.hpp"
+#include "SDLGameobject.hpp"
 #include "Player.hpp"
 #include "Singleton.hpp"
 #include "SDL.h"
@@ -31,6 +32,8 @@ public:
 	int SetCurrentFrame(int frame) { m_CurrentFrame = frame;  }
 	int GetCurrentFrame() { return m_CurrentFrame; }
 
+	SDL_Renderer* GetRenderer() const { return m_pRenderer; }
+
 private:
 
 	SDL_Window* m_pWindow;
@@ -39,8 +42,11 @@ private:
 	bool m_bRunning;
 	int m_CurrentFrame;
 
-	Gameobject m_go;
-	Player m_player;
+	
+
+	std::vector<SDLGameobject*> m_GameObjects;
+	
+
 };
 
 

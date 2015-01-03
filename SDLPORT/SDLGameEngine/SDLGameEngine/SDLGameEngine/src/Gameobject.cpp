@@ -22,3 +22,8 @@ void Gameobject::Update()
 {
 	m_x += 1;
 }
+
+void Gameobject::Clean()
+{
+
+}

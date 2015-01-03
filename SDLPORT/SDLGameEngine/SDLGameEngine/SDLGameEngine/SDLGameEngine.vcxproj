@@ -80,15 +80,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Framework.cpp" />
-    <ClCompile Include="src\Gameobject.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\SDLGameobject.cpp" />
     <ClCompile Include="src\Texturemanager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework.hpp" />
     <ClInclude Include="src\Gameobject.hpp" />
+    <ClInclude Include="src\Loaderparams.hpp" />
     <ClInclude Include="src\Player.hpp" />
+    <ClInclude Include="src\SDLGameobject.hpp" />
     <ClInclude Include="src\Singleton.hpp" />
     <ClInclude Include="src\Texturemanager.hpp" />
   </ItemGroup>

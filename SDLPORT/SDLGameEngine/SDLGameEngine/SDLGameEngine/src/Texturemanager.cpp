@@ -16,7 +16,7 @@ bool Texturemanager::Load(std::string fileName, std::string  id, SDL_Renderer* p
 	if (pTexture != NULL)
 	{
 		m_TextureMap[id] = pTexture;
-		std::cout << "[TEXTUREMANAGER] Texture with id: " << id << " registred at: " << m_TextureMap[id] << std::endl;
+		std::cout << "[TEXTUREMANAGER] Texture with id: " << "'"<< id << "'" << " registred at: " << m_TextureMap[id] << std::endl;
 		return true; //Everything worked
 	}
 
