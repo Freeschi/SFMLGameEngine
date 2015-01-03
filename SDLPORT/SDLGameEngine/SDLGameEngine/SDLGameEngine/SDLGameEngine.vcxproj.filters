@@ -24,6 +24,9 @@
     <ClCompile Include="src\Framework.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="src\Texturemanager.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Framework.hpp">
@@ -31,6 +34,9 @@
     </ClInclude>
     <ClInclude Include="src\Singleton.hpp">
       <Filter>Headerdateien\Templates</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Texturemanager.hpp">
+      <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

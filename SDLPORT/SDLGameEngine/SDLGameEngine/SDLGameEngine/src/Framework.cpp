@@ -1,4 +1,5 @@
 #include "Framework.hpp"
+#include "Texturemanager.hpp"
 
 bool Framework::Init(const char* title, int xpos, int ypos, int width, int height, int flags)
 {
@@ -37,18 +38,7 @@ bool Framework::Init(const char* title, int xpos, int ypos, int width, int heigh
 	std::cout << "[FREESCHI] Main-Init success\n"; //Main-Init completed
 	m_bRunning = true; //All working start the looooooooooooooop!
 
-	SDL_Surface* pTempSurface = IMG_Load("Data/test.png");	
-	
-	m_pTexture = SDL_CreateTextureFromSurface(m_pRenderer, pTempSurface);
-
-	SDL_FreeSurface(pTempSurface);
-
-	SDL_QueryTexture(m_pTexture, NULL, NULL, &m_sourceRectangle.w, &m_sourceRectangle.h);
-
-	m_destinationRectangle.x = 50;
-	m_destinationRectangle.y = 50;
-	m_destinationRectangle.w = m_sourceRectangle.w = 50;
-	m_destinationRectangle.h = m_sourceRectangle.h = 50;
+	g_pTexturemanager->Load("Data/test.png", "Test", m_pRenderer);
 	
 	return true;
 }
@@ -57,8 +47,8 @@ void Framework::Render()
 {
 	SDL_RenderClear(m_pRenderer); //Clear
 
-	
-	SDL_RenderCopy(m_pRenderer, m_pTexture,0,0);
+	g_pTexturemanager->Draw("Test", 100, 100, 0, 0, m_pRenderer);
+
 
 	SDL_RenderPresent(m_pRenderer); //Draw
 }

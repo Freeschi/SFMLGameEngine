@@ -1,10 +1,11 @@
 #ifndef FRAMEWORK_HPP
 #define FRAMEWORK_HPP
 
+#include <iostream>
 #include "Singleton.hpp"
 #include "SDL.h"
 #include "SDL_image.h"
-#include <iostream>
+
 
 #define g_pFramework Framework::Get ()
 
@@ -25,17 +26,16 @@ public:
 	//m_bRunning Getter
 	bool IsRunning() { return m_bRunning; }
 
+	int SetCurrentFrame(int frame) { m_CurrentFrame = frame;  }
+	int GetCurrentFrame() { return m_CurrentFrame; }
+
 private:
 
 	SDL_Window* m_pWindow;
 	SDL_Renderer* m_pRenderer;
 
-	SDL_Texture* m_pTexture;
-	SDL_Rect m_sourceRectangle;
-	SDL_Rect m_destinationRectangle;
-
 	bool m_bRunning;
-
+	int m_CurrentFrame;
 };
 
 
