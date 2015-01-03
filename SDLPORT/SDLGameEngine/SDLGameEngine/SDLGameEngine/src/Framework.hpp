@@ -3,6 +3,7 @@
 
 #include "Singleton.hpp"
 #include "SDL.h"
+#include "SDL_image.h"
 #include <iostream>
 
 #define g_pFramework Framework::Get ()
