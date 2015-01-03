@@ -39,6 +39,7 @@ bool Framework::Init(const char* title, int xpos, int ypos, int width, int heigh
 	m_bRunning = true; //All working start the looooooooooooooop!
 
 	g_pTexturemanager->Load("Data/test.png", "Test", m_pRenderer);
+	g_pTexturemanager->Delete("Test");
 	
 	return true;
 }

@@ -13,16 +13,29 @@ bool Texturemanager::Load(std::string fileName, std::string  id, SDL_Renderer* p
 
 	SDL_FreeSurface(pTempSurface);
 
-	if (pTexture != 0)
+	if (pTexture != NULL)
 	{
 		m_TextureMap[id] = pTexture;
+		std::cout << "[TEXTUREMANAGER] Texture with id: " << id << " registred at: " << m_TextureMap[id] << std::endl;
 		return true; //Everything worked
 	}
 
 	return false; //Something went wrong if this is reached
 }
 
-void Texturemanager::Draw(std::string id, int x, int y, int width, int height, SDL_Renderer* pRenderer, SDL_RendererFlip flip)
+bool Texturemanager::Delete(std::string id)
+{
+	if (m_TextureMap[id] != NULL)
+	{
+		m_TextureMap[id] = NULL;
+		std::cout << "[TEXTUREMANAGER] Deleted Texture with id: " << id << " [" << m_TextureMap[id] << "]\n";
+		return true;
+	}
+	std::cout << "[TEXTUREMANAGER] failed to delete texture with id: " << id << " (ALREADY NULL)\n";
+	return false;
+}
+
+void Texturemanager::Draw(std::string id, int x, int y, int width, int height, SDL_Renderer* pRenderer, SDL_RendererFlip flip)  //STATIC IMAGE
 {
 	SDL_Rect srcRect;
 	SDL_Rect destRect;
@@ -37,7 +50,7 @@ void Texturemanager::Draw(std::string id, int x, int y, int width, int height, S
 	SDL_RenderCopyEx(pRenderer, m_TextureMap[id], &srcRect, &destRect, 0, 0, flip);
 }
 
-void Texturemanager::DrawFrame(std::string id, int x, int y, int width, int height,int currentRow, int currentFrame, SDL_Renderer* pRenderer, SDL_RendererFlip flip)
+void Texturemanager::DrawFrame(std::string id, int x, int y, int width, int height,int currentRow, int currentFrame, SDL_Renderer* pRenderer, SDL_RendererFlip flip) //ANIMATED IMAGE
 {
 	SDL_Rect srcRect;
 	SDL_Rect destRect;
