@@ -32,7 +32,14 @@ bool Texturemanager::Delete(std::string id)
 		return true;
 	}
 	std::cout << "[TEXTUREMANAGER] failed to delete texture with id: " << id << " (ALREADY NULL)\n";
+	
 	return false;
+}
+
+void Texturemanager::Clean()
+{
+	std::cout << "[TEXTUREMANAGER] cleaning...\n";
+	m_TextureMap.clear();
 }
 
 void Texturemanager::Draw(std::string id, int x, int y, int width, int height, SDL_Renderer* pRenderer, SDL_RendererFlip flip)  //STATIC IMAGE

@@ -39,7 +39,7 @@ bool Framework::Init(const char* title, int xpos, int ypos, int width, int heigh
 	m_bRunning = true; //All working start the looooooooooooooop!
 
 	g_pTexturemanager->Load("Data/test.png", "Test", m_pRenderer);
-	g_pTexturemanager->Delete("Test");
+	
 	
 	return true;
 }
@@ -57,9 +57,11 @@ void Framework::Render()
 void Framework::Clean()
 {
 	std::cout << "[FREESCHI] Cleaning...\n";
+	g_pTexturemanager->Clean();
 	SDL_DestroyWindow(m_pWindow);
 	SDL_DestroyRenderer(m_pRenderer);
 	SDL_Quit();
+	
 }
 
 void Framework::HandleEvents()

@@ -15,7 +15,9 @@ class Texturemanager : public TSingleton <Texturemanager>
 public:
 
 	bool Load(std::string fileName, std::string id, SDL_Renderer* pRenderer);
-	bool Delete(std::string id);
+	bool Delete(std::string id); //Delete a specific Texture
+
+	void Clean(); //Clean the Texturemanager
 
 	void Draw(std::string id, int x, int y, int width, int height, SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
 	void DrawFrame(std::string id, int x, int y, int width, int height, int currentRow, int currentFrame, SDL_Renderer* pRenderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
