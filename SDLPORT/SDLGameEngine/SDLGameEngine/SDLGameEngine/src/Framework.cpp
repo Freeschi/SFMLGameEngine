@@ -40,6 +40,8 @@ bool Framework::Init(const char* title, int xpos, int ypos, int width, int heigh
 
 	g_pTexturemanager->Load("Data/test.png", "Test", m_pRenderer);
 	
+	m_go.Load(100, 100, 128, 82, "Test");
+	m_player.Load(300, 300, 128, 82, "Test");
 	
 	return true;
 }
@@ -48,12 +50,18 @@ void Framework::Render()
 {
 	SDL_RenderClear(m_pRenderer); //Clear
 
-	g_pTexturemanager->Draw("Test", 100, 100, 0, 0, m_pRenderer);
+	m_go.Draw(m_pRenderer); 
+	m_player.Draw(m_pRenderer);
 
 
 	SDL_RenderPresent(m_pRenderer); //Draw
 }
 
+void Framework::Update()
+{
+	m_go.Update();
+	m_player.Update();
+}
 void Framework::Clean()
 {
 	std::cout << "[FREESCHI] Cleaning...\n";

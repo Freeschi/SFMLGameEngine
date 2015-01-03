@@ -2,6 +2,8 @@
 #define FRAMEWORK_HPP
 
 #include <iostream>
+#include "Gameobject.hpp"
+#include "Player.hpp"
 #include "Singleton.hpp"
 #include "SDL.h"
 #include "SDL_image.h"
@@ -19,7 +21,7 @@ public:
 
 	//Base Functions
 	void Render();
-	//void Update();
+	void Update();
 	void HandleEvents();
 	void Clean();
 
@@ -36,6 +38,9 @@ private:
 
 	bool m_bRunning;
 	int m_CurrentFrame;
+
+	Gameobject m_go;
+	Player m_player;
 };
 
 

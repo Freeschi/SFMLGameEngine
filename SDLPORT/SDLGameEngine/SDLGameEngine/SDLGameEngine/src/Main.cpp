@@ -9,8 +9,10 @@ int main(int argc, char* argv[])
 	while (g_pFramework->IsRunning())
 	{
 		g_pFramework->HandleEvents();
-		//Application->Update();
+		g_pFramework->Update();
 		g_pFramework->Render();
+
+		SDL_Delay(10);
 	}
 
 	g_pFramework->Clean();

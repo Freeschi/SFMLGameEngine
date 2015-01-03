@@ -16,26 +16,44 @@
     <Filter Include="Headerdateien\Templates">
       <UniqueIdentifier>{3a1370cd-28fe-44e6-b04c-58ac31982da6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headerdateien\Core">
+      <UniqueIdentifier>{ee80502c-7838-4dac-baed-cbac1154352a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Quelldateien\Core">
+      <UniqueIdentifier>{cbd2b401-3e2f-4c59-98bf-25c29fd86942}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Main.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="src\Framework.cpp">
-      <Filter>Quelldateien</Filter>
+      <Filter>Quelldateien\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Main.cpp">
+      <Filter>Quelldateien\Core</Filter>
     </ClCompile>
     <ClCompile Include="src\Texturemanager.cpp">
+      <Filter>Quelldateien\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Gameobject.cpp">
+      <Filter>Quelldateien\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Player.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Framework.hpp">
-      <Filter>Headerdateien</Filter>
-    </ClInclude>
     <ClInclude Include="src\Singleton.hpp">
       <Filter>Headerdateien\Templates</Filter>
     </ClInclude>
+    <ClInclude Include="src\Framework.hpp">
+      <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\Texturemanager.hpp">
+      <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Gameobject.hpp">
+      <Filter>Headerdateien\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Player.hpp">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

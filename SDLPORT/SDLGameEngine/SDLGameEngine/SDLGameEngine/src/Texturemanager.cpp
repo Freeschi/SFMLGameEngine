@@ -40,6 +40,7 @@ void Texturemanager::Clean()
 {
 	std::cout << "[TEXTUREMANAGER] cleaning...\n";
 	m_TextureMap.clear();
+	g_pTexturemanager->Del();
 }
 
 void Texturemanager::Draw(std::string id, int x, int y, int width, int height, SDL_Renderer* pRenderer, SDL_RendererFlip flip)  //STATIC IMAGE
